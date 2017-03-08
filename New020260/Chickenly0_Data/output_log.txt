@@ -1,0 +1,29 @@
+Initialize engine version: 5.5.0f3 (38b4efef76f0)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 930M       (ID=0x1346)
+    Vendor:   NVIDIA
+    VRAM:     1996 MB
+    Driver:   21.20.16.4550
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\New020260\Chickenly0_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\New020260\Chickenly0_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\New020260\Chickenly0_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\New020260\Chickenly0_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\New020260\Chickenly0_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\New020260\Chickenly0_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\New020260\Chickenly0_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\New020260\Chickenly0_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\New020260\Chickenly0_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading E:\New020260\Chickenly0_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.029 seconds
+Platform assembly: E:\New020260\Chickenly0_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: E:\New020260\Chickenly0_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.260802 ms
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 3a6c -> priority: 1 
