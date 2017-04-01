@@ -1,0 +1,468 @@
+fileFormatVersion: 2
+guid: d76c1fd610c4be2418b86471f95a783c
+timeCreated: 1489106145
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: chicken_IdelAnimation_600x600_0
+    21300002: chicken_IdelAnimation_600x600_1
+    21300004: chicken_IdelAnimation_600x600_2
+    21300006: chicken_IdelAnimation_600x600_3
+    21300008: chicken_IdelAnimation_600x600_4
+    21300010: chicken_IdelAnimation_600x600_5
+    21300012: chicken_IdelAnimation_600x600_6
+    21300014: chicken_IdelAnimation_600x600_7
+    21300016: chicken_IdelAnimation_600x600_8
+    21300018: chicken_IdelAnimation_600x600_9
+    21300020: chicken_IdelAnimation_600x600_10
+    21300022: chicken_IdelAnimation_600x600_11
+    21300024: chicken_IdelAnimation_600x600_12
+    21300026: chicken_IdelAnimation_600x600_13
+    21300028: chicken_IdelAnimation_600x600_14
+    21300030: chicken_IdelAnimation_600x600_15
+    21300032: chicken_IdelAnimation_600x600_16
+    21300034: chicken_IdelAnimation_600x600_17
+    21300036: chicken_IdelAnimation_600x600_18
+    21300038: chicken_IdelAnimation_600x600_19
+    21300040: chicken_IdelAnimation_600x600_20
+    21300042: chicken_IdelAnimation_600x600_21
+    21300044: chicken_IdelAnimation_600x600_22
+    21300046: chicken_IdelAnimation_600x600_23
+    21300048: chicken_IdelAnimation_600x600_24
+    21300050: chicken_IdelAnimation_600x600_25
+    21300052: chicken_IdelAnimation_600x600_26
+    21300054: chicken_IdelAnimation_600x600_27
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_0
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 2758
+        width: 315
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_1
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 2758
+        width: 314
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_2
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 2758
+        width: 311
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_3
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 2758
+        width: 313
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_4
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 2758
+        width: 312
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_5
+      rect:
+        serializedVersion: 2
+        x: 3142
+        y: 2758
+        width: 315
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_6
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 2158
+        width: 315
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_7
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 2158
+        width: 314
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_8
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 2158
+        width: 311
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_9
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 2158
+        width: 313
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_10
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 2158
+        width: 312
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_11
+      rect:
+        serializedVersion: 2
+        x: 3142
+        y: 2163
+        width: 315
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_12
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 1559
+        width: 315
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_13
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 1559
+        width: 314
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_14
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 1559
+        width: 314
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_15
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 1559
+        width: 311
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_16
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 1559
+        width: 312
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_17
+      rect:
+        serializedVersion: 2
+        x: 3142
+        y: 1559
+        width: 313
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_18
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 963
+        width: 315
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_19
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 961
+        width: 314
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_20
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 961
+        width: 420
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_21
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 961
+        width: 422
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_22
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 957
+        width: 315
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_23
+      rect:
+        serializedVersion: 2
+        x: 3142
+        y: 961
+        width: 315
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_24
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 358
+        width: 313
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_25
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 358
+        width: 313
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_26
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 358
+        width: 311
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: chicken_IdelAnimation_600x600_27
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 358
+        width: 315
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
