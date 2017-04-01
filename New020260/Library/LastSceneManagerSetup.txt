@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/petSim.unity
-  isLoaded: 1
-  isActive: 1
