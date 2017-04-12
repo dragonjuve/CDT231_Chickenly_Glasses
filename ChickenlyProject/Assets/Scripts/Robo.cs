@@ -246,9 +246,11 @@ public class Robo : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Manager.GetComponent<Manager>().money += 100;
-        //gameObject.GetComponent<AudioSource>().Play();
-        Golden.SetActive(false);
+        if (Golden.activeInHierarchy) {
+            Manager.GetComponent<Manager>().money += 100;
+            //gameObject.GetComponent<AudioSource>().Play();
+            Golden.SetActive(false);
+        }
         
     }
 }
