@@ -37,13 +37,14 @@ public class Manager : MonoBehaviour {
     public GameObject foods;
     public Text[] foodAmount;
     public GameObject store;
+    public int[] feedValue;
+    public int[] price;
     
-    int[] foodAmt;
 
     void Start()
     {
         time = 0;
-        foodAmt = new int[8];
+        
     }
 
     void Update () {
@@ -74,10 +75,7 @@ public class Manager : MonoBehaviour {
         }
 
         moneyText.GetComponent<Text>().text = money.ToString();
-        for (int i=0; i < 8; i++)
-        {
-            foodAmount[i].text = foodAmt[i].ToString();
-        }
+        
         if (countForQuest2 >= 2)
         {
             countForQuest2 = 0;
@@ -173,415 +171,432 @@ public class Manager : MonoBehaviour {
         }
     }
 
-    public void selectFood1(int i)
+    public void selectFood(int i)
     {
-        pet.GetComponent<Robo>().Hunger += 1;
-        pet2.GetComponent<Robo2>().Hunger += 1;
-        pet3.GetComponent<Robo3>().Hunger += 1;
-        pet4.GetComponent<Robo4>().Hunger += 1;
-        if (pet.GetComponent<Robo>().Hunger > 100)
+        int hun = feedValue[i];
+        int pay = price[i];
+        if (money >= pay)
         {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
+            money -= pay;
+            pet.GetComponent<Robo>().Hunger += hun;
+            pet2.GetComponent<Robo2>().Hunger += hun;
+            pet3.GetComponent<Robo3>().Hunger += hun;
+            pet4.GetComponent<Robo4>().Hunger += hun;
 
-        if (foodAmt[0] > 0)
-        {
-            foodAmt[0]--;
+            if (pet.GetComponent<Robo>().Hunger > 100)
+            {
+                pet.GetComponent<Robo>().Hunger = 100;
+            }
+            if (pet2.GetComponent<Robo2>().Hunger > 100)
+            {
+                pet2.GetComponent<Robo2>().Hunger = 100;
+            }
+            if (pet3.GetComponent<Robo3>().Hunger > 100)
+            {
+                pet3.GetComponent<Robo3>().Hunger = 100;
+            }
+            if (pet4.GetComponent<Robo4>().Hunger > 100)
+            {
+                pet4.GetComponent<Robo4>().Hunger = 100;
+            }
+
+            if (money < 0)
+                money = 0;
+
             feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[0];
             Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
             feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
             Invoke("fade", 1);
+            
         }
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
+        
 
         
-    }
-
-    public void selectFood2(int i)
-    {
-        pet.GetComponent<Robo>().Hunger += 3;
-        pet2.GetComponent<Robo2>().Hunger += 3;
-        pet3.GetComponent<Robo3>().Hunger += 3;
-        pet4.GetComponent<Robo4>().Hunger += 3;
-        if (pet.GetComponent<Robo>().Hunger > 100)
-        {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
-
-        if (foodAmt[1] > 0)
-        {
-            foodAmt[1]--;
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[1];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
-        }
-
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
-
-        
-    }
-
-    public void selectFood3(int i)
-    {
-        pet.GetComponent<Robo>().Hunger += 5;
-        pet2.GetComponent<Robo2>().Hunger += 5;
-        pet3.GetComponent<Robo3>().Hunger += 5;
-        pet4.GetComponent<Robo4>().Hunger += 5;
-        if (pet.GetComponent<Robo>().Hunger > 100)
-        {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
-
-        if (foodAmt[2] > 0)
-        {
-            foodAmt[2]--;
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[2];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
-        }
-
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
-    }
-
-    public void selectFood4(int i)
-    {
-        pet.GetComponent<Robo>().Hunger += 7;
-        pet2.GetComponent<Robo2>().Hunger += 7;
-        pet3.GetComponent<Robo3>().Hunger += 7;
-        pet4.GetComponent<Robo4>().Hunger += 7;
-        if (pet.GetComponent<Robo>().Hunger > 100)
-        {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
-
-        if (foodAmt[3] > 0)
-        {
-            foodAmt[3]--;
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[3];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
-        }
-
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
-    }
-
-    public void selectFood5(int i)
-    {
-        pet.GetComponent<Robo>().Hunger += 9;
-        pet2.GetComponent<Robo2>().Hunger += 9;
-        pet3.GetComponent<Robo3>().Hunger += 9;
-        pet4.GetComponent<Robo4>().Hunger += 9;
-
-        if (pet.GetComponent<Robo>().Hunger > 100)
-        {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
-
-        if (foodAmt[4] > 0)
-        {
-            foodAmt[4]--;
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[4];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
-        }
-    }
-
-    public void selectFood6(int i)
-    {
-        pet.GetComponent<Robo>().Hunger += 11;
-        pet2.GetComponent<Robo2>().Hunger += 11;
-        pet3.GetComponent<Robo3>().Hunger += 11;
-        pet4.GetComponent<Robo4>().Hunger += 11;
-        if (pet.GetComponent<Robo>().Hunger > 100)
-        {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
-
-        if (foodAmt[5] > 0)
-        {
-            foodAmt[5]--;
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[5];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
-        }
-
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
-    }
-
-    public void selectFood7(int i)
-    {
-        pet.GetComponent<Robo>().Hunger += 13;
-        pet2.GetComponent<Robo2>().Hunger += 13;
-        pet3.GetComponent<Robo3>().Hunger += 13;
-        pet4.GetComponent<Robo4>().Hunger += 13;
-        if (pet.GetComponent<Robo>().Hunger > 100)
-        {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
-
-        if (foodAmt[6] > 0)
-        {
-            foodAmt[6]--;
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[6];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
-        }
-
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
-    }
-
-    public void selectFood8(int i)
-    {
-        pet.GetComponent<Robo>().Hunger += 15;
-        pet2.GetComponent<Robo2>().Hunger += 15;
-        pet3.GetComponent<Robo3>().Hunger += 15;
-        pet4.GetComponent<Robo4>().Hunger += 15;
-        if (pet.GetComponent<Robo>().Hunger > 100)
-        {
-            pet.GetComponent<Robo>().Hunger = 100;
-        }
-        if (pet2.GetComponent<Robo2>().Hunger > 100)
-        {
-            pet2.GetComponent<Robo2>().Hunger = 100;
-        }
-        if (pet3.GetComponent<Robo3>().Hunger > 100)
-        {
-            pet3.GetComponent<Robo3>().Hunger = 100;
-        }
-        if (pet4.GetComponent<Robo4>().Hunger > 100)
-        {
-            pet4.GetComponent<Robo4>().Hunger = 100;
-        }
-
-        if (foodAmt[7] > 0)
-        {
-            foodAmt[7]--;
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[7];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
-        }
-
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
-    }
-    public void selectInStore1(int i)
-    {
-        money -= 10;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[0]++;
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-        {
-            countForQuest2++;
-        }
+            
        
-    }
-
-    public void selectInStore2(int i)
-    {
-        money -= 20;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[1]++;
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+       
+        
+        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
         {
-            countForQuest2++;
+            countForQuest1++;
         }
+
+        
     }
 
-    public void selectInStore3(int i)
-    {
-        money -= 30;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[2]++;
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-        {
-            countForQuest2++;
-        }
-    }
+    //public void selectFood2(int i)
+    //{
+    //    pet.GetComponent<Robo>().Hunger += 3;
+    //    pet2.GetComponent<Robo2>().Hunger += 3;
+    //    pet3.GetComponent<Robo3>().Hunger += 3;
+    //    pet4.GetComponent<Robo4>().Hunger += 3;
+    //    if (pet.GetComponent<Robo>().Hunger > 100)
+    //    {
+    //        pet.GetComponent<Robo>().Hunger = 100;
+    //    }
+    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
+    //    {
+    //        pet2.GetComponent<Robo2>().Hunger = 100;
+    //    }
+    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
+    //    {
+    //        pet3.GetComponent<Robo3>().Hunger = 100;
+    //    }
+    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
+    //    {
+    //        pet4.GetComponent<Robo4>().Hunger = 100;
+    //    }
 
-    public void selectInStore4(int i)
-    {
-        money -= 40;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[3]++;
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-        {
-            countForQuest2++;
-        }
-    }
+    //    if (foodAmt[1] > 0)
+    //    {
+    //        foodAmt[1]--;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[1];
+    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+    //        Invoke("fade", 1);
+    //    }
 
-    public void selectInStore5(int i)
-    {
-        money -= 50;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[4]++;
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-        {
-            countForQuest2++;
-        }
-    }
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+    //    {
+    //        countForQuest1++;
+    //    }
 
-    public void selectInStore6(int i)
-    {
-        money -= 60;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[5]++;
+        
+    //}
 
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-        {
-            countForQuest2++;
-        }
-    }
+    //public void selectFood3(int i)
+    //{
+    //    pet.GetComponent<Robo>().Hunger += 5;
+    //    pet2.GetComponent<Robo2>().Hunger += 5;
+    //    pet3.GetComponent<Robo3>().Hunger += 5;
+    //    pet4.GetComponent<Robo4>().Hunger += 5;
+    //    if (pet.GetComponent<Robo>().Hunger > 100)
+    //    {
+    //        pet.GetComponent<Robo>().Hunger = 100;
+    //    }
+    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
+    //    {
+    //        pet2.GetComponent<Robo2>().Hunger = 100;
+    //    }
+    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
+    //    {
+    //        pet3.GetComponent<Robo3>().Hunger = 100;
+    //    }
+    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
+    //    {
+    //        pet4.GetComponent<Robo4>().Hunger = 100;
+    //    }
 
-    public void selectInStore7(int i)
-    {
-        money -= 70;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[6]++;
+    //    if (foodAmt[2] > 0)
+    //    {
+    //        foodAmt[2]--;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[2];
+    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+    //        Invoke("fade", 1);
+    //    }
 
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-        {
-            countForQuest2++;
-        }
-    }
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+    //    {
+    //        countForQuest1++;
+    //    }
+    //}
 
-    public void selectInStore8(int i)
-    {
-        money -= 80;
-        if (money < 0)
-            money = 0;
-        else
-            foodAmt[7]++;
+    //public void selectFood4(int i)
+    //{
+    //    pet.GetComponent<Robo>().Hunger += 7;
+    //    pet2.GetComponent<Robo2>().Hunger += 7;
+    //    pet3.GetComponent<Robo3>().Hunger += 7;
+    //    pet4.GetComponent<Robo4>().Hunger += 7;
+    //    if (pet.GetComponent<Robo>().Hunger > 100)
+    //    {
+    //        pet.GetComponent<Robo>().Hunger = 100;
+    //    }
+    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
+    //    {
+    //        pet2.GetComponent<Robo2>().Hunger = 100;
+    //    }
+    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
+    //    {
+    //        pet3.GetComponent<Robo3>().Hunger = 100;
+    //    }
+    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
+    //    {
+    //        pet4.GetComponent<Robo4>().Hunger = 100;
+    //    }
 
-        if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-        {
-            countForQuest2++;
-        }
-    }
+    //    if (foodAmt[3] > 0)
+    //    {
+    //        foodAmt[3]--;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[3];
+    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+    //        Invoke("fade", 1);
+    //    }
+
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+    //    {
+    //        countForQuest1++;
+    //    }
+    //}
+
+    //public void selectFood5(int i)
+    //{
+    //    pet.GetComponent<Robo>().Hunger += 9;
+    //    pet2.GetComponent<Robo2>().Hunger += 9;
+    //    pet3.GetComponent<Robo3>().Hunger += 9;
+    //    pet4.GetComponent<Robo4>().Hunger += 9;
+
+    //    if (pet.GetComponent<Robo>().Hunger > 100)
+    //    {
+    //        pet.GetComponent<Robo>().Hunger = 100;
+    //    }
+    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
+    //    {
+    //        pet2.GetComponent<Robo2>().Hunger = 100;
+    //    }
+    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
+    //    {
+    //        pet3.GetComponent<Robo3>().Hunger = 100;
+    //    }
+    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
+    //    {
+    //        pet4.GetComponent<Robo4>().Hunger = 100;
+    //    }
+
+    //    if (foodAmt[4] > 0)
+    //    {
+    //        foodAmt[4]--;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[4];
+    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+    //        Invoke("fade", 1);
+    //    }
+    //}
+
+    //public void selectFood6(int i)
+    //{
+    //    pet.GetComponent<Robo>().Hunger += 11;
+    //    pet2.GetComponent<Robo2>().Hunger += 11;
+    //    pet3.GetComponent<Robo3>().Hunger += 11;
+    //    pet4.GetComponent<Robo4>().Hunger += 11;
+    //    if (pet.GetComponent<Robo>().Hunger > 100)
+    //    {
+    //        pet.GetComponent<Robo>().Hunger = 100;
+    //    }
+    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
+    //    {
+    //        pet2.GetComponent<Robo2>().Hunger = 100;
+    //    }
+    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
+    //    {
+    //        pet3.GetComponent<Robo3>().Hunger = 100;
+    //    }
+    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
+    //    {
+    //        pet4.GetComponent<Robo4>().Hunger = 100;
+    //    }
+
+    //    if (foodAmt[5] > 0)
+    //    {
+    //        foodAmt[5]--;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[5];
+    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+    //        Invoke("fade", 1);
+    //    }
+
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+    //    {
+    //        countForQuest1++;
+    //    }
+    //}
+
+    //public void selectFood7(int i)
+    //{
+    //    pet.GetComponent<Robo>().Hunger += 13;
+    //    pet2.GetComponent<Robo2>().Hunger += 13;
+    //    pet3.GetComponent<Robo3>().Hunger += 13;
+    //    pet4.GetComponent<Robo4>().Hunger += 13;
+    //    if (pet.GetComponent<Robo>().Hunger > 100)
+    //    {
+    //        pet.GetComponent<Robo>().Hunger = 100;
+    //    }
+    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
+    //    {
+    //        pet2.GetComponent<Robo2>().Hunger = 100;
+    //    }
+    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
+    //    {
+    //        pet3.GetComponent<Robo3>().Hunger = 100;
+    //    }
+    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
+    //    {
+    //        pet4.GetComponent<Robo4>().Hunger = 100;
+    //    }
+
+    //    if (foodAmt[6] > 0)
+    //    {
+    //        foodAmt[6]--;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[6];
+    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+    //        Invoke("fade", 1);
+    //    }
+
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+    //    {
+    //        countForQuest1++;
+    //    }
+    //}
+
+    //public void selectFood8(int i)
+    //{
+    //    pet.GetComponent<Robo>().Hunger += 15;
+    //    pet2.GetComponent<Robo2>().Hunger += 15;
+    //    pet3.GetComponent<Robo3>().Hunger += 15;
+    //    pet4.GetComponent<Robo4>().Hunger += 15;
+    //    if (pet.GetComponent<Robo>().Hunger > 100)
+    //    {
+    //        pet.GetComponent<Robo>().Hunger = 100;
+    //    }
+    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
+    //    {
+    //        pet2.GetComponent<Robo2>().Hunger = 100;
+    //    }
+    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
+    //    {
+    //        pet3.GetComponent<Robo3>().Hunger = 100;
+    //    }
+    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
+    //    {
+    //        pet4.GetComponent<Robo4>().Hunger = 100;
+    //    }
+
+    //    if (foodAmt[7] > 0)
+    //    {
+    //        foodAmt[7]--;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[7];
+    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+    //        Invoke("fade", 1);
+    //    }
+
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+    //    {
+    //        countForQuest1++;
+    //    }
+    //}
+    //public void selectInStore1(int i)
+    //{
+        
+    //    if (money >= 10)
+    //        money -= 10;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[0]++;
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+       
+    //}
+
+    //public void selectInStore2(int i)
+    //{
+    //    if (money >= 20)
+    //        money -= 20;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[1]++;
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+    //}
+
+    //public void selectInStore3(int i)
+    //{
+    //    money -= 30;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[2]++;
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+    //}
+
+    //public void selectInStore4(int i)
+    //{
+    //    money -= 40;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[3]++;
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+    //}
+
+    //public void selectInStore5(int i)
+    //{
+    //    money -= 50;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[4]++;
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+    //}
+
+    //public void selectInStore6(int i)
+    //{
+    //    money -= 60;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[5]++;
+
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+    //}
+
+    //public void selectInStore7(int i)
+    //{
+    //    money -= 70;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[6]++;
+
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+    //}
+
+    //public void selectInStore8(int i)
+    //{
+    //    money -= 80;
+    //    if (money < 0)
+    //        money = 0;
+    //    else
+    //        foodAmt[7]++;
+
+    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
+    //    {
+    //        countForQuest2++;
+    //    }
+    //}
 
     public void dailyQuest()
     {
