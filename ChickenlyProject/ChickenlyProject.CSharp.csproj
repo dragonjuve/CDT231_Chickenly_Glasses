@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Robo2.cs" />
     <Compile Include="Assets\Scripts\Robo3.cs" />
     <Compile Include="Assets\Scripts\Robo4.cs" />
+    <Compile Include="Assets\Scripts\Sharper.cs" />
     <Compile Include="Assets\Scripts\SlotController.cs" />
     <Compile Include="Assets\Scripts\UpdateDate.cs" />
     <Compile Include="Assets\Scripts\disappearing.cs" />
