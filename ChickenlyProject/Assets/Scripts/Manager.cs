@@ -21,6 +21,10 @@ public class Manager : MonoBehaviour {
     public GameObject nameInput;
     public GameObject nameText;
 
+    public GameObject datePanel;
+    public GameObject dateInput;
+    //public GameObject dateText;
+
     public GameObject DailyQuest;
     public GameObject youngChicken;
     public GameObject youngAdultChicken;
@@ -43,7 +47,7 @@ public class Manager : MonoBehaviour {
 
     void Start()
     {
-        time = 0;
+        //time = 0;
         
     }
 
@@ -149,6 +153,15 @@ public class Manager : MonoBehaviour {
         }
     }
 
+    public void triggerCheat(bool b)
+    {
+        datePanel.SetActive(!datePanel.activeInHierarchy);
+        if (b)
+        {
+            PlayerPrefs.SetString("then", dateInput.GetComponent<InputField>().text);
+        }
+    }
+
     public void buttonBahavior(int i)
     {
         switch (i)
@@ -209,13 +222,7 @@ public class Manager : MonoBehaviour {
             Invoke("fade", 1);
             
         }
-        
 
-        
-            
-       
-       
-        
         if (DailyQuest.GetComponent<DailyQuest>().number == 1)
         {
             countForQuest1++;

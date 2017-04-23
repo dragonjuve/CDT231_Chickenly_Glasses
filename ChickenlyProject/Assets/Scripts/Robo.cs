@@ -32,7 +32,7 @@ public class Robo : MonoBehaviour {
     public float time = 0.0f;
 
     void Start() {
-        PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
+        //PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
         //Debug.Log(getTimeSpan().TotalHours);
         Manager = GameObject.FindGameObjectWithTag("Manager");
         updateStatus();
@@ -53,14 +53,13 @@ public class Robo : MonoBehaviour {
                 dirt.SetActive(true);
             }
         }
-
-
         GetComponent<Animator>().SetInteger("age", AGE);
 
     }
 
 
     void Update() {
+        print(PlayerPrefs.GetString("then"));
         if (!DEBUG)
         {
             dayText.GetComponent<Text>().text = dayCount.ToString();
@@ -107,11 +106,6 @@ public class Robo : MonoBehaviour {
             Golden.SetActive(true);
             goldSpawn = true;
         }
-        
-
-
-
-
 
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -128,7 +122,7 @@ public class Robo : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Debug.Log(getTimeSpan().ToString());
+            updateStatus();
         }
         
         if (Input.GetKeyDown(KeyCode.Q))
