@@ -158,6 +158,7 @@ public class Manager : MonoBehaviour {
         datePanel.SetActive(!datePanel.activeInHierarchy);
         if (b)
         {
+            print("Hello");
             PlayerPrefs.SetString("then", dateInput.GetComponent<InputField>().text);
         }
     }

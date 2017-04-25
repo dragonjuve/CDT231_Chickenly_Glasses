@@ -34,7 +34,7 @@ public class Robo3 : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
+        //PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
         //Debug.Log(getTimeSpan().TotalHours);
         Manager = GameObject.FindGameObjectWithTag("Manager");
         updateStatus();
