@@ -107,20 +107,20 @@ public class Robo : MonoBehaviour {
             goldSpawn = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        /*if (Input.GetKeyDown(KeyCode.S))
         {
 
             PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
             //Debug.Log(getStringTime().ToString());
             updateStatus();
 
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log(getStringTime().ToString());
         }
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             updateStatus();
         }
