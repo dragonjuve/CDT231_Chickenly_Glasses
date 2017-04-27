@@ -1,0 +1,524 @@
+fileFormatVersion: 2
+guid: c1dd6ef4e27edff489d3019301e9da83
+timeCreated: 1492352745
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: YoungAdult_Comb
+    21300002: YoungAdultedit_edit_1
+    21300004: YoungAdultedit_edit_2
+    21300006: YoungAdultedit_edit_3
+    21300008: YoungAdultedit_edit_4
+    21300010: YoungAdult_Happy_Eyes
+    21300012: YoungAdult_Head
+    21300014: YoungAdult_Normal_Eyes
+    21300016: YoungAdultedit_edit_8
+    21300018: YoungAdultedit_edit_11
+    21300020: YoungAdultedit_edit_12
+    21300022: YoungAdultedit_edit_13
+    21300024: YoungAdultedit_edit_14
+    21300026: YoungAdult_Normal_Beak
+    21300028: YoungAdult_Happy_Beak
+    21300030: YoungAdultedit_edit_17
+    21300032: YoungAdultedit_edit_18
+    21300034: YoungAdultedit_edit_19
+    21300036: YoungAdult_Normal_Wing_Right
+    21300038: YoungAdult_Normal_Wing_Left
+    21300040: YoungAdultedit_edit_22
+    21300042: YoungAdult_Normal_Leg_Right
+    21300044: YoungAdult_Normal_Leg_Left
+    21300046: YoungAdultedit_edit_25
+    21300048: YoungAdultedit_edit_26
+    21300050: YoungAdult_Body
+    21300052: YoungAdult_Happy_Wing_Right
+    21300054: YoungAdult_Side_Leg_Right
+    21300056: YoungAdult_Side_Leg_Left
+    21300058: YoungAdultedit_edit_31
+    21300060: YoungAdult_Tail
+    21300062: YoungAdult_Happy_Wing_Left
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: YoungAdult_Comb
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 2030
+        width: 164
+        height: 352
+      alignment: 9
+      pivot: {x: 0.4906393, y: 0.11234214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_1
+      rect:
+        serializedVersion: 2
+        x: 1969
+        y: 2353
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_2
+      rect:
+        serializedVersion: 2
+        x: 2011
+        y: 2351
+        width: 5
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_3
+      rect:
+        serializedVersion: 2
+        x: 2106
+        y: 2346
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_4
+      rect:
+        serializedVersion: 2
+        x: 1828
+        y: 2330
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Happy_Eyes
+      rect:
+        serializedVersion: 2
+        x: 2445
+        y: 2210
+        width: 380
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Head
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 1624
+        width: 882
+        height: 699
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Normal_Eyes
+      rect:
+        serializedVersion: 2
+        x: 1762
+        y: 2173
+        width: 413
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_8
+      rect:
+        serializedVersion: 2
+        x: 1923
+        y: 2277
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_11
+      rect:
+        serializedVersion: 2
+        x: 1873
+        y: 2233
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_12
+      rect:
+        serializedVersion: 2
+        x: 1972
+        y: 2216
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_13
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 2139
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_14
+      rect:
+        serializedVersion: 2
+        x: 1808
+        y: 2140
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Normal_Beak
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 1945
+        width: 236
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Happy_Beak
+      rect:
+        serializedVersion: 2
+        x: 2539
+        y: 1950
+        width: 208
+        height: 259
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_17
+      rect:
+        serializedVersion: 2
+        x: 1814
+        y: 2129
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_18
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 2053
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_19
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 2046
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Normal_Wing_Right
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 1301
+        width: 324
+        height: 461
+      alignment: 9
+      pivot: {x: 0.65457267, y: 0.88997865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Normal_Wing_Left
+      rect:
+        serializedVersion: 2
+        x: 1913
+        y: 1311
+        width: 307
+        height: 450
+      alignment: 9
+      pivot: {x: 0.2532092, y: 0.87953585}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_22
+      rect:
+        serializedVersion: 2
+        x: 2456
+        y: 1518
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Normal_Leg_Right
+      rect:
+        serializedVersion: 2
+        x: 2580
+        y: 1297
+        width: 208
+        height: 279
+      alignment: 9
+      pivot: {x: 0.44023132, y: 0.9511623}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Normal_Leg_Left
+      rect:
+        serializedVersion: 2
+        x: 3020
+        y: 1308
+        width: 204
+        height: 272
+      alignment: 9
+      pivot: {x: 0.44667682, y: 0.9399203}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_25
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 1477
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_26
+      rect:
+        serializedVersion: 2
+        x: 2255
+        y: 1477
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Body
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 568
+        width: 1008
+        height: 784
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Happy_Wing_Right
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 692
+        width: 581
+        height: 414
+      alignment: 9
+      pivot: {x: 0.97221416, y: 0.33947104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Side_Leg_Right
+      rect:
+        serializedVersion: 2
+        x: 2376
+        y: 717
+        width: 309
+        height: 327
+      alignment: 9
+      pivot: {x: 0.7967194, y: 0.9467165}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Side_Leg_Left
+      rect:
+        serializedVersion: 2
+        x: 2945
+        y: 726
+        width: 309
+        height: 330
+      alignment: 9
+      pivot: {x: 0.8118071, y: 0.9285282}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdultedit_edit_31
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 651
+        width: 51
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Tail
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 0
+        width: 523
+        height: 446
+      alignment: 9
+      pivot: {x: 0.42180136, y: 0.04532464}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: YoungAdult_Happy_Wing_Left
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 105
+        width: 528
+        height: 423
+      alignment: 9
+      pivot: {x: 0.025569107, y: 0.33080098}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

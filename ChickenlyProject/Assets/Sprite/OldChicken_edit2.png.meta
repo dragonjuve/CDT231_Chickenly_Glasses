@@ -1,0 +1,342 @@
+fileFormatVersion: 2
+guid: 0a0a19bddda3c60468bb0550dd25c1e6
+timeCreated: 1493195067
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: OldChicken_Comb_Hair
+    21300002: OldChicken_Normal_Eyes
+    21300004: OldChicken_Happy_Eyes
+    21300006: OldChicken_Head
+    21300008: OldChicken_Normal_Beak
+    21300010: OldChicken_Happy_Beak
+    21300012: OldChicken_Comb_Mouth
+    21300014: OldChicken_Happy_Wing_Right
+    21300016: OldChicken_Body
+    21300018: OldChicken_Normal_Wing_Right
+    21300020: OldChicken_Happy_Wing_Left
+    21300022: OldChicken_Normal_Wing_Left
+    21300024: OldChicken_edit2_14
+    21300026: OldChicken_Normal_Right_Leg
+    21300028: OldChicken_Normal_Left_Leg
+    21300030: OldChicken_Tail
+    21300032: OldChicken_Side_Right_Leg
+    21300034: OldChicken_Side_Left_Leg
+    21300036: OldChicken_edit2_20
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OldChicken_Comb_Hair
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 2475
+        width: 266
+        height: 341
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Normal_Eyes
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 2699
+        width: 395
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Happy_Eyes
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 2738
+        width: 491
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Head
+      rect:
+        serializedVersion: 2
+        x: 2351
+        y: 2244
+        width: 733
+        height: 700
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Normal_Beak
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 2358
+        width: 413
+        height: 285
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Happy_Beak
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 2347
+        width: 396
+        height: 308
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Comb_Mouth
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 1933
+        width: 464
+        height: 369
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Happy_Wing_Right
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 1660
+        width: 736
+        height: 492
+      alignment: 9
+      pivot: {x: 0.98695505, y: 0.23305084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Body
+      rect:
+        serializedVersion: 2
+        x: 2197
+        y: 1037
+        width: 1028
+        height: 990
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Normal_Wing_Right
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 1109
+        width: 372
+        height: 623
+      alignment: 9
+      pivot: {x: 0.8345281, y: 0.9166223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Happy_Wing_Left
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 898
+        width: 773
+        height: 494
+      alignment: 9
+      pivot: {x: 0.024833966, y: 0.23413198}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Normal_Wing_Left
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 181
+        width: 370
+        height: 617
+      alignment: 9
+      pivot: {x: 0.20210212, y: 0.96677494}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_edit2_14
+      rect:
+        serializedVersion: 2
+        x: 2415
+        y: 761
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Normal_Right_Leg
+      rect:
+        serializedVersion: 2
+        x: 2539
+        y: 557
+        width: 212
+        height: 279
+      alignment: 9
+      pivot: {x: 0.46730012, y: 0.93069905}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Normal_Left_Leg
+      rect:
+        serializedVersion: 2
+        x: 2961
+        y: 500
+        width: 204
+        height: 272
+      alignment: 9
+      pivot: {x: 0.46601778, y: 0.94178367}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Tail
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 154
+        width: 460
+        height: 515
+      alignment: 9
+      pivot: {x: 0.5, y: 0.065048754}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Side_Right_Leg
+      rect:
+        serializedVersion: 2
+        x: 1601
+        y: 410
+        width: 307
+        height: 330
+      alignment: 9
+      pivot: {x: 0.816145, y: 0.9411656}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_Side_Left_Leg
+      rect:
+        serializedVersion: 2
+        x: 2022
+        y: 116
+        width: 310
+        height: 329
+      alignment: 9
+      pivot: {x: 0.81308514, y: 0.942507}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OldChicken_edit2_20
+      rect:
+        serializedVersion: 2
+        x: 2729
+        y: 411
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,336 @@
+fileFormatVersion: 2
+guid: faee8682196ae854e8a6811b30f19d63
+timeCreated: 1493194882
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: AdultChicken_eyeOpen
+    21300002: AdultChicken_Head
+    21300004: AdultChicken_tail
+    21300006: AdultChicken_frontSprite__4
+    21300008: AdultChicken_eyeClose
+    21300010: AdultChicken_CloseWingR
+    21300012: AdultChicken_CloseWingL
+    21300014: AdultChicken_HeadComb
+    21300016: AdultChicken_OpenWingR
+    21300018: AdultChicken_frontLegR
+    21300020: AdultChicken_mouthComb
+    21300022: AdultChicken_torso
+    21300024: AdultChicken_closeBeck
+    21300026: AdultChicken_OpenWingL
+    21300028: AdultChicken_frontLegL
+    21300030: AdultChicken_openBeck
+    21300032: AdultChicken_sideLegR
+    21300034: AdultChicken_sideLegL
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AdultChicken_eyeOpen
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 2245
+        width: 254
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_Head
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 1575
+        width: 624
+        height: 782
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_tail
+      rect:
+        serializedVersion: 2
+        x: 2869
+        y: 1741
+        width: 407
+        height: 587
+      alignment: 9
+      pivot: {x: 0.4937747, y: 0.007857626}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_frontSprite__4
+      rect:
+        serializedVersion: 2
+        x: 3202
+        y: 2325
+        width: 15
+        height: 7
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_eyeClose
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 1968
+        width: 255
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_CloseWingR
+      rect:
+        serializedVersion: 2
+        x: 1726
+        y: 1748
+        width: 261
+        height: 527
+      alignment: 9
+      pivot: {x: 0.6460097, y: 0.9798892}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_CloseWingL
+      rect:
+        serializedVersion: 2
+        x: 2309
+        y: 1721
+        width: 292
+        height: 545
+      alignment: 9
+      pivot: {x: 0.38135603, y: 0.98310995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_HeadComb
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 1458
+        width: 250
+        height: 285
+      alignment: 9
+      pivot: {x: 0.55437315, y: 0.031460732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_OpenWingR
+      rect:
+        serializedVersion: 2
+        x: 1855
+        y: 1153
+        width: 554
+        height: 461
+      alignment: 9
+      pivot: {x: 0.014279802, y: 0.060579974}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_frontLegR
+      rect:
+        serializedVersion: 2
+        x: 2894
+        y: 1181
+        width: 209
+        height: 275
+      alignment: 9
+      pivot: {x: 0.44592577, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_mouthComb
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1066
+        width: 126
+        height: 204
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_torso
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 465
+        width: 832
+        height: 884
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_closeBeck
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 702
+        width: 179
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_OpenWingL
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 553
+        width: 555
+        height: 461
+      alignment: 9
+      pivot: {x: 0.98023385, y: 0.04064306}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_frontLegL
+      rect:
+        serializedVersion: 2
+        x: 2858
+        y: 699
+        width: 205
+        height: 271
+      alignment: 9
+      pivot: {x: 0.45006907, y: 0.9748197}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_openBeck
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 325
+        width: 235
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_sideLegR
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 86
+        width: 309
+        height: 329
+      alignment: 9
+      pivot: {x: 0.8450592, y: 0.9681201}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AdultChicken_sideLegL
+      rect:
+        serializedVersion: 2
+        x: 2033
+        y: 90
+        width: 308
+        height: 328
+      alignment: 9
+      pivot: {x: 0.8320804, y: 0.9632938}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

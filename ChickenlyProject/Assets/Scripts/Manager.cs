@@ -43,6 +43,8 @@ public class Manager : MonoBehaviour {
     public GameObject store;
     public int[] feedValue;
     public int[] price;
+
+    Color C;
     
 
     void Start()
@@ -97,28 +99,28 @@ public class Manager : MonoBehaviour {
             money += 1000;
             DailyQuest.GetComponent<DailyQuest>().generateQuest();
         }
-        if (int.Parse(dayText.GetComponent<Text>().text) < 2)
+        if (int.Parse(dayText.GetComponent<Text>().text) < 5)
         {
             youngChicken.SetActive(true);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-        if(int.Parse(dayText.GetComponent<Text>().text) >= 2 && int.Parse(dayText.GetComponent<Text>().text) < 15)
+        else if(int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 19)
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(true);
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-        if(int.Parse(dayText.GetComponent<Text>().text) >= 15 && int.Parse(dayText.GetComponent<Text>().text) < 25){
+        else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49){
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(true);
             OldChicken.SetActive(false);
         }
 
-        if (int.Parse(dayText.GetComponent<Text>().text) >= 25 && int.Parse(dayText.GetComponent<Text>().text) < 30)
+        else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
@@ -218,7 +220,7 @@ public class Manager : MonoBehaviour {
                 money = 0;
 
             feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[0];
-            Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+            C = feedFoodPic.GetComponent<SpriteRenderer>().color;
             feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
             Invoke("fade", 1);
             

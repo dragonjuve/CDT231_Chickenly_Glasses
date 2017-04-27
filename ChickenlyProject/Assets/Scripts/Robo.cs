@@ -31,8 +31,12 @@ public class Robo : MonoBehaviour {
     bool goldSpawn;
     public float time = 0.0f;
 
+    float idleCount;
+    float sXwalk;
+    bool walkRight;
+
     void Start() {
-        PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
+        //PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
         //Debug.Log(getTimeSpan().TotalHours);
         Manager = GameObject.FindGameObjectWithTag("Manager");
         updateStatus();
@@ -54,6 +58,10 @@ public class Robo : MonoBehaviour {
             }
         }
         GetComponent<Animator>().SetInteger("age", AGE);
+
+        idleCount = 15 / Time.deltaTime;
+        sXwalk = 0.05f;
+        walkRight = true;
 
     }
 
@@ -86,6 +94,7 @@ public class Robo : MonoBehaviour {
                     {
                         clickCount = 0;
                         updateHappiness(1);
+                        idleCount = 15 / Time.deltaTime;
                     }
                     
                     if (countForQuest3 >= 25)
@@ -139,6 +148,34 @@ public class Robo : MonoBehaviour {
         {
             dayCountde++;
             Debug.Log(dayCountde);
+        }
+
+        idleCount--;
+
+        if(idleCount < 0)
+        {
+            idleCount = 0;
+        }
+
+        if(idleCount == 0 && !GetComponent<Animator>().GetBool("walking"))
+        {
+            GetComponent<Animator>().SetBool("walking",true);
+        }
+
+        if (GetComponent<Animator>().GetBool("walking"))
+        {
+             
+            if (transform.position.x <= 0 && !walkRight)
+            {
+                sXwalk = 0.01f;
+                walkRight = true;
+            }
+            else if(transform.position.x >= 1.5f && walkRight)
+            {
+                sXwalk = -0.01f;
+                walkRight = false;
+            }
+            transform.Translate(new Vector3(sXwalk,0,0));
         }
     }
 
