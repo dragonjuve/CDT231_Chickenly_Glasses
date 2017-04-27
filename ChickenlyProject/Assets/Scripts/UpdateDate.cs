@@ -5,9 +5,9 @@ using System;
 using UnityEngine.UI;
 
 public class UpdateDate : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    public GameObject dayText;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -15,13 +15,12 @@ public class UpdateDate : MonoBehaviour {
 	void Update () {
         TimeSpan ts = getTimeSpan();
         int Day = (int)ts.TotalDays + 1;
-        gameObject.GetComponent<Text>().text = Day.ToString();
+        dayText.GetComponent<Text>().text = Day.ToString();
     }
 
     TimeSpan getTimeSpan()
     {
-
-            return DateTime.Now - Convert.ToDateTime(PlayerPrefs.GetString("then"));
+            return DateTime.Now - Convert.ToDateTime(PlayerPrefs.GetString("firstPlay"));
     }
 
     string getStringTime()

@@ -34,45 +34,31 @@ public class Robo4 : MonoBehaviour
 
     void Start()
     {
-        //PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
-        //Debug.Log(getTimeSpan().TotalHours);
         Manager = GameObject.FindGameObjectWithTag("Manager");
         updateStatus();
         if (!PlayerPrefs.HasKey("name"))
+        {
             PlayerPrefs.SetString("name", "Cracker");
-        itsName = PlayerPrefs.GetString("name");
-
-        TimeSpan sinceBegin = getTimeSpan();
-        dayCount = previousChicken.GetComponent<Robo3>().dayCountde;
-        if (sinceBegin.TotalHours > 72.0)
+        }
+        else
         {
-            AGE = 1;
+            itsName = PlayerPrefs.GetString("name");
         }
 
-        if (PlayerPrefs.HasKey("lastBath"))
+        if (!PlayerPrefs.HasKey("then"))
         {
-            if (PlayerPrefs.GetInt("lastBath") > 12)
-            {
-                dirt.SetActive(true);
-            }
+            PlayerPrefs.SetString("then", DateTime.Now.ToString());
         }
-
-
-        GetComponent<Animator>().SetInteger("age", AGE);
+        else
+        {
+            updateStatus();
+        }
 
     }
 
 
     void Update()
     {
-        if (!DEBUG)
-        {
-            dayText.GetComponent<Text>().text = dayCount.ToString();
-        }
-        else
-        {
-            dayText.GetComponent<Text>().text = dayCountde.ToString();
-        }
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -105,53 +91,25 @@ public class Robo4 : MonoBehaviour
             }
         }
 
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-
-            PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
-            //Debug.Log(getStringTime().ToString());
-            updateStatus();
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log(getStringTime().ToString());
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Debug.Log(getTimeSpan().ToString());
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            PlayerPrefs.DeleteKey("hunger");
-            PlayerPrefs.DeleteKey("happiness");
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            dayCountde = dayCount;
-            DEBUG = !DEBUG;
-        }
-        if ((Input.GetKeyDown(KeyCode.U)) && (DEBUG))
-        {
-            dayCountde++;
-            Debug.Log(dayCountde);
-        }
     }
 
-    void updateStatus()
+    public void updateStatus()
     {
-
+        int time = 0;
         TimeSpan ts = getTimeSpan();
-        float produceEgg = (float)ts.TotalHours;
-        Debug.Log(produceEgg);
+        float getDirty = (float)ts.TotalHours;
+
+        if (getDirty > 4.0f)
+        {
+            dirt.SetActive(true);
+        }
+        float produceEgg = (float)ts.TotalHours / 15.0f;
         for (float i = produceEgg; i >= 0; i -= 10)
         {
             GameObject EGG = (GameObject)Instantiate(egg, transform.position, transform.rotation);
             EGG.transform.position = new Vector2(UnityEngine.Random.Range(-2.9f, 2.0f), -3f);
-            if (i == 10)
+            time++;
+            if (time == 10)
             {
                 break;
             }
@@ -174,6 +132,7 @@ public class Robo4 : MonoBehaviour
         //    updateServer();
         //else
         //    InvokeRepeating("updateDevice",0f,30f);
+        InvokeRepeating("updateDevice", 0f, 30f);
     }
 
     void updateServer()
@@ -219,6 +178,8 @@ public class Robo4 : MonoBehaviour
         DateTime now = DateTime.Now;
         return now.Month + "/" + now.Day + "/" + now.Year + " " + now.Hour + ":" + now.Minute + ":" + now.Second;
     }
+
+    //04/25/2016 06:00:00
 
     public void updateHappiness(int i)
     {

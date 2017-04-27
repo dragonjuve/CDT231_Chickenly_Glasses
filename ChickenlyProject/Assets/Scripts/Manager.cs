@@ -22,7 +22,9 @@ public class Manager : MonoBehaviour {
     public GameObject nameText;
 
     public GameObject datePanel;
+    public GameObject thenPanel;
     public GameObject dateInput;
+    public GameObject thenInput;
     //public GameObject dateText;
 
     public GameObject DailyQuest;
@@ -49,8 +51,7 @@ public class Manager : MonoBehaviour {
 
     void Start()
     {
-        //time = 0;
-        
+
     }
 
     void Update () {
@@ -113,14 +114,22 @@ public class Manager : MonoBehaviour {
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
+<<<<<<< HEAD
         else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49){
+=======
+        if(int.Parse(dayText.GetComponent<Text>().text) >= 15 && int.Parse(dayText.GetComponent<Text>().text) < 30){
+>>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(true);
             OldChicken.SetActive(false);
         }
 
+<<<<<<< HEAD
         else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
+=======
+        if (int.Parse(dayText.GetComponent<Text>().text) >= 30)
+>>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
@@ -161,7 +170,30 @@ public class Manager : MonoBehaviour {
         if (b)
         {
             print("Hello");
-            PlayerPrefs.SetString("then", dateInput.GetComponent<InputField>().text);
+            PlayerPrefs.SetString("firstPlay", dateInput.GetComponent<InputField>().text);
+        }
+    }
+
+    public void triggerCheat2(bool b)
+    {
+        thenPanel.SetActive(!thenPanel.activeInHierarchy);
+        if (b)
+        {
+            print("Hello2");
+            PlayerPrefs.SetString("then", thenInput.GetComponent<InputField>().text);
+            if (pet.activeSelf == true)
+            {
+                pet.GetComponent<Robo>().updateStatus();
+            }
+            else if (pet2.activeSelf == true)
+            {
+                pet2.GetComponent<Robo2>().updateStatus();
+            }
+            else if (pet3.activeSelf == true) {
+                pet3.GetComponent<Robo3>().updateStatus();
+            } else if (pet4.activeSelf == true) {
+                pet4.GetComponent<Robo4>().updateStatus();
+            }
         }
     }
 

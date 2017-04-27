@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class disappearing : MonoBehaviour {
 
+    public GameObject Dirty;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -21,6 +23,7 @@ public class disappearing : MonoBehaviour {
 
     void gone()
     {
+        Dirty.SetActive(false);
         gameObject.SetActive(false);
     }
 }

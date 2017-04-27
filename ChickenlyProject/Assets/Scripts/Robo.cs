@@ -36,28 +36,32 @@ public class Robo : MonoBehaviour {
     bool walkRight;
 
     void Start() {
+<<<<<<< HEAD
         //PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
         //Debug.Log(getTimeSpan().TotalHours);
+=======
+>>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
         Manager = GameObject.FindGameObjectWithTag("Manager");
         updateStatus();
         if (!PlayerPrefs.HasKey("name"))
+        {
             PlayerPrefs.SetString("name", "Cracker");
-        itsName = PlayerPrefs.GetString("name");
-
-        TimeSpan sinceBegin = getTimeSpan();
-        //dayCount = sinceBegin.Days;
-        if (sinceBegin.TotalHours > 72.0)
-        {
-            AGE = 1;
+        }
+        else {
+            itsName = PlayerPrefs.GetString("name");
         }
 
-        if (PlayerPrefs.HasKey("lastBath"))
+        if (!PlayerPrefs.HasKey("then"))
         {
-            if(PlayerPrefs.GetInt("lastBath") > 12){
-                dirt.SetActive(true);
-            }
+            PlayerPrefs.SetString("then", DateTime.Now.ToString());
         }
-        GetComponent<Animator>().SetInteger("age", AGE);
+        else {
+            updateStatus();
+        }
+        if (!PlayerPrefs.HasKey("firstPlay"))
+        {
+            PlayerPrefs.SetString("firstPlay", getTimeSpan().ToString());
+        }
 
         idleCount = 15 / Time.deltaTime;
         sXwalk = 0.05f;
@@ -67,15 +71,9 @@ public class Robo : MonoBehaviour {
 
 
     void Update() {
-        print(PlayerPrefs.GetString("then"));
-        if (!DEBUG)
-        {
-            dayText.GetComponent<Text>().text = dayCount.ToString();
-        }
-        else
-        {
-            dayText.GetComponent<Text>().text = dayCountde.ToString();
-        }
+        
+        print(PlayerPrefs.GetString("firstPlay"));
+        //dayText.GetComponent<Text>().text = dayCount.ToString();
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -110,26 +108,16 @@ public class Robo : MonoBehaviour {
         }
 
 
-        if((DateTime.Now.Hour >= 12) && !goldSpawn)
+        if((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
         {
             Golden.SetActive(true);
             goldSpawn = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-
-            PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
-            //Debug.Log(getStringTime().ToString());
-            updateStatus();
-
-        }
-
         if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log(getStringTime().ToString());
         }
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             updateStatus();
         }
@@ -139,6 +127,7 @@ public class Robo : MonoBehaviour {
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
         }
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.I))
         {
             dayCountde = dayCount;
@@ -177,24 +166,31 @@ public class Robo : MonoBehaviour {
             }
             transform.Translate(new Vector3(sXwalk,0,0));
         }
+=======
+>>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
     }
 
-    void updateStatus()
+    public void updateStatus()
     {
-
+        int time = 0;
         TimeSpan ts = getTimeSpan();
-        float produceEgg = (float)ts.TotalHours;
-        Debug.Log(produceEgg);
+        float produceEgg = (float)ts.TotalHours / 15.0f;
+        float getDirty = (float)ts.TotalHours;
+
+        if (getDirty > 4.0f) {
+            dirt.SetActive(true);
+        }
         for (float i = produceEgg; i >= 0; i -= 10)
         {
             GameObject EGG = (GameObject)Instantiate(egg, transform.position, transform.rotation);
             EGG.transform.position = new Vector2(UnityEngine.Random.Range(-2.9f, 2.0f), -3f);
-            if (i == 10)
+            time++;
+            if (time == 10)
             {
                 break;
             }
         }
-            
+
 
         Hunger -= (int)ts.TotalHours * 2;
         if (Hunger < 0)
@@ -204,14 +200,7 @@ public class Robo : MonoBehaviour {
 
         if (Happiness < 0)
             Happiness = 0;
-
-        //Debug.Log(getTimeSpan().ToString());
-        //Debug.Log(getTimeSpan().TotalHours);
-
-        //if (serverTime)
-        //    updateServer();
-        //else
-        //    InvokeRepeating("updateDevice",0f,30f);
+        InvokeRepeating("updateDevice", 0f, 30f);
     }
 
     void updateServer()
