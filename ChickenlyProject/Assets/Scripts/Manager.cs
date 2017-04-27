@@ -105,14 +105,14 @@ public class Manager : MonoBehaviour {
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-        if(int.Parse(dayText.GetComponent<Text>().text) >= 2 && int.Parse(dayText.GetComponent<Text>().text) < 15)
+        if(int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 14)
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(true);
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-        if(int.Parse(dayText.GetComponent<Text>().text) >= 15 && int.Parse(dayText.GetComponent<Text>().text) < 30){
+        if(int.Parse(dayText.GetComponent<Text>().text) >= 14 && int.Parse(dayText.GetComponent<Text>().text) < 30){
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(true);
@@ -151,6 +151,9 @@ public class Manager : MonoBehaviour {
         {
             pet.GetComponent<Robo>().Name = nameInput.GetComponent<InputField>().text;
             PlayerPrefs.SetString("name", pet.GetComponent<Robo>().Name);
+            PlayerPrefs.SetString("name", pet2.GetComponent<Robo2>().Name);
+            PlayerPrefs.SetString("name", pet3.GetComponent<Robo3>().Name);
+            PlayerPrefs.SetString("name", pet4.GetComponent<Robo4>().Name);
         }
     }
 
@@ -248,7 +251,7 @@ public class Manager : MonoBehaviour {
             
         }
 
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+        if (DailyQuest.GetComponent<DailyQuest>().number == 1 || DailyQuest.GetComponent<DailyQuest>().number == 2)
         {
             countForQuest1++;
         }

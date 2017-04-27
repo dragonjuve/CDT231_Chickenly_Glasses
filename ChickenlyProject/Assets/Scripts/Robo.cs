@@ -18,6 +18,7 @@ public class Robo : MonoBehaviour {
     public GameObject treasureAward;
     public GameObject daily;
     public GameObject Golden;
+    bool goldSpawn;
     int countForQuest3;
     GameObject Manager;
     public GameObject egg;
@@ -28,7 +29,7 @@ public class Robo : MonoBehaviour {
     public int dayCountde ;
     public GameObject dirt;
     bool DEBUG;
-    bool goldSpawn;
+    
     public float time = 0.0f;
 
     void Start() {
@@ -60,7 +61,6 @@ public class Robo : MonoBehaviour {
     void Update() {
         
         print(PlayerPrefs.GetString("firstPlay"));
-        //dayText.GetComponent<Text>().text = dayCount.ToString();
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -141,10 +141,22 @@ public class Robo : MonoBehaviour {
         if (Hunger < 0)
             Hunger = 0;
 
+        if (Hunger > 100)
+        {
+            Hunger = 100;
+        }
+
         Happiness -= (100 - Hunger) * (int)ts.TotalHours / 5;
 
         if (Happiness < 0)
             Happiness = 0;
+
+        if (Happiness > 100)
+        {
+            Hunger = 100;
+        }
+
+
         InvokeRepeating("updateDevice", 0f, 30f);
     }
 

@@ -18,7 +18,8 @@ public class Robo4 : MonoBehaviour
     public GameObject previousChicken;
     public GameObject treasureAward;
     public GameObject daily;
-
+    public GameObject Golden;
+    bool goldSpawn;
     int countForQuest3;
     GameObject Manager;
     public GameObject egg;
@@ -59,7 +60,11 @@ public class Robo4 : MonoBehaviour
 
     void Update()
     {
-
+        if ((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
+        {
+            Golden.SetActive(true);
+            goldSpawn = true;
+        }
         if (Input.GetMouseButtonUp(0))
         {
             Vector2 v = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -120,10 +125,19 @@ public class Robo4 : MonoBehaviour
         if (Hunger < 0)
             Hunger = 0;
 
+        if (Hunger > 100) {
+            Hunger = 100;
+        }
+
         Happiness -= (100 - Hunger) * (int)ts.TotalHours / 5;
 
         if (Happiness < 0)
             Happiness = 0;
+
+        if (Happiness > 100)
+        {
+            Hunger = 100;
+        }
 
         //Debug.Log(getTimeSpan().ToString());
         //Debug.Log(getTimeSpan().TotalHours);
