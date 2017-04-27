@@ -114,22 +114,18 @@ public class Manager : MonoBehaviour {
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-<<<<<<< HEAD
-        else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49){
-=======
-        if(int.Parse(dayText.GetComponent<Text>().text) >= 15 && int.Parse(dayText.GetComponent<Text>().text) < 30){
->>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
+
+        else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49)
+        {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(true);
             OldChicken.SetActive(false);
         }
 
-<<<<<<< HEAD
+
         else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
-=======
-        if (int.Parse(dayText.GetComponent<Text>().text) >= 30)
->>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
+
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);

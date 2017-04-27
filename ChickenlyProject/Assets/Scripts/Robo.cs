@@ -36,11 +36,9 @@ public class Robo : MonoBehaviour {
     bool walkRight;
 
     void Start() {
-<<<<<<< HEAD
         //PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
         //Debug.Log(getTimeSpan().TotalHours);
-=======
->>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
+
         Manager = GameObject.FindGameObjectWithTag("Manager");
         updateStatus();
         if (!PlayerPrefs.HasKey("name"))
@@ -127,7 +125,7 @@ public class Robo : MonoBehaviour {
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
         }
-<<<<<<< HEAD
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             dayCountde = dayCount;
@@ -166,8 +164,7 @@ public class Robo : MonoBehaviour {
             }
             transform.Translate(new Vector3(sXwalk,0,0));
         }
-=======
->>>>>>> 9b9111713ca4a58ac470b9eb94c3128d3c0bbb06
+
     }
 
     public void updateStatus()
