@@ -32,13 +32,10 @@ public class DailyQuest : MonoBehaviour {
     public void generateQuest()
     {
         number = UnityEngine.Random.Range(1, 4);
-       if(number == 1)
+       if(number == 1 || number == 2)
        {
           Quest1();
-       } else if (number == 2)
-       {
-          Quest2();
-       } else if (number == 3 || number == 4)
+       }  else if (number == 3 || number == 4)
        {
           Quest3();
        }
