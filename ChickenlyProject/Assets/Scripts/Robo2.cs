@@ -6,19 +6,19 @@ using System;
 
 public class Robo2 : MonoBehaviour
 {
-
     [SerializeField]
     public int hunger;
     [SerializeField]
     private int happiness;
     [SerializeField]
-    private string itsName;
+    public string itsName;
     public GameObject dayText;
     public Animator anim;
     public GameObject previousChicken;
     public GameObject treasureAward;
     public GameObject daily;
-
+    public GameObject Golden;
+    bool goldSpawn;
     int countForQuest3;
     GameObject Manager;
     public GameObject egg;
@@ -31,11 +31,14 @@ public class Robo2 : MonoBehaviour
     bool DEBUG;
 
     public float time = 0.0f;
+    float idleCount;
+    float sXwalk;
+    bool walkRight;
 
     void Start()
     {
         Manager = GameObject.FindGameObjectWithTag("Manager");
-       
+
         if (!PlayerPrefs.HasKey("name"))
         {
             PlayerPrefs.SetString("name", "Cracker");
@@ -45,10 +48,13 @@ public class Robo2 : MonoBehaviour
             itsName = PlayerPrefs.GetString("name");
         }
 
-       /* if (!PlayerPrefs.HasKey("then"))
-        {
-            PlayerPrefs.SetString("then", DateTime.Now.ToString());
-        }*/
+        /* if (!PlayerPrefs.HasKey("then"))
+         {
+             PlayerPrefs.SetString("then", DateTime.Now.ToString());
+         }*/
+        idleCount = 15 / Time.deltaTime;
+        sXwalk =- 0.01f;
+        walkRight = false;
         updateStatus();
 
     }
@@ -56,7 +62,11 @@ public class Robo2 : MonoBehaviour
 
     void Update()
     {
-        //updateStatus();
+        if ((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
+        {
+            Golden.SetActive(true);
+            goldSpawn = true;
+        }
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -75,6 +85,8 @@ public class Robo2 : MonoBehaviour
                     {
                         clickCount = 0;
                         updateHappiness(1);
+                        GetComponent<Animator>().SetBool("walking", false);
+                        idleCount = 15 / Time.deltaTime;
                     }
 
                     if (countForQuest3 >= 25)
@@ -86,13 +98,76 @@ public class Robo2 : MonoBehaviour
                         daily.GetComponent<DailyQuest>().generateQuest();
                     }
                 }
+                if (hit.transform.gameObject.tag == "GoldenEgg")
+                {
+                    Golden.SetActive(false);
+                    goldSpawn = false;
+                }
             }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+
+            PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
+            //Debug.Log(getStringTime().ToString());
+            updateStatus();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log(getStringTime().ToString());
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log(getTimeSpan().ToString());
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
+        }
+        /*if (Input.GetKeyDown(KeyCode.I))
+        {
+            dayCountde = dayCount;
+            DEBUG = !DEBUG;
+        }
+        if ((Input.GetKeyDown(KeyCode.U)) && (DEBUG))
+        {
+            dayCountde++;
+            Debug.Log(dayCountde);
+        }*/
+        idleCount--;
+
+        if (idleCount < 0)
+        {
+            idleCount = 0;
+        }
+
+        if (idleCount == 0 && !GetComponent<Animator>().GetBool("walking"))
+        {
+            GetComponent<Animator>().SetBool("walking", true);
+        }
+
+        if (GetComponent<Animator>().GetBool("walking"))
+        {
+
+            if (transform.position.x <= 0 && !walkRight)
+            {
+                sXwalk = 0.01f;
+                walkRight = true;
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+            else if (transform.position.x >= 1.5f && walkRight)
+            {
+                sXwalk = -0.01f;
+                walkRight = false;
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+            transform.Translate(new Vector3(sXwalk, 0, 0));
         }
     }
 
@@ -124,10 +199,20 @@ public class Robo2 : MonoBehaviour
         if (Hunger < 0)
             Hunger = 0;
 
+        if (Hunger > 100)
+        {
+            Hunger = 100;
+        }
+
         Happiness -= (100 - Hunger) * (int)ts.TotalHours / 5;
 
         if (Happiness < 0)
             Happiness = 0;
+
+        if (Happiness > 100)
+        {
+            Hunger = 100;
+        }
 
         //Debug.Log(getTimeSpan().ToString());
         //Debug.Log(getTimeSpan().TotalHours);

@@ -20,7 +20,7 @@ public class Manager : MonoBehaviour {
     public GameObject namePanel;
     public GameObject nameInput;
     public GameObject nameText;
-
+    public GameObject optionPanel;
     public GameObject datePanel;
     public GameObject thenPanel;
     public GameObject dateInput;
@@ -51,34 +51,36 @@ public class Manager : MonoBehaviour {
 
     void Start()
     {
-
+        PlayerPrefs.SetString("firstPlay","04/27/2017 06:00:00");
+        //time = 0;
+        
     }
 
     void Update () {
-
+        print(PlayerPrefs.GetString("firstPlay"));
         if(pet.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet.GetComponent<Robo>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet.GetComponent<Robo>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet.GetComponent<Robo>().Name;
+            nameText.GetComponent<Text>().text = pet.GetComponent<Robo>().itsName;
         }
         if (pet2.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().Name;
+            nameText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().itsName;
         }
         if (pet3.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().Name;
+            nameText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().itsName;
         }
         if (pet4.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().Name;
+            nameText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().itsName;
         }
 
         moneyText.GetComponent<Text>().text = money.ToString();
@@ -114,19 +116,14 @@ public class Manager : MonoBehaviour {
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-
         else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49){
-
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(true);
             OldChicken.SetActive(false);
         }
 
-
         else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
-
-
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
@@ -157,7 +154,18 @@ public class Manager : MonoBehaviour {
         if (b)
         {
             pet.GetComponent<Robo>().Name = nameInput.GetComponent<InputField>().text;
-            PlayerPrefs.SetString("name", pet.GetComponent<Robo>().Name);
+            PlayerPrefs.SetString("name", pet.GetComponent<Robo>().itsName);
+            PlayerPrefs.SetString("name", pet2.GetComponent<Robo2>().itsName);
+            PlayerPrefs.SetString("name", pet3.GetComponent<Robo3>().itsName);
+            PlayerPrefs.SetString("name", pet4.GetComponent<Robo4>().itsName);
+        }
+    }
+
+    public void triggerdailyQuest(bool b)
+    {
+        DailyQuest.SetActive(!DailyQuest.activeInHierarchy);
+        if (b)
+        {
         }
     }
 
@@ -166,7 +174,6 @@ public class Manager : MonoBehaviour {
         datePanel.SetActive(!datePanel.activeInHierarchy);
         if (b)
         {
-            print("Hello");
             PlayerPrefs.SetString("firstPlay", dateInput.GetComponent<InputField>().text);
         }
     }
@@ -176,7 +183,6 @@ public class Manager : MonoBehaviour {
         thenPanel.SetActive(!thenPanel.activeInHierarchy);
         if (b)
         {
-            print("Hello2");
             PlayerPrefs.SetString("then", thenInput.GetComponent<InputField>().text);
             if (pet.activeSelf == true)
             {
@@ -192,6 +198,15 @@ public class Manager : MonoBehaviour {
                 pet4.GetComponent<Robo4>().updateStatus();
             }
         }
+    }
+
+    public void triggerOption(bool b)
+    {
+        optionPanel.SetActive(!optionPanel.activeInHierarchy);
+        if (b)
+        {
+        }
+           
     }
 
     public void buttonBahavior(int i)
@@ -248,14 +263,52 @@ public class Manager : MonoBehaviour {
             if (money < 0)
                 money = 0;
 
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[0];
+            foodPanel.SetActive(false);
+            if (pet.activeSelf == true)
+            {
+                feedFoodPic.transform.position = new Vector3(pet.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+            }
+            else if (pet2.activeSelf == true)
+            {
+                feedFoodPic.transform.position = new Vector3(pet2.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+            }
+            else if (pet3.activeSelf == true)
+            {
+                feedFoodPic.transform.position = new Vector3(pet3.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+            }
+            else if (pet4.activeSelf == true)
+            {
+                feedFoodPic.transform.position = new Vector3(pet4.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+            }
+            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[i];
             C = feedFoodPic.GetComponent<SpriteRenderer>().color;
             feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
             Invoke("fade", 1);
-            
+
+            if (pet.activeSelf == true)
+            {
+                pet.GetComponent<Animator>().SetBool("walking", false);
+                pet.GetComponent<Animator>().SetTrigger("eat");
+            }
+            if (pet2.activeSelf == true)
+            {
+                pet2.GetComponent<Animator>().SetBool("walking", false);
+                pet2.GetComponent<Animator>().SetTrigger("eat");
+            }
+            if (pet3.activeSelf == true)
+            {
+                pet3.GetComponent<Animator>().SetBool("walking", false);
+                pet3.GetComponent<Animator>().SetTrigger("eat");
+            }
+            if (pet4.activeSelf == true)
+            {
+                pet4.GetComponent<Animator>().SetBool("walking", false);
+                pet4.GetComponent<Animator>().SetTrigger("eat");
+            }
+
         }
 
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+        if (DailyQuest.GetComponent<DailyQuest>().number == 1 || DailyQuest.GetComponent<DailyQuest>().number == 1)
         {
             countForQuest1++;
         }
@@ -637,10 +690,10 @@ public class Manager : MonoBehaviour {
     //    }
     //}
 
-    public void dailyQuest()
+   /* public void dailyQuest()
     {
         DailyQuest.SetActive(true);
-    }
+    }*/
 
     public void toggle(GameObject g)
     {

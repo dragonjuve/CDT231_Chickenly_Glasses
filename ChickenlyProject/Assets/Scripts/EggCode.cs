@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EggCode : MonoBehaviour
 {
-
+    public GameObject CoinEffect;
     GameObject Manager;
     //public GameObject EggMusic;
     float coolDown = 0.25f;
@@ -29,15 +29,21 @@ public class EggCode : MonoBehaviour
         if (startCount == true)
         {
             coolDown -= Time.deltaTime;
-            Debug.Log(coolDown);
+            //Debug.Log(coolDown);
         }
         if (coolDown <= 0)
         {
             startCount = false;
             coolDown = 0.25f;
+            PlayCoinEffect();
             Destroy(gameObject);
         }
     }
 
+    void PlayCoinEffect()
+    {
+        GameObject explosion = (GameObject)Instantiate(CoinEffect);
 
+        explosion.transform.position = transform.position;
+    }
 }

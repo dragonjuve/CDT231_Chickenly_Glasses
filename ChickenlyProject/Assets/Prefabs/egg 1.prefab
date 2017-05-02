@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b99f65edd9ed8a458ef3e20d4638b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinEffect: {fileID: 1272946011862444, guid: 6e79f4f6f68ed134aa308e93062e04b2, type: 2}
 --- !u!135 &135832262375859426
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -176,7 +177,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 394616973
-  m_SortingOrder: 2
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 5d69df4168b93c84a8e2e1e051485fbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

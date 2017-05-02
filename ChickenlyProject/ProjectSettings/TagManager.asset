@@ -8,6 +8,7 @@ TagManager:
   - Egg
   - Manager
   - daily
+  - GoldenEgg
   layers:
   - Default
   - TransparentFX

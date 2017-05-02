@@ -4,15 +4,18 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-public class UpdateDate : MonoBehaviour {
+public class UpdateDate : MonoBehaviour
+{
     public GameObject dayText;
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         TimeSpan ts = getTimeSpan();
         int Day = (int)ts.TotalDays + 1;
         dayText.GetComponent<Text>().text = Day.ToString();
@@ -20,7 +23,7 @@ public class UpdateDate : MonoBehaviour {
 
     TimeSpan getTimeSpan()
     {
-            return DateTime.Now - Convert.ToDateTime(PlayerPrefs.GetString("firstPlay"));
+        return DateTime.Now - Convert.ToDateTime(PlayerPrefs.GetString("firstPlay"));
     }
 
     string getStringTime()

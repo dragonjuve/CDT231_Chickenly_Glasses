@@ -12,13 +12,14 @@ public class Robo3 : MonoBehaviour
     [SerializeField]
     private int happiness;
     [SerializeField]
-    private string itsName;
+    public string itsName;
     public GameObject dayText;
     public Animator anim;
     public GameObject previousChicken;
     public GameObject treasureAward;
     public GameObject daily;
-
+    public GameObject Golden;
+    bool goldSpawn;
     int countForQuest3;
     GameObject Manager;
     public GameObject egg;
@@ -29,6 +30,9 @@ public class Robo3 : MonoBehaviour
     public int dayCountde;
     public GameObject dirt;
     bool DEBUG;
+    float idleCount;
+    float sXwalk;
+    bool walkRight;
 
     public float time = 0.0f;
 
@@ -44,21 +48,19 @@ public class Robo3 : MonoBehaviour
         {
             itsName = PlayerPrefs.GetString("name");
         }
+        idleCount = 15 / Time.deltaTime;
+        sXwalk = -0.01f;
+        walkRight = false;
     }
 
 
     void Update()
     {
-        
-        //updateStatus();
-        /*if (!DEBUG)
+        if ((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
         {
-            dayText.GetComponent<Text>().text = dayCount.ToString();
+            Golden.SetActive(true);
+            goldSpawn = true;
         }
-        else
-        {
-            dayText.GetComponent<Text>().text = dayCountde.ToString();
-        }*/
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -77,6 +79,8 @@ public class Robo3 : MonoBehaviour
                     {
                         clickCount = 0;
                         updateHappiness(1);
+                        GetComponent<Animator>().SetBool("walking", false);
+                        idleCount = 15 / Time.deltaTime;
                     }
 
                     if (countForQuest3 >= 25)
@@ -87,6 +91,11 @@ public class Robo3 : MonoBehaviour
                         Manager.GetComponent<Manager>().money += 1000;
                         daily.GetComponent<DailyQuest>().generateQuest();
                     }
+                }
+                if (hit.transform.gameObject.tag == "GoldenEgg")
+                {
+                    Golden.SetActive(false);
+                    goldSpawn = false;
                 }
             }
         }
@@ -101,17 +110,63 @@ public class Robo3 : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log(getStringTime().ToString());
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log(getTimeSpan().ToString());
+        }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
         }
+        /*if (Input.GetKeyDown(KeyCode.I))
+        {
+            dayCountde = dayCount;
+            DEBUG = !DEBUG;
+        }
+        if ((Input.GetKeyDown(KeyCode.U)) && (DEBUG))
+        {
+            dayCountde++;
+            Debug.Log(dayCountde);
+        }*/
+        idleCount--;
+
+        if (idleCount < 0)
+        {
+            idleCount = 0;
+        }
+
+        if (idleCount == 0 && !GetComponent<Animator>().GetBool("walking"))
+        {
+            GetComponent<Animator>().SetBool("walking", true);
+        }
+
+        if (GetComponent<Animator>().GetBool("walking"))
+        {
+
+            if (transform.position.x <= 0 && !walkRight)
+            {
+                sXwalk = 0.01f;
+                walkRight = true;
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+            else if (transform.position.x >= 1.5f && walkRight)
+            {
+                sXwalk = -0.01f;
+                walkRight = false;
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); ;
+            }
+            transform.Translate(new Vector3(sXwalk, 0, 0));
+        }
     }
 
     public void updateStatus()
     {
-        
         int time = 0;
         TimeSpan ts = getTimeSpan();
         float getDirty = (float)ts.TotalHours;
@@ -138,10 +193,20 @@ public class Robo3 : MonoBehaviour
         if (Hunger < 0)
             Hunger = 0;
 
+        if (Hunger > 100)
+        {
+            Hunger = 100;
+        }
+
         Happiness -= (100 - Hunger) * (int)ts.TotalHours / 5;
 
         if (Happiness < 0)
             Happiness = 0;
+
+        if (Happiness > 100)
+        {
+            Hunger = 100;
+        }
 
         //Debug.Log(getTimeSpan().ToString());
         //Debug.Log(getTimeSpan().TotalHours);
