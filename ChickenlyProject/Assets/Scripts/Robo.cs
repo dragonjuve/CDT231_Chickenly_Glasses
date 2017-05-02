@@ -36,8 +36,6 @@ public class Robo : MonoBehaviour {
     bool walkRight;
 
     void Start() {
-        //PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
-        //Debug.Log(getTimeSpan().TotalHours);
 
         Manager = GameObject.FindGameObjectWithTag("Manager");
         updateStatus();

@@ -115,8 +115,8 @@ public class Manager : MonoBehaviour {
             OldChicken.SetActive(false);
         }
 
-        else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49)
-        {
+        else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49){
+
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(true);
@@ -125,6 +125,7 @@ public class Manager : MonoBehaviour {
 
 
         else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
+
 
         {
             youngChicken.SetActive(false);
