@@ -51,13 +51,13 @@ public class Manager : MonoBehaviour {
 
     void Start()
     {
-        PlayerPrefs.SetString("firstPlay","04/27/2017 06:00:00");
+        //PlayerPrefs.SetString("firstPlay","05/04/2017 06:00:00");
         //time = 0;
         
     }
 
     void Update () {
-        print(PlayerPrefs.GetString("firstPlay"));
+        //print(PlayerPrefs.GetString("firstPlay"));
         if(pet.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet.GetComponent<Robo>().Happiness.ToString();
@@ -137,7 +137,7 @@ public class Manager : MonoBehaviour {
             al -= 100 * Time.deltaTime;
             Color Co = feedFoodPic.GetComponent<SpriteRenderer>().color;
             feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(Co.r, Co.g, Co.b, (int)al);
-            Debug.Log(feedFoodPic.GetComponent<SpriteRenderer>().color.a);
+            //Debug.Log(feedFoodPic.GetComponent<SpriteRenderer>().color.a);
         }
         else if(fading && feedFoodPic.GetComponent<SpriteRenderer>().color.a <= 0)
         {
@@ -288,21 +288,29 @@ public class Manager : MonoBehaviour {
             if (pet.activeSelf == true)
             {
                 pet.GetComponent<Animator>().SetBool("walking", false);
+                pet.GetComponent<Robo>().idle = false;
+                //pet.GetComponent<Robo>().idleCount = 15 / Time.deltaTime;
                 pet.GetComponent<Animator>().SetTrigger("eat");
             }
             if (pet2.activeSelf == true)
             {
                 pet2.GetComponent<Animator>().SetBool("walking", false);
+                pet2.GetComponent<Robo2>().idle = false;
+                //pet2.GetComponent<Robo2>().idleCount = 15 / Time.deltaTime;
                 pet2.GetComponent<Animator>().SetTrigger("eat");
             }
             if (pet3.activeSelf == true)
             {
                 pet3.GetComponent<Animator>().SetBool("walking", false);
+                pet3.GetComponent<Robo3>().idle = false;
+                //pet3.GetComponent<Robo3>().idleCount = 15 / Time.deltaTime;
                 pet3.GetComponent<Animator>().SetTrigger("eat");
             }
             if (pet4.activeSelf == true)
             {
                 pet4.GetComponent<Animator>().SetBool("walking", false);
+                pet4.GetComponent<Robo4>().idle = false;
+               // pet4.GetComponent<Robo4>().idleCount = 15 / Time.deltaTime;
                 pet4.GetComponent<Animator>().SetTrigger("eat");
             }
 

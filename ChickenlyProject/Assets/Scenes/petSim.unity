@@ -2594,7 +2594,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e97b7113a6abb7d409d0f1d4b67a9022, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2687,6 +2687,7 @@ MonoBehaviour:
   dayCountde: 0
   dirt: {fileID: 725723280}
   time: 0
+  idleCount: 0
 --- !u!58 &310029374
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3411,7 +3412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &381113055
 Animator:
   serializedVersion: 3
@@ -3424,7 +3425,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 69a074005d34b5b4db9beffeca29e9c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -3516,6 +3517,7 @@ MonoBehaviour:
   egg: {fileID: 1910621266109408, guid: 2c9893eb8ca58d44c8fd35975657ff2d, type: 2}
   dayCountde: 0
   dirt: {fileID: 725723280}
+  idleCount: 0
   time: 0
 --- !u!58 &381113059
 CircleCollider2D:
@@ -10134,6 +10136,85 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &1357121039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1357121042}
+  - component: {fileID: 1357121041}
+  - component: {fileID: 1357121040}
+  m_Layer: 0
+  m_Name: New Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1357121040
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357121039}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 6, y: 1}
+--- !u!212 &1357121041
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357121039}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &1357121042
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357121039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1361240533
 GameObject:
   m_ObjectHideFlags: 0
@@ -10581,6 +10662,7 @@ MonoBehaviour:
   egg: {fileID: 1910621266109408, guid: 2c9893eb8ca58d44c8fd35975657ff2d, type: 2}
   dayCountde: 0
   dirt: {fileID: 725723280}
+  idleCount: 0
   time: 0
 --- !u!95 &1391683760
 Animator:
@@ -10594,7 +10676,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: c56144dadf8edf34993fed4c396d58b8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -12341,6 +12423,7 @@ GameObject:
   - component: {fileID: 1537487078}
   - component: {fileID: 1537487080}
   - component: {fileID: 1537487079}
+  - component: {fileID: 1537487081}
   m_Layer: 0
   m_Name: Chick
   m_TagString: Pet
@@ -12360,7 +12443,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5658fe9fe51e1d2469e4aeff7980d9dd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -12441,7 +12524,7 @@ MonoBehaviour:
   happiness: 100
   itsName: 
   dayText: {fileID: 1662078390}
-  anim: {fileID: 0}
+  anim: {fileID: 1537487075}
   treasureAward: {fileID: 1475118420}
   daily: {fileID: 640673057}
   Golden: {fileID: 1903270886}
@@ -12449,6 +12532,8 @@ MonoBehaviour:
   dayCountde: 0
   dirt: {fileID: 725723280}
   time: 0
+  idle: 0
+  idleCount: 0
 --- !u!82 &1537487079
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12543,6 +12628,26 @@ CircleCollider2D:
   m_Offset: {x: 0.01, y: -0.56}
   serializedVersion: 2
   m_Radius: 5.49
+--- !u!50 &1537487081
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1537487074}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1539070142
 GameObject:
   m_ObjectHideFlags: 0

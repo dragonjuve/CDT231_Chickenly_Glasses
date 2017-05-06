@@ -30,8 +30,9 @@ public class Robo2 : MonoBehaviour
     public GameObject dirt;
     bool DEBUG;
 
+    public bool idle;
     public float time = 0.0f;
-    float idleCount;
+    //public float idleCount;
     float sXwalk;
     bool walkRight;
 
@@ -52,8 +53,12 @@ public class Robo2 : MonoBehaviour
          {
              PlayerPrefs.SetString("then", DateTime.Now.ToString());
          }*/
-        idleCount = 15 / Time.deltaTime;
-        sXwalk =- 0.01f;
+
+        idle = true;
+        StartCoroutine(willWalk());
+        StartCoroutine(backToIdle());
+        //idleCount = 15 / Time.deltaTime;
+        sXwalk = -0.01f;
         walkRight = false;
         updateStatus();
 
@@ -86,7 +91,8 @@ public class Robo2 : MonoBehaviour
                         clickCount = 0;
                         updateHappiness(1);
                         GetComponent<Animator>().SetBool("walking", false);
-                        idleCount = 15 / Time.deltaTime;
+                        idle = false;
+                        //idleCount = 15 / Time.deltaTime;
                     }
 
                     if (countForQuest3 >= 25)
@@ -140,34 +146,38 @@ public class Robo2 : MonoBehaviour
             dayCountde++;
             Debug.Log(dayCountde);
         }*/
-        idleCount--;
+        //idleCount--;
 
-        if (idleCount < 0)
-        {
-            idleCount = 0;
-        }
+        //if (idleCount < 0)
+        //{
+        //    idleCount = 0;
+        //}
 
-        if (idleCount == 0 && !GetComponent<Animator>().GetBool("walking"))
-        {
-            GetComponent<Animator>().SetBool("walking", true);
-        }
+        //if (idleCount == 0 && !GetComponent<Animator>().GetBool("walking"))
+        //{
+        //    GetComponent<Animator>().SetBool("walking", true);
+        //}
 
         if (GetComponent<Animator>().GetBool("walking"))
         {
+
 
             if (transform.position.x <= 0 && !walkRight)
             {
                 sXwalk = 0.01f;
                 walkRight = true;
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
             }
             else if (transform.position.x >= 1.5f && walkRight)
             {
                 sXwalk = -0.01f;
                 walkRight = false;
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
             }
             transform.Translate(new Vector3(sXwalk, 0, 0));
+            
         }
     }
 
@@ -284,5 +294,43 @@ public class Robo2 : MonoBehaviour
             updateDevice();
         PlayerPrefs.SetInt("hunger", hunger);
         PlayerPrefs.SetInt("happiness", happiness);
+    }
+
+    IEnumerator willWalk()
+    {
+        while (true)
+        {
+
+            if (!GetComponent<Animator>().GetBool("walking"))
+            {
+                int duration = UnityEngine.Random.Range(5, 16);
+                for (float i = 0; i < duration; i += 0.1f)
+                {
+                    if (!idle)
+                    {
+                        duration = UnityEngine.Random.Range(5, 16);
+                        i = 0;
+                    }
+                    yield return new WaitForSeconds(0.1f);
+                    Debug.Log(i);
+                }
+                Debug.Log("now walk");
+                GetComponent<Animator>().SetBool("walking", true);
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    IEnumerator backToIdle()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3);
+            if (!idle)
+            {
+                idle = true;
+                Debug.Log("back to idle");
+            }
+        }
     }
 }
