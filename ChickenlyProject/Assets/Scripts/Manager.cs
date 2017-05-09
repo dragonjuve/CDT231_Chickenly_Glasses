@@ -62,41 +62,40 @@ public class Manager : MonoBehaviour {
         {
             happinessText.GetComponent<Text>().text = pet.GetComponent<Robo>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet.GetComponent<Robo>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet.GetComponent<Robo>().itsName;
+            //nameText.GetComponent<Text>().text = pet.GetComponent<Robo>().itsName;
         }
         if (pet2.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().itsName;
+            //nameText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().itsName;
         }
         if (pet3.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().itsName;
+            //nameText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().itsName;
         }
         if (pet4.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().Hunger.ToString();
-            nameText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().itsName;
+           // nameText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().itsName;
         }
 
         moneyText.GetComponent<Text>().text = money.ToString();
-        
+        nameText.GetComponent<Text>().text = PlayerPrefs.GetString("name");
         if (countForQuest2 >= 2)
         {
             countForQuest2 = 0;
             treasureAward.SetActive(true);
-
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
             money += 1000;
             DailyQuest.GetComponent<DailyQuest>().generateQuest();
         }
         if (countForQuest1 >= 2)
         {
-                treasureAward.SetActive(true);
+            treasureAward.SetActive(true);
             countForQuest1 = 0;
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
             money += 1000;
@@ -153,11 +152,8 @@ public class Manager : MonoBehaviour {
         namePanel.SetActive(!namePanel.activeInHierarchy);
         if (b)
         {
-            pet.GetComponent<Robo>().Name = nameInput.GetComponent<InputField>().text;
-            PlayerPrefs.SetString("name", pet.GetComponent<Robo>().itsName);
-            PlayerPrefs.SetString("name", pet2.GetComponent<Robo2>().itsName);
-            PlayerPrefs.SetString("name", pet3.GetComponent<Robo3>().itsName);
-            PlayerPrefs.SetString("name", pet4.GetComponent<Robo4>().itsName);
+            nameText.GetComponent<Text>().text = nameInput.GetComponent<InputField>().text;
+            PlayerPrefs.SetString("name", nameText.GetComponent<Text>().text);
         }
     }
 
@@ -233,7 +229,11 @@ public class Manager : MonoBehaviour {
 
     public void selectFood(int i)
     {
-        int hun = feedValue[i];
+        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+            {
+                    countForQuest1++;
+            }
+            int hun = feedValue[i];
         int pay = price[i];
         if (money >= pay)
         {

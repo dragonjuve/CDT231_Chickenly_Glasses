@@ -19,7 +19,7 @@ public class Robo4 : MonoBehaviour
     public GameObject daily;
     public GameObject Golden;
     bool goldSpawn;
-    int countForQuest3;
+    int countForQuest2;
     GameObject Manager;
     public GameObject egg;
     private bool serverTime;
@@ -55,12 +55,16 @@ public class Robo4 : MonoBehaviour
         //idleCount = 15 / Time.deltaTime;
         sXwalk = -0.01f;
         walkRight = false;
-
+        updateStatus();
     }
 
 
     void Update()
     {
+        /*for (int i = 0; i < 2; i++) {
+            updateStatus();
+        }*/
+        
         if ((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
         {
             Golden.SetActive(true);
@@ -75,9 +79,9 @@ public class Robo4 : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "Pet")
                 {
-                    if (daily.GetComponent<DailyQuest>().number == 3 || daily.GetComponent<DailyQuest>().number == 4)
+                    if (daily.GetComponent<DailyQuest>().number == 2)
                     {
-                        countForQuest3++;
+                        countForQuest2++;
                     }
                     clickCount++;
                     if (clickCount >= 3)
@@ -89,10 +93,10 @@ public class Robo4 : MonoBehaviour
                         //idleCount = 15 / Time.deltaTime;
                     }
 
-                    if (countForQuest3 >= 25)
+                    if (countForQuest2 >= 25)
                     {
                         treasureAward.SetActive(true);
-                        countForQuest3 = 0;
+                        countForQuest2 = 0;
                         daily.GetComponent<DailyQuest>().inProcess = false;
                         Manager.GetComponent<Manager>().money += 1000;
                         daily.GetComponent<DailyQuest>().generateQuest();
@@ -175,12 +179,12 @@ public class Robo4 : MonoBehaviour
     {
         int time = 0;
         TimeSpan ts = getTimeSpan();
-        float getDirty = (float)ts.TotalHours;
+        /*float getDirty = (float)ts.TotalHours;
 
         if (getDirty > 4.0f)
         {
             dirt.SetActive(true);
-        }
+        }*/
         float produceEgg = (float)ts.TotalHours / 15.0f;
         //Debug.Log(produceEgg);
         for (float i = produceEgg; i >= 0; i -= 10)

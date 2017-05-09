@@ -18,7 +18,7 @@ public class Robo : MonoBehaviour {
     public GameObject treasureAward;
     public GameObject daily;
     public GameObject Golden;
-    int countForQuest3;
+    int countForQuest2;
     GameObject Manager;
     public GameObject egg;
     private bool serverTime;
@@ -67,11 +67,12 @@ public class Robo : MonoBehaviour {
         //idleCount = 15 / Time.deltaTime;
         sXwalk = -0.01f;
         walkRight = false;
-
+        updateStatus();
     }
 
 
     void Update() {
+        print(PlayerPrefs.GetString("name"));
         //print(PlayerPrefs.GetString("then"));
         /*if (!DEBUG)
         {
@@ -90,9 +91,9 @@ public class Robo : MonoBehaviour {
             {
                 if (hit.transform.gameObject.tag == "Pet")
                 {
-                    if (daily.GetComponent<DailyQuest>().number == 3 || daily.GetComponent<DailyQuest>().number == 4)
+                    if (daily.GetComponent<DailyQuest>().number == 2)
                     {
-                        countForQuest3++;
+                        countForQuest2++;
                     }
                     clickCount++;
                     if(clickCount >= 3)
@@ -106,10 +107,10 @@ public class Robo : MonoBehaviour {
                         //idleCount = 15 / Time.deltaTime;
                     }
                     
-                    if (countForQuest3 >= 25)
+                    if (countForQuest2 >= 25)
                     {
                         treasureAward.SetActive(true);
-                        countForQuest3 = 0;
+                        countForQuest2 = 0;
                         daily.GetComponent<DailyQuest>().inProcess = false;
                         Manager.GetComponent<Manager>().money += 1000;
                         daily.GetComponent<DailyQuest>().generateQuest();
@@ -211,15 +212,15 @@ public class Robo : MonoBehaviour {
 
         int time = 0;
         TimeSpan ts = getTimeSpan();
-        float produceEgg = (float)ts.TotalHours / 5.0f;
-        float getDirty = (float)ts.TotalHours;
+      //  float produceEgg = (float)ts.TotalHours / 5.0f;
+        /*float getDirty = (float)ts.TotalHours;
 
         if (getDirty > 4.0f)
         {
             dirt.SetActive(true);
             dirt.transform.position = gameObject.transform.position;
-        }
-        for (float i = produceEgg; i >= 0; i -= 10)
+        }*/
+     /*   for (float i = produceEgg; i >= 0; i -= 10)
         {
             GameObject EGG = (GameObject)Instantiate(egg, transform.position, transform.rotation);
             EGG.transform.position = new Vector2(UnityEngine.Random.Range(-2.9f, 2.0f), -3f);
@@ -228,7 +229,7 @@ public class Robo : MonoBehaviour {
             {
                 break;
             }
-        }
+        }*/
 
 
         Hunger -= (int)ts.TotalHours * 2;

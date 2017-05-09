@@ -31,13 +31,13 @@ public class DailyQuest : MonoBehaviour {
 
     public void generateQuest()
     {
-        number = UnityEngine.Random.Range(1, 4);
-       if(number == 1 || number == 2)
+        number = UnityEngine.Random.Range(1, 2);
+       if(number == 1)
        {
           Quest1();
-       }  else if (number == 3 || number == 4)
+       }  else if (number == 2)
        {
-          Quest3();
+          Quest2();
        }
     }
 
@@ -48,12 +48,6 @@ public class DailyQuest : MonoBehaviour {
     }
 
     void Quest2()
-    {
-        objective.GetComponent<Text>().text = "[Pay Me]";
-        description.GetComponent<Text>().text = "Purchase 2 Items";
-    }
-
-    void Quest3()
     {
         objective.GetComponent<Text>().text = "[Play With Me]";
         description.GetComponent<Text>().text = "Pat Chicken Head 25 Times";
