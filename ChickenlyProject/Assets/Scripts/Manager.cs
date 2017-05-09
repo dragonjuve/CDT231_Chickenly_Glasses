@@ -170,7 +170,8 @@ public class Manager : MonoBehaviour {
         datePanel.SetActive(!datePanel.activeInHierarchy);
         if (b)
         {
-            PlayerPrefs.SetString("firstPlay", dateInput.GetComponent<InputField>().text);
+            if(dateInput.GetComponent<InputField>().text != "")
+                PlayerPrefs.SetString("firstPlay", dateInput.GetComponent<InputField>().text);
         }
     }
 
@@ -179,7 +180,8 @@ public class Manager : MonoBehaviour {
         thenPanel.SetActive(!thenPanel.activeInHierarchy);
         if (b)
         {
-            PlayerPrefs.SetString("then", thenInput.GetComponent<InputField>().text);
+            if (thenInput.GetComponent<InputField>().text != "")
+                PlayerPrefs.SetString("then", thenInput.GetComponent<InputField>().text);
             if (pet.activeSelf == true)
             {
                 pet.GetComponent<Robo>().updateStatus();
