@@ -56,12 +56,13 @@ public class Robo : MonoBehaviour {
         {
             updateStatus();
         }
-        //if (!PlayerPrefs.HasKey("firstPlay"))
-        //{
-        //  PlayerPrefs.SetString("firstPlay", getStringTime());
-        //}
+        if (!PlayerPrefs.HasKey("firstPlay"))
+        {
+            PlayerPrefs.SetString("firstPlay", getStringTime());
+        }
 
         idle = true;
+        print(PlayerPrefs.GetString("name"));
         StartCoroutine(willWalk());
         StartCoroutine(backToIdle());
         //idleCount = 15 / Time.deltaTime;
@@ -72,7 +73,7 @@ public class Robo : MonoBehaviour {
 
 
     void Update() {
-        print(PlayerPrefs.GetString("name"));
+        //print(PlayerPrefs.GetString("name"));
         //print(PlayerPrefs.GetString("then"));
         /*if (!DEBUG)
         {

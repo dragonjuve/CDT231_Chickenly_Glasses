@@ -51,9 +51,10 @@ public class Manager : MonoBehaviour {
 
     void Start()
     {
+        //PlayerPrefs.SetString("then","05/10/2017 06:00:00");
         //PlayerPrefs.SetString("firstPlay","05/04/2017 06:00:00");
         //time = 0;
-        
+
     }
 
     void Update () {
