@@ -49,21 +49,46 @@ public class Robo4 : MonoBehaviour
             itsName = PlayerPrefs.GetString("name");
         }
 
+        if (!PlayerPrefs.HasKey("firstPlay"))
+        {
+            PlayerPrefs.SetString("firstPlay", getStringTime());
+        }
+
+        if (!PlayerPrefs.HasKey("happiness"))
+        {
+            PlayerPrefs.SetInt("happiness", happiness);
+        }
+        else
+        {
+            happiness = PlayerPrefs.GetInt("happiness");
+        }
+        if (!PlayerPrefs.HasKey("hunger"))
+        {
+            PlayerPrefs.SetInt("hunger", hunger);
+        }
+        else
+        {
+            hunger = PlayerPrefs.GetInt("hunger");
+        }
+        if (!PlayerPrefs.HasKey("then"))
+        {
+            PlayerPrefs.SetString("then", DateTime.Now.ToString());
+        }
+        else
+        {
+            updateStatus();
+        }
         idle = true;
         StartCoroutine(willWalk());
         StartCoroutine(backToIdle());
         //idleCount = 15 / Time.deltaTime;
         sXwalk = -0.01f;
         walkRight = false;
-        updateStatus();
     }
 
 
     void Update()
     {
-        /*for (int i = 0; i < 2; i++) {
-            updateStatus();
-        }*/
         
         if ((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
         {
@@ -111,15 +136,6 @@ public class Robo4 : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-
-            PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
-            //Debug.Log(getStringTime().ToString());
-            updateStatus();
-
-        }
-
         if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log(getStringTime().ToString());
@@ -134,16 +150,6 @@ public class Robo4 : MonoBehaviour
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
         }
-        /* if (Input.GetKeyDown(KeyCode.I))
-         {
-             dayCountde = dayCount;
-             DEBUG = !DEBUG;
-         }
-         if ((Input.GetKeyDown(KeyCode.U)) && (DEBUG))
-         {
-             dayCountde++;
-             Debug.Log(dayCountde);
-         }*/
         //idleCount--;
 
         //if (idleCount < 0)
@@ -179,12 +185,6 @@ public class Robo4 : MonoBehaviour
     {
         int time = 0;
         TimeSpan ts = getTimeSpan();
-        /*float getDirty = (float)ts.TotalHours;
-
-        if (getDirty > 4.0f)
-        {
-            dirt.SetActive(true);
-        }*/
         float produceEgg = (float)ts.TotalHours / 15.0f;
         //Debug.Log(produceEgg);
         for (float i = produceEgg; i >= 0; i -= 10)
@@ -208,7 +208,7 @@ public class Robo4 : MonoBehaviour
             Hunger = 100;
         }
 
-        Happiness -= (100 - Hunger) * (int)ts.TotalHours / 5;
+        Happiness -= (100 - Hunger) * (int)ts.TotalHours * 2;
 
         if (Happiness < 0)
             Happiness = 0;
@@ -218,14 +218,14 @@ public class Robo4 : MonoBehaviour
             Hunger = 100;
         }
 
-        //Debug.Log(getTimeSpan().ToString());
-        //Debug.Log(getTimeSpan().TotalHours);
+        //InvokeRepeating("updateDevice", 0f, 30f);
+    }
 
-        //if (serverTime)
-        //    updateServer();
-        //else
-        //    InvokeRepeating("updateDevice",0f,30f);
-        InvokeRepeating("updateDevice", 0f, 30f);
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("happiness", Happiness);
+        PlayerPrefs.SetInt("hunger", Hunger);
+        PlayerPrefs.SetString("then", getStringTime());
     }
 
     void updateServer()

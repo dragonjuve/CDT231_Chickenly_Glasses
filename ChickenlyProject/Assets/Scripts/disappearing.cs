@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class disappearing : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public GameObject DailyQuest;
+    GameObject Manager;
+    public GameObject treasure;
+    static int countForQuest3;
+    // Use this for initialization
+    void Start () {
+        Manager = GameObject.FindGameObjectWithTag("Manager");
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        
+    }
 
     public void willbegone()
     {
@@ -22,5 +25,16 @@ public class disappearing : MonoBehaviour {
     void gone()
     {
         gameObject.SetActive(false);
+        if (DailyQuest.GetComponent<DailyQuest>().number == 3)
+        {
+            countForQuest3++;
+        }
+        if (countForQuest3 == 3) {
+            treasure.SetActive(true);
+            countForQuest3 = 0;
+            DailyQuest.GetComponent<DailyQuest>().inProcess = false;
+            Manager.GetComponent<Manager>().money += 1000;
+            DailyQuest.GetComponent<DailyQuest>().generateQuest();
+        }
     }
 }

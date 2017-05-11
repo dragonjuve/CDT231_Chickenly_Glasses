@@ -9,9 +9,10 @@ public class option : MonoBehaviour {
     public GameObject BGM;
     public GameObject BGM_On;
     public GameObject BGM_Off;
-    public GameObject BG1;
-    public GameObject BG2;
+    public GameObject BG;
+    public Sprite[] BGsprite;
     public GameObject dayText;
+    int id = 0;
     // Use this for initialization
     public void Quit() {
         Application.Quit();
@@ -32,16 +33,27 @@ public class option : MonoBehaviour {
         
     }
 
-    public void BGchange() {
-        if (BG1.activeSelf == true)
+    public void BGchange(bool next) {
+        if (next)
         {
-            BG1.SetActive(false);
-            BG2.SetActive(true);
+            id++;
+            if (id >= BGsprite.Length)
+            {
+                id = 0;
+            }
         }
-        else {
-            BG2.SetActive(false);
-            BG1.SetActive(true);
+
+        else
+        {
+            id--;
+            if (id < 0)
+            {
+                id = BGsprite.Length - 1;
+            }
         }
+  
+        BG.GetComponent<SpriteRenderer>().sprite = BGsprite[id];
+        
     }
 
     public void Reset() {
