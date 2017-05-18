@@ -173,10 +173,13 @@ public class Manager : MonoBehaviour {
             DailyQuest.GetComponent<DailyQuest>().generateQuest();
         }
 
-        if (int.Parse(dayText.GetComponent<Text>().text) >= 5) {
+        /*if (int.Parse(dayText.GetComponent<Text>().text) >= 5)
+        {
             explore.SetActive(true);
-
         }
+        else {
+            explore.SetActive(false);
+        }*/
 
         if (explore == true) {
             coolDown -= Time.deltaTime;
