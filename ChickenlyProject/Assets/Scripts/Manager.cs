@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Manager : MonoBehaviour {
 
@@ -14,19 +15,21 @@ public class Manager : MonoBehaviour {
     public GameObject dayText;
     public GameObject treasureAward;
     public float time = 0.0f;
-
-    int countForQuest2;
     int countForQuest1;
+    int countForQuest4;
     public GameObject namePanel;
     public GameObject nameInput;
     public GameObject nameText;
+    public GameObject waitPanel;
+    public GameObject waitText;
     public GameObject optionPanel;
     public GameObject datePanel;
     public GameObject thenPanel;
     public GameObject dateInput;
     public GameObject thenInput;
+    public GameObject collectableMenu;
     //public GameObject dateText;
-
+    float coolDown = 30.00f;
     public GameObject DailyQuest;
     public GameObject youngChicken;
     public GameObject youngAdultChicken;
@@ -36,65 +39,124 @@ public class Manager : MonoBehaviour {
     public GameObject pet2;
     public GameObject pet3;
     public GameObject pet4;
+    public GameObject explore;
+    bool exploring;
     bool fading = false;
+    bool fading2 = false;
+    public GameObject ItemPic;
     public GameObject feedFoodPic;
     public GameObject foodPanel;
     public Sprite[] foodIcon;
+    public Sprite[] Cosmetics;
+    static bool[] CosmeticSave = {false, false, false, false, false, false};
     public GameObject foods;
     public Text[] foodAmount;
     public GameObject store;
     public int[] feedValue;
     public int[] price;
-
+    public GameObject[] item;
+    bool spawnItem = false;
+    float rarityhelp = 0;
+    int ribbonKey;
     Color C;
     
 
     void Start()
     {
-        //PlayerPrefs.SetString("then","05/10/2017 06:00:00");
-        //PlayerPrefs.SetString("firstPlay","05/04/2017 06:00:00");
-        //time = 0;
+        if (!PlayerPrefs.HasKey("money"))
+        {
+            PlayerPrefs.SetInt("money", money);
+        }
+        else
+        {
+            money = PlayerPrefs.GetInt("money");
+        }
 
+        foreach(GameObject cosm in item)
+        {
+            cosm.GetComponent<Button>().interactable = false;
+        }
+
+        if (PlayerPrefs.HasKey("CosmeticSave1"))
+        {
+            item[0].GetComponent<Image>().sprite = Cosmetics[0];
+            item[0].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave2"))
+        {
+            item[1].GetComponent<Image>().sprite = Cosmetics[1];
+            item[1].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave3"))
+        {
+            item[2].GetComponent<Image>().sprite = Cosmetics[2];
+            item[2].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave4"))
+        {
+            item[3].GetComponent<Image>().sprite = Cosmetics[3];
+            item[3].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave5"))
+        {
+            item[4].GetComponent<Image>().sprite = Cosmetics[4];
+            item[4].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave6"))
+        {
+            item[5].GetComponent<Image>().sprite = Cosmetics[5];
+            item[5].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("RibbonNow"))
+        {
+            ribbonKey = PlayerPrefs.GetInt("RibbonNow");
+            if (ribbonKey >= 0)
+            {
+                if (pet2.activeSelf == true)
+                {
+                    pet2.transform.Find("YoungAdult_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+                if (pet3.activeSelf == true)
+                {
+                    pet3.transform.Find("AdultChicken_torso").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+                if (pet4.activeSelf == true)
+                {
+                    pet4.transform.Find("OldChicken_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+            }
+        }
+        {
+
+        }
     }
 
     void Update () {
-        //print(PlayerPrefs.GetString("firstPlay"));
-        if(pet.activeSelf == true)
+        if (pet.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet.GetComponent<Robo>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet.GetComponent<Robo>().Hunger.ToString();
-            //nameText.GetComponent<Text>().text = pet.GetComponent<Robo>().itsName;
         }
         if (pet2.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().Hunger.ToString();
-            //nameText.GetComponent<Text>().text = pet2.GetComponent<Robo2>().itsName;
         }
         if (pet3.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().Hunger.ToString();
-            //nameText.GetComponent<Text>().text = pet3.GetComponent<Robo3>().itsName;
         }
         if (pet4.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().Happiness.ToString();
             hungerText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().Hunger.ToString();
-           // nameText.GetComponent<Text>().text = pet4.GetComponent<Robo4>().itsName;
         }
 
         moneyText.GetComponent<Text>().text = money.ToString();
         nameText.GetComponent<Text>().text = PlayerPrefs.GetString("name");
-        if (countForQuest2 >= 2)
-        {
-            countForQuest2 = 0;
-            treasureAward.SetActive(true);
-            DailyQuest.GetComponent<DailyQuest>().inProcess = false;
-            money += 1000;
-            DailyQuest.GetComponent<DailyQuest>().generateQuest();
-        }
-        if (countForQuest1 >= 2)
+        waitText.GetComponent<Text>().text = ((int)coolDown).ToString();
+        if (countForQuest1 >= 3)
         {
             treasureAward.SetActive(true);
             countForQuest1 = 0;
@@ -102,6 +164,69 @@ public class Manager : MonoBehaviour {
             money += 1000;
             DailyQuest.GetComponent<DailyQuest>().generateQuest();
         }
+        if (countForQuest4 >= 1)
+        {
+            treasureAward.SetActive(true);
+            countForQuest4 = 0;
+            DailyQuest.GetComponent<DailyQuest>().inProcess = false;
+            money += 1000;
+            DailyQuest.GetComponent<DailyQuest>().generateQuest();
+        }
+
+        if (int.Parse(dayText.GetComponent<Text>().text) >= 5) {
+            explore.SetActive(true);
+
+        }
+
+        if (explore == true) {
+            coolDown -= Time.deltaTime;
+        }
+        if (coolDown <= 0) {
+            exploring = false;
+            if (int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 19)
+            {
+                if (DailyQuest.GetComponent<DailyQuest>().number > 3)
+                {
+                    countForQuest4++;
+                }
+                youngAdultChicken.SetActive(true);
+                waitPanel.SetActive(false);
+                if (spawnItem == true) {
+                    ItemPic.SetActive(true);
+                    RandomItem();
+                }
+            }
+            else if (int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49)
+            {
+                if (DailyQuest.GetComponent<DailyQuest>().number > 3)
+                {
+                    countForQuest4++;
+                }
+                closeOldChicken.SetActive(true);
+                waitPanel.SetActive(false);
+                if (spawnItem == true)
+                {
+                    ItemPic.SetActive(true);
+                    RandomItem();
+                }
+            }
+            else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
+            {
+                if (DailyQuest.GetComponent<DailyQuest>().number > 3)
+                {
+                    countForQuest4++;
+                }
+                OldChicken.SetActive(true);
+                waitPanel.SetActive(false);
+                if (spawnItem == true)
+                {
+                    ItemPic.SetActive(true);
+                    RandomItem();
+                }
+            }
+            spawnItem = false;
+        }
+
         if (int.Parse(dayText.GetComponent<Text>().text) < 5)
         {
             youngChicken.SetActive(true);
@@ -109,21 +234,22 @@ public class Manager : MonoBehaviour {
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-        else if(int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 19)
+        else if(int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 19 && exploring == false)
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(true);
             closeOldChicken.SetActive(false);
             OldChicken.SetActive(false);
         }
-        else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49){
+        else if(int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49 && exploring == false)
+        {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
             closeOldChicken.SetActive(true);
             OldChicken.SetActive(false);
         }
 
-        else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
+        else if (int.Parse(dayText.GetComponent<Text>().text) >= 49 && exploring == false)
         {
             youngChicken.SetActive(false);
             youngAdultChicken.SetActive(false);
@@ -148,6 +274,7 @@ public class Manager : MonoBehaviour {
         }
     }
 
+
     public void triggerNamePanel(bool b)
     {
         namePanel.SetActive(!namePanel.activeInHierarchy);
@@ -158,12 +285,38 @@ public class Manager : MonoBehaviour {
         }
     }
 
-    public void triggerdailyQuest(bool b)
+    public void triggerdailyQuest()
     {
         DailyQuest.SetActive(!DailyQuest.activeInHierarchy);
-        if (b)
+    }
+
+    public void goExplore() {
+        coolDown = 20.0f;
+        if(!youngChicken.activeInHierarchy)
+            waitPanel.SetActive(true);
+        
+        if (int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 19)
         {
+            youngAdultChicken.SetActive(false);
+            exploring = true;
+            spawnItem = true;
         }
+        else if (int.Parse(dayText.GetComponent<Text>().text) >= 19 && int.Parse(dayText.GetComponent<Text>().text) < 49)
+        {
+            closeOldChicken.SetActive(false);
+            exploring = true;
+            spawnItem = true;
+        }
+        else if (int.Parse(dayText.GetComponent<Text>().text) >= 49)
+        {
+            OldChicken.SetActive(false);
+            exploring = true;
+            spawnItem = true;
+        }
+    }
+
+    public void triggerCollectableMenu() {
+        collectableMenu.SetActive(!collectableMenu.activeInHierarchy);
     }
 
     public void triggerCheat(bool b)
@@ -173,6 +326,15 @@ public class Manager : MonoBehaviour {
         {
             if(dateInput.GetComponent<InputField>().text != "")
                 PlayerPrefs.SetString("firstPlay", dateInput.GetComponent<InputField>().text);
+        }
+        else
+        {
+            DateTime changes = Convert.ToDateTime(PlayerPrefs.GetString("firstPlay"));
+            int days = int.Parse(datePanel.transform.Find("Amount").GetComponent<Text>().text);
+            
+            changes = changes.AddDays(-days);
+            datePanel.transform.Find("Amount").GetComponent<Text>().text = "0";
+            PlayerPrefs.SetString("firstPlay", changes.Month + "/" + changes.Day + "/" + changes.Year + " " + changes.Hour + ":" + changes.Minute + ":" + changes.Second);
         }
     }
 
@@ -197,15 +359,53 @@ public class Manager : MonoBehaviour {
                 pet4.GetComponent<Robo4>().updateStatus();
             }
         }
+        else
+        {
+            DateTime changes = Convert.ToDateTime(PlayerPrefs.GetString("then"));
+            int hours = int.Parse(thenPanel.transform.Find("Amount").GetComponent<Text>().text);
+            print(changes.Hour);
+            changes = changes.AddHours(hours);
+            print(changes.Hour);
+            thenPanel.transform.Find("Amount").GetComponent<Text>().text = "0";
+            PlayerPrefs.SetString("then", changes.Month + "/" + changes.Day + "/" + changes.Year + " " + changes.Hour + ":" + changes.Minute + ":" + changes.Second);
+            if (pet.activeSelf == true)
+            {
+                pet.GetComponent<Robo>().updateStatus();
+            }
+            else if (pet2.activeSelf == true)
+            {
+                pet2.GetComponent<Robo2>().updateStatus();
+            }
+            else if (pet3.activeSelf == true)
+            {
+                pet3.GetComponent<Robo3>().updateStatus();
+            }
+            else if (pet4.activeSelf == true)
+            {
+                pet4.GetComponent<Robo4>().updateStatus();
+            }
+        }
     }
+
+    public void ChangeInDays(int value)
+    {
+        int days = int.Parse(datePanel.transform.Find("Amount").GetComponent<Text>().text);
+        days = days + value;
+        datePanel.transform.Find("Amount").GetComponent<Text>().text = days.ToString();
+    }
+
+    public void ChangeInHours(int value)
+    {
+        int hours = int.Parse(thenPanel.transform.Find("Amount").GetComponent<Text>().text);
+        hours = hours + value;
+        thenPanel.transform.Find("Amount").GetComponent<Text>().text = hours.ToString();
+    }
+
+
 
     public void triggerOption(bool b)
     {
         optionPanel.SetActive(!optionPanel.activeInHierarchy);
-        if (b)
-        {
-        }
-           
     }
 
     public void buttonBahavior(int i)
@@ -228,6 +428,52 @@ public class Manager : MonoBehaviour {
                 Application.Quit();
                 break;
         }
+    }
+
+    void RandomItem()
+    {
+        int rarity = UnityEngine.Random.Range(1, 7);
+        rarity += (int)rarityhelp;
+        if (rarity > 7)
+        {
+            rarity = 7;
+        }
+        if (rarity >= 1 && rarity <= 6)
+        {
+            int random = UnityEngine.Random.Range(1, 6);
+            if (random > 5)
+            {
+                random = 5;
+            }
+            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[random - 1];
+            item[random - 1].GetComponent<Image>().sprite = Cosmetics[random - 1];
+            if (random - 1 == 0)
+            {
+                PlayerPrefs.SetInt("CosmeticSave1", random - 1);
+            }
+            else if (random - 1 == 1)
+            {
+                PlayerPrefs.SetInt("CosmeticSave2", random - 1);
+            }
+            else if (random - 1 == 2)
+            {
+                PlayerPrefs.SetInt("CosmeticSave3", random - 1);
+            }
+            else if (random - 1 == 3)
+            {
+                PlayerPrefs.SetInt("CosmeticSave4", random - 1);
+            }
+            else if (random - 1 == 4)
+            {
+                PlayerPrefs.SetInt("CosmeticSave5", random - 1);
+            }
+        }
+        else {
+            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[5];
+            item[5].GetComponent<Image>().sprite = Cosmetics[5];
+            PlayerPrefs.SetInt("CosmeticSave6", 5);
+        }
+        rarityhelp = 0;
     }
 
     public void selectFood(int i)
@@ -283,6 +529,30 @@ public class Manager : MonoBehaviour {
             {
                 feedFoodPic.transform.position = new Vector3(pet4.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
             }
+            if (i == 3)
+            {
+                rarityhelp += 0.25f;
+                feedFoodPic.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+            }
+            else if (i == 5)
+            {
+                rarityhelp += 0.75f;
+                feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
+            }
+            else if (i == 4) {
+                rarityhelp += 0.5f;
+                feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
+            } else if (i == 6) {
+                rarityhelp += 1.25f;
+                feedFoodPic.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+            } else if (i == 7) {
+                rarityhelp += 1.5f;
+                feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
+            }
+            else
+            {
+                feedFoodPic.transform.localScale = new Vector3(0.2530704f, 0.0530704f, 0);
+            }
             feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[i];
             C = feedFoodPic.GetComponent<SpriteRenderer>().color;
             feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
@@ -317,394 +587,50 @@ public class Manager : MonoBehaviour {
                 pet4.GetComponent<Animator>().SetTrigger("eat");
             }
 
-        }
-
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1 || DailyQuest.GetComponent<DailyQuest>().number == 1)
-        {
-            countForQuest1++;
-        }
-
-        
+        }        
     }
 
-    //public void selectFood2(int i)
-    //{
-    //    pet.GetComponent<Robo>().Hunger += 3;
-    //    pet2.GetComponent<Robo2>().Hunger += 3;
-    //    pet3.GetComponent<Robo3>().Hunger += 3;
-    //    pet4.GetComponent<Robo4>().Hunger += 3;
-    //    if (pet.GetComponent<Robo>().Hunger > 100)
-    //    {
-    //        pet.GetComponent<Robo>().Hunger = 100;
-    //    }
-    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
-    //    {
-    //        pet2.GetComponent<Robo2>().Hunger = 100;
-    //    }
-    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
-    //    {
-    //        pet3.GetComponent<Robo3>().Hunger = 100;
-    //    }
-    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
-    //    {
-    //        pet4.GetComponent<Robo4>().Hunger = 100;
-    //    }
-
-    //    if (foodAmt[1] > 0)
-    //    {
-    //        foodAmt[1]--;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[1];
-    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-    //        Invoke("fade", 1);
-    //    }
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-    //    {
-    //        countForQuest1++;
-    //    }
-
-        
-    //}
-
-    //public void selectFood3(int i)
-    //{
-    //    pet.GetComponent<Robo>().Hunger += 5;
-    //    pet2.GetComponent<Robo2>().Hunger += 5;
-    //    pet3.GetComponent<Robo3>().Hunger += 5;
-    //    pet4.GetComponent<Robo4>().Hunger += 5;
-    //    if (pet.GetComponent<Robo>().Hunger > 100)
-    //    {
-    //        pet.GetComponent<Robo>().Hunger = 100;
-    //    }
-    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
-    //    {
-    //        pet2.GetComponent<Robo2>().Hunger = 100;
-    //    }
-    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
-    //    {
-    //        pet3.GetComponent<Robo3>().Hunger = 100;
-    //    }
-    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
-    //    {
-    //        pet4.GetComponent<Robo4>().Hunger = 100;
-    //    }
-
-    //    if (foodAmt[2] > 0)
-    //    {
-    //        foodAmt[2]--;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[2];
-    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-    //        Invoke("fade", 1);
-    //    }
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-    //    {
-    //        countForQuest1++;
-    //    }
-    //}
-
-    //public void selectFood4(int i)
-    //{
-    //    pet.GetComponent<Robo>().Hunger += 7;
-    //    pet2.GetComponent<Robo2>().Hunger += 7;
-    //    pet3.GetComponent<Robo3>().Hunger += 7;
-    //    pet4.GetComponent<Robo4>().Hunger += 7;
-    //    if (pet.GetComponent<Robo>().Hunger > 100)
-    //    {
-    //        pet.GetComponent<Robo>().Hunger = 100;
-    //    }
-    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
-    //    {
-    //        pet2.GetComponent<Robo2>().Hunger = 100;
-    //    }
-    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
-    //    {
-    //        pet3.GetComponent<Robo3>().Hunger = 100;
-    //    }
-    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
-    //    {
-    //        pet4.GetComponent<Robo4>().Hunger = 100;
-    //    }
-
-    //    if (foodAmt[3] > 0)
-    //    {
-    //        foodAmt[3]--;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[3];
-    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-    //        Invoke("fade", 1);
-    //    }
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-    //    {
-    //        countForQuest1++;
-    //    }
-    //}
-
-    //public void selectFood5(int i)
-    //{
-    //    pet.GetComponent<Robo>().Hunger += 9;
-    //    pet2.GetComponent<Robo2>().Hunger += 9;
-    //    pet3.GetComponent<Robo3>().Hunger += 9;
-    //    pet4.GetComponent<Robo4>().Hunger += 9;
-
-    //    if (pet.GetComponent<Robo>().Hunger > 100)
-    //    {
-    //        pet.GetComponent<Robo>().Hunger = 100;
-    //    }
-    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
-    //    {
-    //        pet2.GetComponent<Robo2>().Hunger = 100;
-    //    }
-    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
-    //    {
-    //        pet3.GetComponent<Robo3>().Hunger = 100;
-    //    }
-    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
-    //    {
-    //        pet4.GetComponent<Robo4>().Hunger = 100;
-    //    }
-
-    //    if (foodAmt[4] > 0)
-    //    {
-    //        foodAmt[4]--;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[4];
-    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-    //        Invoke("fade", 1);
-    //    }
-    //}
-
-    //public void selectFood6(int i)
-    //{
-    //    pet.GetComponent<Robo>().Hunger += 11;
-    //    pet2.GetComponent<Robo2>().Hunger += 11;
-    //    pet3.GetComponent<Robo3>().Hunger += 11;
-    //    pet4.GetComponent<Robo4>().Hunger += 11;
-    //    if (pet.GetComponent<Robo>().Hunger > 100)
-    //    {
-    //        pet.GetComponent<Robo>().Hunger = 100;
-    //    }
-    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
-    //    {
-    //        pet2.GetComponent<Robo2>().Hunger = 100;
-    //    }
-    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
-    //    {
-    //        pet3.GetComponent<Robo3>().Hunger = 100;
-    //    }
-    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
-    //    {
-    //        pet4.GetComponent<Robo4>().Hunger = 100;
-    //    }
-
-    //    if (foodAmt[5] > 0)
-    //    {
-    //        foodAmt[5]--;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[5];
-    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-    //        Invoke("fade", 1);
-    //    }
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-    //    {
-    //        countForQuest1++;
-    //    }
-    //}
-
-    //public void selectFood7(int i)
-    //{
-    //    pet.GetComponent<Robo>().Hunger += 13;
-    //    pet2.GetComponent<Robo2>().Hunger += 13;
-    //    pet3.GetComponent<Robo3>().Hunger += 13;
-    //    pet4.GetComponent<Robo4>().Hunger += 13;
-    //    if (pet.GetComponent<Robo>().Hunger > 100)
-    //    {
-    //        pet.GetComponent<Robo>().Hunger = 100;
-    //    }
-    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
-    //    {
-    //        pet2.GetComponent<Robo2>().Hunger = 100;
-    //    }
-    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
-    //    {
-    //        pet3.GetComponent<Robo3>().Hunger = 100;
-    //    }
-    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
-    //    {
-    //        pet4.GetComponent<Robo4>().Hunger = 100;
-    //    }
-
-    //    if (foodAmt[6] > 0)
-    //    {
-    //        foodAmt[6]--;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[6];
-    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-    //        Invoke("fade", 1);
-    //    }
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-    //    {
-    //        countForQuest1++;
-    //    }
-    //}
-
-    //public void selectFood8(int i)
-    //{
-    //    pet.GetComponent<Robo>().Hunger += 15;
-    //    pet2.GetComponent<Robo2>().Hunger += 15;
-    //    pet3.GetComponent<Robo3>().Hunger += 15;
-    //    pet4.GetComponent<Robo4>().Hunger += 15;
-    //    if (pet.GetComponent<Robo>().Hunger > 100)
-    //    {
-    //        pet.GetComponent<Robo>().Hunger = 100;
-    //    }
-    //    if (pet2.GetComponent<Robo2>().Hunger > 100)
-    //    {
-    //        pet2.GetComponent<Robo2>().Hunger = 100;
-    //    }
-    //    if (pet3.GetComponent<Robo3>().Hunger > 100)
-    //    {
-    //        pet3.GetComponent<Robo3>().Hunger = 100;
-    //    }
-    //    if (pet4.GetComponent<Robo4>().Hunger > 100)
-    //    {
-    //        pet4.GetComponent<Robo4>().Hunger = 100;
-    //    }
-
-    //    if (foodAmt[7] > 0)
-    //    {
-    //        foodAmt[7]--;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[7];
-    //        Color C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-    //        feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-    //        Invoke("fade", 1);
-    //    }
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 1)
-    //    {
-    //        countForQuest1++;
-    //    }
-    //}
-    //public void selectInStore1(int i)
-    //{
-        
-    //    if (money >= 10)
-    //        money -= 10;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[0]++;
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-       
-    //}
-
-    //public void selectInStore2(int i)
-    //{
-    //    if (money >= 20)
-    //        money -= 20;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[1]++;
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-    //}
-
-    //public void selectInStore3(int i)
-    //{
-    //    money -= 30;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[2]++;
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-    //}
-
-    //public void selectInStore4(int i)
-    //{
-    //    money -= 40;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[3]++;
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-    //}
-
-    //public void selectInStore5(int i)
-    //{
-    //    money -= 50;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[4]++;
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-    //}
-
-    //public void selectInStore6(int i)
-    //{
-    //    money -= 60;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[5]++;
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-    //}
-
-    //public void selectInStore7(int i)
-    //{
-    //    money -= 70;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[6]++;
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-    //}
-
-    //public void selectInStore8(int i)
-    //{
-    //    money -= 80;
-    //    if (money < 0)
-    //        money = 0;
-    //    else
-    //        foodAmt[7]++;
-
-    //    if (DailyQuest.GetComponent<DailyQuest>().number == 2)
-    //    {
-    //        countForQuest2++;
-    //    }
-    //}
-
-   /* public void dailyQuest()
+    void OnApplicationQuit()
     {
-        DailyQuest.SetActive(true);
-    }*/
+        PlayerPrefs.SetInt("money", money);
+        PlayerPrefs.SetInt("RibbonNow", ribbonKey);
+    }
+    
+
+    public void wear(int i)
+    {
+        if(i < 0)
+        {
+            if (pet2.activeSelf == true)
+            {
+                pet2.transform.Find("YoungAdult_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+
+            }
+            if (pet3.activeSelf == true)
+            {
+                pet3.transform.Find("AdultChicken_torso").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            if (pet4.activeSelf == true)
+            {
+                pet4.transform.Find("OldChicken_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            ribbonKey = -1;
+            return;
+        }
+        if(pet2.activeSelf == true)
+        {
+            pet2.transform.Find("YoungAdult_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+        }
+        if (pet3.activeSelf == true)
+        {
+            pet3.transform.Find("AdultChicken_torso").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+        }
+        if (pet4.activeSelf == true)
+        {
+            pet4.transform.Find("OldChicken_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+        }
+        ribbonKey = i;
+    }
 
     public void toggle(GameObject g)
     {

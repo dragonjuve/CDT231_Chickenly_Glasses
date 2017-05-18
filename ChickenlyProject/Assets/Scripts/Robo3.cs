@@ -41,7 +41,6 @@ public class Robo3 : MonoBehaviour
     void Start()
     {
         Manager = GameObject.FindGameObjectWithTag("Manager");
-        updateStatus();
         if (!PlayerPrefs.HasKey("name"))
         {
             PlayerPrefs.SetString("name", "Cracker");
@@ -51,13 +50,41 @@ public class Robo3 : MonoBehaviour
             itsName = PlayerPrefs.GetString("name");
         }
 
+        if (!PlayerPrefs.HasKey("firstPlay"))
+        {
+            PlayerPrefs.SetString("firstPlay", getStringTime());
+        }
+
+        if (!PlayerPrefs.HasKey("happiness"))
+        {
+            PlayerPrefs.SetInt("happiness", happiness);
+        }
+        else
+        {
+            happiness = PlayerPrefs.GetInt("happiness");
+        }
+        if (!PlayerPrefs.HasKey("hunger"))
+        {
+            PlayerPrefs.SetInt("hunger", hunger);
+        }
+        else
+        {
+            hunger = PlayerPrefs.GetInt("hunger");
+        }
+        if (!PlayerPrefs.HasKey("then"))
+        {
+            PlayerPrefs.SetString("then", DateTime.Now.ToString());
+        }
+        else
+        {
+            updateStatus();
+        }
         idle = true;
         StartCoroutine(willWalk());
         StartCoroutine(backToIdle());
         //idleCount = 15 / Time.deltaTime;
         sXwalk = -0.01f;
         walkRight = false;
-        updateStatus();
     }
 
 
@@ -132,16 +159,7 @@ public class Robo3 : MonoBehaviour
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
         }
-        /*if (Input.GetKeyDown(KeyCode.I))
-        {
-            dayCountde = dayCount;
-            DEBUG = !DEBUG;
-        }
-        if ((Input.GetKeyDown(KeyCode.U)) && (DEBUG))
-        {
-            dayCountde++;
-            Debug.Log(dayCountde);
-        }*/
+
         //idleCount--;
 
         //if (idleCount < 0)
@@ -216,14 +234,14 @@ public class Robo3 : MonoBehaviour
             Hunger = 100;
         }
 
-        //Debug.Log(getTimeSpan().ToString());
-        //Debug.Log(getTimeSpan().TotalHours);
+        //InvokeRepeating("updateDevice", 0f, 30f);
+    }
 
-        //if (serverTime)
-        //    updateServer();
-        //else
-        //    InvokeRepeating("updateDevice",0f,30f);
-        InvokeRepeating("updateDevice", 0f, 30f);
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("happiness", Happiness);
+        PlayerPrefs.SetInt("hunger", Hunger);
+        PlayerPrefs.SetString("then", getStringTime());
     }
 
     void updateServer()

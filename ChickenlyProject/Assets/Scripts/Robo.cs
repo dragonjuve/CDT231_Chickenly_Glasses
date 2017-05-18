@@ -38,7 +38,6 @@ public class Robo : MonoBehaviour {
 
     void Start() {
         Manager = GameObject.FindGameObjectWithTag("Manager");
-        updateStatus();
         if (!PlayerPrefs.HasKey("name"))
         {
             PlayerPrefs.SetString("name", "Chick");
@@ -48,6 +47,28 @@ public class Robo : MonoBehaviour {
             itsName = PlayerPrefs.GetString("name");
         }
 
+        
+        if (!PlayerPrefs.HasKey("firstPlay"))
+        {
+            PlayerPrefs.SetString("firstPlay", getStringTime());
+        }
+
+        if (!PlayerPrefs.HasKey("happiness"))
+        {
+            PlayerPrefs.SetInt("happiness", happiness);
+        }
+        else
+        {
+            happiness = PlayerPrefs.GetInt("happiness");
+        }
+        if (!PlayerPrefs.HasKey("hunger"))
+        {
+            PlayerPrefs.SetInt("hunger", hunger);
+        }
+        else
+        {
+            hunger = PlayerPrefs.GetInt("hunger");
+        }
         if (!PlayerPrefs.HasKey("then"))
         {
             PlayerPrefs.SetString("then", DateTime.Now.ToString());
@@ -56,11 +77,6 @@ public class Robo : MonoBehaviour {
         {
             updateStatus();
         }
-        if (!PlayerPrefs.HasKey("firstPlay"))
-        {
-            PlayerPrefs.SetString("firstPlay", getStringTime());
-        }
-
         idle = true;
         print(PlayerPrefs.GetString("name"));
         StartCoroutine(willWalk());
@@ -68,22 +84,13 @@ public class Robo : MonoBehaviour {
         //idleCount = 15 / Time.deltaTime;
         sXwalk = -0.01f;
         walkRight = false;
-        updateStatus();
     }
 
 
     void Update() {
         //print(PlayerPrefs.GetString("name"));
-        //print(PlayerPrefs.GetString("then"));
-        /*if (!DEBUG)
-        {
-            dayText.GetComponent<Text>().text = dayCount.ToString();
-        }
-        else
-        {
-            dayText.GetComponent<Text>().text = dayCountde.ToString();
-        }*/
-
+        print(PlayerPrefs.GetInt("happiness"));
+        print(PlayerPrefs.GetInt("hunger"));
         if (Input.GetMouseButtonUp(0))
         {
             Vector2 v = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -97,14 +104,13 @@ public class Robo : MonoBehaviour {
                         countForQuest2++;
                     }
                     clickCount++;
-                    if(clickCount >= 3)
+                    if(clickCount >= 1)
                     {
                         clickCount = 0;
                         updateHappiness(1);
                         gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300.0f));
                         GetComponent<Animator>().SetBool("walking",false);
-                        idle = false;
-                        
+                        idle = false;              
                         //idleCount = 15 / Time.deltaTime;
                     }
                     
@@ -113,7 +119,7 @@ public class Robo : MonoBehaviour {
                         treasureAward.SetActive(true);
                         countForQuest2 = 0;
                         daily.GetComponent<DailyQuest>().inProcess = false;
-                        Manager.GetComponent<Manager>().money += 1000;
+                        Manager.GetComponent<Manager>().money += 500;
                         daily.GetComponent<DailyQuest>().generateQuest();
                     }
                 }
@@ -130,59 +136,17 @@ public class Robo : MonoBehaviour {
             Golden.SetActive(true);
             goldSpawn = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-
-            PlayerPrefs.SetString("then", "03/30/2017 06:00:00");
-            //Debug.Log(getStringTime().ToString());
-            updateStatus();
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log(getStringTime().ToString());
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            updateStatus();
-        }
         
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
         }
-        /*if (Input.GetKeyDown(KeyCode.I))
-        {
-            dayCountde = dayCount;
-            DEBUG = !DEBUG;
-        }
-        if ((Input.GetKeyDown(KeyCode.U)) && (DEBUG))
-        {
-            dayCountde++;
-            Debug.Log(dayCountde);
-        }*/
-
 
         if(transform.position.y >= 4.0f)
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, 0);
         }
-
-
-        //idleCount--;
-
-        //if(idleCount < 0)
-        //{
-        //    idleCount = 0;
-        //}
-
-        //if(idleCount == 0 && !GetComponent<Animator>().GetBool("walking"))
-        //{
-        //    GetComponent<Animator>().SetBool("walking",true);
-        //}
 
         if (GetComponent<Animator>().GetBool("walking"))
         {
@@ -210,29 +174,7 @@ public class Robo : MonoBehaviour {
 
     public void updateStatus()
     {
-
-        int time = 0;
         TimeSpan ts = getTimeSpan();
-      //  float produceEgg = (float)ts.TotalHours / 5.0f;
-        /*float getDirty = (float)ts.TotalHours;
-
-        if (getDirty > 4.0f)
-        {
-            dirt.SetActive(true);
-            dirt.transform.position = gameObject.transform.position;
-        }*/
-     /*   for (float i = produceEgg; i >= 0; i -= 10)
-        {
-            GameObject EGG = (GameObject)Instantiate(egg, transform.position, transform.rotation);
-            EGG.transform.position = new Vector2(UnityEngine.Random.Range(-2.9f, 2.0f), -3f);
-            time++;
-            if (time == 50)
-            {
-                break;
-            }
-        }*/
-
-
         Hunger -= (int)ts.TotalHours * 2;
         if (Hunger < 0)
             Hunger = 0;
@@ -242,7 +184,7 @@ public class Robo : MonoBehaviour {
             Hunger = 100;
         }
 
-        Happiness -= (100 - Hunger) * (int)ts.TotalHours / 5;
+        Happiness -= (100 - Hunger) * (int)ts.TotalHours * 2;
 
         if (Happiness < 0)
             Happiness = 0;
@@ -251,9 +193,14 @@ public class Robo : MonoBehaviour {
         {
             Hunger = 100;
         }
+        //InvokeRepeating("updateDevice", 0f, 30f);
+    }
 
-
-        InvokeRepeating("updateDevice", 0f, 30f);
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("happiness", Happiness);
+        PlayerPrefs.SetInt("hunger", Hunger);
+        PlayerPrefs.SetString("then", getStringTime());
     }
 
     void updateServer()
@@ -276,8 +223,6 @@ public class Robo : MonoBehaviour {
         get { return happiness; }
         set { happiness = value; }
     }
-
-    
 
     public string Name
     {

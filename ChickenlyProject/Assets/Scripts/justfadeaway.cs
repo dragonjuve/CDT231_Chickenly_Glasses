@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class justfadeaway : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    float coolDown = 2.00f;
+    // Use this for initialization
+    void Start () {
 		
 	}
 
@@ -16,6 +16,11 @@ public class justfadeaway : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+        coolDown -= Time.deltaTime;
+        if (coolDown <= 0)
+        {
+            gameObject.SetActive(false);
+            coolDown = 2.00f;
+        }
+    }
 }
