@@ -33,7 +33,7 @@ public class disappearing : MonoBehaviour {
             treasure.SetActive(true);
             countForQuest3 = 0;
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
-            Manager.GetComponent<Manager>().money += 1000;
+            Manager.GetComponent<Manager>().money += 30;
             DailyQuest.GetComponent<DailyQuest>().generateQuest();
         }
     }

@@ -28,6 +28,7 @@ public class Manager : MonoBehaviour {
     public GameObject dateInput;
     public GameObject thenInput;
     public GameObject collectableMenu;
+    public GameObject collect;
     //public GameObject dateText;
     float coolDown = 30.00f;
     public GameObject DailyQuest;
@@ -40,6 +41,7 @@ public class Manager : MonoBehaviour {
     public GameObject pet3;
     public GameObject pet4;
     public GameObject explore;
+    bool shutforamoment = false;
     bool exploring;
     bool fading = false;
     bool fading2 = false;
@@ -55,14 +57,42 @@ public class Manager : MonoBehaviour {
     public int[] feedValue;
     public int[] price;
     public GameObject[] item;
+    public GameObject music1;
+    float coolDownmusic1 = 1.0f;
+    public GameObject BG;
+    public Sprite[] BGsprite;
+    public GameObject music2;
+    public GameObject music3;
+    public GameObject music4;
+    float coolDownmusic4 = 0.5f;
     bool spawnItem = false;
     float rarityhelp = 0;
     int ribbonKey;
+    public GameObject BGM;
+    public GameObject BGM_On;
+    public GameObject BGM_Off;
     Color C;
     
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("SaveBGM")) {
+            if (PlayerPrefs.GetInt("SaveBGM") == 1)
+            {
+                BGM.GetComponent<AudioSource>().Play();
+                BGM_On.SetActive(true);
+                BGM_Off.SetActive(false);
+            }
+            else {
+                BGM.GetComponent<AudioSource>().Stop();
+                BGM_On.SetActive(false);
+                BGM_Off.SetActive(true);
+            }
+        }
+        if (PlayerPrefs.HasKey("BackGroundSave"))
+        {
+            BG.GetComponent<SpriteRenderer>().sprite = BGsprite[PlayerPrefs.GetInt("BackGroundSave")];
+        }
         if (!PlayerPrefs.HasKey("money"))
         {
             PlayerPrefs.SetInt("money", money);
@@ -107,6 +137,36 @@ public class Manager : MonoBehaviour {
             item[5].GetComponent<Image>().sprite = Cosmetics[5];
             item[5].GetComponent<Button>().interactable = true;
         }
+        if (PlayerPrefs.HasKey("CosmeticSave7"))
+        {
+            item[6].GetComponent<Image>().sprite = Cosmetics[6];
+            item[6].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave8"))
+        {
+            item[7].GetComponent<Image>().sprite = Cosmetics[7];
+            item[7].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave9"))
+        {
+            item[8].GetComponent<Image>().sprite = Cosmetics[8];
+            item[8].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave10"))
+        {
+            item[9].GetComponent<Image>().sprite = Cosmetics[9];
+            item[9].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave11"))
+        {
+            item[10].GetComponent<Image>().sprite = Cosmetics[10];
+            item[10].GetComponent<Button>().interactable = true;
+        }
+        if (PlayerPrefs.HasKey("CosmeticSave12"))
+        {
+            item[11].GetComponent<Image>().sprite = Cosmetics[11];
+            item[11].GetComponent<Button>().interactable = true;
+        }
         if (PlayerPrefs.HasKey("RibbonNow"))
         {
             ribbonKey = PlayerPrefs.GetInt("RibbonNow");
@@ -126,12 +186,22 @@ public class Manager : MonoBehaviour {
                 }
             }
         }
-        {
 
-        }
     }
 
     void Update () {
+        print(dayText);
+        coolDownmusic4 -= Time.deltaTime;
+        if (coolDownmusic4 <= 0)
+        {
+            music4.SetActive(false);
+            coolDownmusic4 = 0.5f;
+        }
+        coolDownmusic1 -= Time.deltaTime;
+        if (coolDownmusic1 <= 0) {
+            music1.SetActive(false);
+            coolDownmusic1 = 1.0f;
+        }
         if (pet.activeSelf == true)
         {
             happinessText.GetComponent<Text>().text = pet.GetComponent<Robo>().Happiness.ToString();
@@ -161,31 +231,44 @@ public class Manager : MonoBehaviour {
             treasureAward.SetActive(true);
             countForQuest1 = 0;
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
-            money += 1000;
+            money += 50;
             DailyQuest.GetComponent<DailyQuest>().generateQuest();
+            moneyText.GetComponent<Text>().text = money.ToString();
         }
         if (countForQuest4 >= 1)
         {
             treasureAward.SetActive(true);
             countForQuest4 = 0;
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
-            money += 1000;
+            money += 50;
             DailyQuest.GetComponent<DailyQuest>().generateQuest();
+            moneyText.GetComponent<Text>().text = money.ToString();
         }
 
-        /*if (int.Parse(dayText.GetComponent<Text>().text) >= 5)
+        if (int.Parse(dayText.GetComponent<Text>().text) >= 5 && shutforamoment == false)
         {
             explore.SetActive(true);
         }
-        else {
+
+        if (int.Parse(dayText.GetComponent<Text>().text) >= 5)
+        {
+            collect.SetActive(true);
+        }
+
+        if (int.Parse(dayText.GetComponent<Text>().text) < 5) {
             explore.SetActive(false);
-        }*/
+            collect.SetActive(false);
+        }
 
         if (explore == true) {
             coolDown -= Time.deltaTime;
         }
         if (coolDown <= 0) {
+            music2.SetActive(false);
+            music3.SetActive(true);
             exploring = false;
+            shutforamoment = false;
+            explore.SetActive(true);
             if (int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 19)
             {
                 if (DailyQuest.GetComponent<DailyQuest>().number > 3)
@@ -280,6 +363,7 @@ public class Manager : MonoBehaviour {
 
     public void triggerNamePanel(bool b)
     {
+        music4.SetActive(true);
         namePanel.SetActive(!namePanel.activeInHierarchy);
         if (b)
         {
@@ -290,12 +374,17 @@ public class Manager : MonoBehaviour {
 
     public void triggerdailyQuest()
     {
+        music4.SetActive(true);
         DailyQuest.SetActive(!DailyQuest.activeInHierarchy);
     }
 
     public void goExplore() {
+        music2.SetActive(true);
+        music3.SetActive(false);
         coolDown = 20.0f;
-        if(!youngChicken.activeInHierarchy)
+        shutforamoment = true;
+        explore.SetActive(false);
+        if (!youngChicken.activeInHierarchy)
             waitPanel.SetActive(true);
         
         if (int.Parse(dayText.GetComponent<Text>().text) >= 5 && int.Parse(dayText.GetComponent<Text>().text) < 19)
@@ -320,6 +409,7 @@ public class Manager : MonoBehaviour {
 
     public void triggerCollectableMenu() {
         collectableMenu.SetActive(!collectableMenu.activeInHierarchy);
+        music4.SetActive(true);
     }
 
     public void triggerCheat(bool b)
@@ -408,6 +498,7 @@ public class Manager : MonoBehaviour {
 
     public void triggerOption(bool b)
     {
+        music4.SetActive(true);
         optionPanel.SetActive(!optionPanel.activeInHierarchy);
     }
 
@@ -435,52 +526,98 @@ public class Manager : MonoBehaviour {
 
     void RandomItem()
     {
-        int rarity = UnityEngine.Random.Range(1, 7);
+        int rarity = UnityEngine.Random.Range(1, 17);
         rarity += (int)rarityhelp;
-        if (rarity > 7)
+        if (rarity > 17)
         {
-            rarity = 7;
+            rarity = 17;
         }
         if (rarity >= 1 && rarity <= 6)
         {
-            int random = UnityEngine.Random.Range(1, 6);
-            if (random > 5)
+            int random = UnityEngine.Random.Range(0, 5);
+            if (random > 4)
             {
-                random = 5;
+                random = 4;
             }
-            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[random - 1];
-            item[random - 1].GetComponent<Image>().sprite = Cosmetics[random - 1];
-            if (random - 1 == 0)
+            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[random];
+            item[random].GetComponent<Image>().sprite = Cosmetics[random];
+            if (random == 0)
             {
-                PlayerPrefs.SetInt("CosmeticSave1", random - 1);
+                PlayerPrefs.SetInt("CosmeticSave1", random);
             }
-            else if (random - 1 == 1)
+            else if (random == 1)
             {
-                PlayerPrefs.SetInt("CosmeticSave2", random - 1);
+                PlayerPrefs.SetInt("CosmeticSave2", random);
             }
-            else if (random - 1 == 2)
+            else if (random == 2)
             {
-                PlayerPrefs.SetInt("CosmeticSave3", random - 1);
+                PlayerPrefs.SetInt("CosmeticSave3", random);
             }
-            else if (random - 1 == 3)
+            else if (random == 3)
             {
-                PlayerPrefs.SetInt("CosmeticSave4", random - 1);
+                PlayerPrefs.SetInt("CosmeticSave4", random);
             }
-            else if (random - 1 == 4)
+            else if (random == 4)
             {
-                PlayerPrefs.SetInt("CosmeticSave5", random - 1);
+                PlayerPrefs.SetInt("CosmeticSave5", random);
+            }
+        }
+        else if (rarity >= 7 && rarity <= 12)
+        {
+            int random = UnityEngine.Random.Range(5, 9);
+            if (random > 8)
+            {
+                random = 8;
+            }
+            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[random];
+            item[random].GetComponent<Image>().sprite = Cosmetics[random];
+            if (random == 5)
+            {
+                PlayerPrefs.SetInt("CosmeticSave6", random);
+            }
+            else if (random == 6)
+            {
+                PlayerPrefs.SetInt("CosmeticSave7", random);
+            }
+            else if (random == 7)
+            {
+                PlayerPrefs.SetInt("CosmeticSave8", random);
+            }
+            else if (random == 8)
+            {
+                PlayerPrefs.SetInt("CosmeticSave9", random);
+            }
+        }
+        else if (rarity >= 13 && rarity <= 16)
+        {
+            int random = UnityEngine.Random.Range(9, 11);
+            if (random > 10)
+            {
+                random = 10;
+            }
+            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[random];
+            item[random].GetComponent<Image>().sprite = Cosmetics[random];
+            if (random == 9)
+            {
+                PlayerPrefs.SetInt("CosmeticSave10", random);
+            }
+            else if (random == 10)
+            {
+                PlayerPrefs.SetInt("CosmeticSave11", random);
             }
         }
         else {
-            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[5];
-            item[5].GetComponent<Image>().sprite = Cosmetics[5];
-            PlayerPrefs.SetInt("CosmeticSave6", 5);
+            ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[11];
+            item[11].GetComponent<Image>().sprite = Cosmetics[11];
+            PlayerPrefs.SetInt("CosmeticSave12", 11);
         }
         rarityhelp = 0;
     }
 
     public void selectFood(int i)
     {
+        music1.SetActive(true);
+        coolDownmusic1 = 1.0f;
         if (DailyQuest.GetComponent<DailyQuest>().number == 1)
             {
                     countForQuest1++;
@@ -490,6 +627,7 @@ public class Manager : MonoBehaviour {
         if (money >= pay)
         {
             money -= pay;
+            moneyText.GetComponent<Text>().text = money.ToString();
             pet.GetComponent<Robo>().Hunger += hun;
             pet2.GetComponent<Robo2>().Hunger += hun;
             pet3.GetComponent<Robo3>().Hunger += hun;
@@ -512,8 +650,12 @@ public class Manager : MonoBehaviour {
                 pet4.GetComponent<Robo4>().Hunger = 100;
             }
 
-            if (money < 0)
+            if (money < 0) {
                 money = 0;
+                moneyText.GetComponent<Text>().text = money.ToString();
+            }
+                
+
 
             foodPanel.SetActive(false);
             if (pet.activeSelf == true)
@@ -590,7 +732,8 @@ public class Manager : MonoBehaviour {
                 pet4.GetComponent<Animator>().SetTrigger("eat");
             }
 
-        }        
+        }
+        
     }
 
     void OnApplicationQuit()

@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\disappearing.cs" />
     <Compile Include="Assets\Scripts\justfadeaway.cs" />
     <Compile Include="Assets\Scripts\option.cs" />
+    <Compile Include="Assets\Scripts\playMusic.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

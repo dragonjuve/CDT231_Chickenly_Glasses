@@ -89,8 +89,8 @@ public class Robo : MonoBehaviour {
 
     void Update() {
         //print(PlayerPrefs.GetString("name"));
-        print(PlayerPrefs.GetInt("happiness"));
-        print(PlayerPrefs.GetInt("hunger"));
+      //  print(PlayerPrefs.GetInt("happiness"));
+        //print(PlayerPrefs.GetInt("hunger"));
         if (Input.GetMouseButtonUp(0))
         {
             Vector2 v = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -104,10 +104,10 @@ public class Robo : MonoBehaviour {
                         countForQuest2++;
                     }
                     clickCount++;
-                    if(clickCount >= 1)
+                    if(clickCount >= 3)
                     {
                         clickCount = 0;
-                        updateHappiness(1);
+                        updateHappiness(3);
                         gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300.0f));
                         GetComponent<Animator>().SetBool("walking",false);
                         idle = false;              
