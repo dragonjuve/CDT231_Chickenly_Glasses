@@ -263,7 +263,7 @@ public class Manager : MonoBehaviour {
         if (explore == true) {
             coolDown -= Time.deltaTime;
         }
-        if (coolDown <= 0) {
+        if (coolDown <= 0 && pet.activeSelf != true) {
             music2.SetActive(false);
             music3.SetActive(true);
             exploring = false;
