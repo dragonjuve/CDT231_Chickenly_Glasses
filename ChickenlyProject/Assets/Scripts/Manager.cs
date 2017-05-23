@@ -191,6 +191,11 @@ public class Manager : MonoBehaviour {
     }
 
     void Update () {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            PlayerPrefs.DeleteKey("RibbonNow");
+        }
+        
         if (Input.GetKeyDown(KeyCode.J))
         {
             cheatPanel1.SetActive(!cheatPanel1.activeInHierarchy);

@@ -88,6 +88,7 @@ public class option : MonoBehaviour {
     public void Reset() {
         musicOption.SetActive(true);
         coolDownmusicOption = 0.3f;
+        PlayerPrefs.DeleteKey("RibbonNow");
         /*PlayerPrefs.SetInt("hunger", 0);
         PlayerPrefs.SetInt("happiness", 0);
         hungerText.GetComponent<Text>().text = PlayerPrefs.GetInt("hunger").ToString();
