@@ -131,11 +131,11 @@ public class Robo : MonoBehaviour {
         }
 
 
-        if ((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
-        {
-            Golden.SetActive(true);
-            goldSpawn = true;
-        }
+        //if ((DateTime.Now.Hour >= 5 && DateTime.Now.Hour <= 7) && !goldSpawn)
+        //{
+        //    Golden.SetActive(true);
+        //    goldSpawn = true;
+        //}
         
         if (Input.GetKeyDown(KeyCode.Q))
         {

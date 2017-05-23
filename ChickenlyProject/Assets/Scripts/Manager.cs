@@ -197,15 +197,15 @@ public class Manager : MonoBehaviour {
             {
                 if (pet2.activeSelf == true)
                 {
-                    pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                    pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[hatKey];
                 }
                 if (pet3.activeSelf == true)
                 {
-                    pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                    pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[hatKey];
                 }
                 if (pet4.activeSelf == true)
                 {
-                    pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                    pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[hatKey];
                 }
             }
         }
@@ -217,15 +217,15 @@ public class Manager : MonoBehaviour {
             {
                 if (pet2.activeSelf == true)
                 {
-                    pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                    pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[capKey];
                 }
                 if (pet3.activeSelf == true)
                 {
-                    pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                    pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[capKey];
                 }
                 if (pet4.activeSelf == true)
                 {
-                    pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                    pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[capKey];
                 }
             }
         }
