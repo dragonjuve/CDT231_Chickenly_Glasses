@@ -110,6 +110,10 @@ public class option : MonoBehaviour {
         PlayerPrefs.DeleteKey("CosmeticSave10");
         PlayerPrefs.DeleteKey("CosmeticSave11");
         PlayerPrefs.DeleteKey("CosmeticSave12");
+        PlayerPrefs.DeleteKey("RibbonNow");
+        PlayerPrefs.DeleteKey("HatNow");
+        PlayerPrefs.DeleteKey("CapNow");
+        PlayerPrefs.SetString("name", "Chick");
         PlayerPrefs.SetString("firstPlay", DateTime.Now.ToString());
         dayText.GetComponent<Text>().text = "1";
     }

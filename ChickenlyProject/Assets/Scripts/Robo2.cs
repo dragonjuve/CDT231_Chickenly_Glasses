@@ -30,6 +30,7 @@ public class Robo2 : MonoBehaviour
     //public float idleCount;
     float sXwalk;
     bool walkRight;
+    int cd = 0;
 
     void Start()
     {
@@ -37,7 +38,7 @@ public class Robo2 : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("name"))
         {
-            PlayerPrefs.SetString("name", "Cracker");
+            PlayerPrefs.SetString("name", "Chick");
         }
         else
         {
@@ -104,11 +105,12 @@ public class Robo2 : MonoBehaviour
                         countForQuest2++;
                     }
                     clickCount++;
-                    if (clickCount >= 1)
+                    if (clickCount >= 1 && cd == 0)
                     {
                         clickCount = 0;
                         updateHappiness(1);
                         GetComponent<Animator>().SetBool("walking", false);
+                        cd = 100;
                         idle = false;
                         //idleCount = 15 / Time.deltaTime;
                     }
@@ -135,6 +137,11 @@ public class Robo2 : MonoBehaviour
             PlayerPrefs.DeleteKey("hunger");
             PlayerPrefs.DeleteKey("happiness");
         }
+
+        cd--;
+
+        if (cd < 0)
+            cd = 0;
         //idleCount--;
 
         //if (idleCount < 0)

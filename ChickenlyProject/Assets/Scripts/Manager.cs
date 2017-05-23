@@ -16,6 +16,7 @@ public class Manager : MonoBehaviour {
     public GameObject treasureAward;
     public float time = 0.0f;
     int countForQuest1;
+    int countForQuest3;
     int countForQuest4;
     public GameObject namePanel;
     public GameObject nameInput;
@@ -40,6 +41,7 @@ public class Manager : MonoBehaviour {
     public GameObject pet2;
     public GameObject pet3;
     public GameObject pet4;
+    public GameObject shower;
     public GameObject explore;
     bool shutforamoment = false;
     bool exploring;
@@ -51,12 +53,13 @@ public class Manager : MonoBehaviour {
     public Sprite[] foodIcon;
     public Sprite[] Cosmetics;
     static bool[] CosmeticSave = {false, false, false, false, false, false};
-    public GameObject foods;
+    //public GameObject foods;
     public Text[] foodAmount;
     public GameObject store;
     public int[] feedValue;
     public int[] price;
     public GameObject[] item;
+    public Sprite locked;
     public GameObject music1;
     float coolDownmusic1 = 1.0f;
     public GameObject BG;
@@ -67,8 +70,7 @@ public class Manager : MonoBehaviour {
     float coolDownmusic4 = 0.5f;
     bool spawnItem = false;
     float rarityhelp = 0;
-    int ribbonKey;
-    public GameObject cheatPanel1, cheatPanel2;
+    int ribbonKey,hatKey,capKey;
     public GameObject BGM;
     public GameObject BGM_On;
     public GameObject BGM_Off;
@@ -188,20 +190,52 @@ public class Manager : MonoBehaviour {
             }
         }
 
+        if (PlayerPrefs.HasKey("HatNow"))
+        {
+            hatKey = PlayerPrefs.GetInt("HatNow");
+            if (hatKey >= 0)
+            {
+                if (pet2.activeSelf == true)
+                {
+                    pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+                if (pet3.activeSelf == true)
+                {
+                    pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+                if (pet4.activeSelf == true)
+                {
+                    pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+            }
+        }
+
+        if (PlayerPrefs.HasKey("CapNow"))
+        {
+            capKey = PlayerPrefs.GetInt("CapNow");
+            if (capKey >= 0)
+            {
+                if (pet2.activeSelf == true)
+                {
+                    pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+                if (pet3.activeSelf == true)
+                {
+                    pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+                if (pet4.activeSelf == true)
+                {
+                    pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[ribbonKey];
+                }
+            }
+        }
+
+        
     }
 
+
+
     void Update () {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            PlayerPrefs.DeleteKey("RibbonNow");
-        }
-        
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            cheatPanel1.SetActive(!cheatPanel1.activeInHierarchy);
-            cheatPanel2.SetActive(!cheatPanel2.activeInHierarchy);
-        }
-        print(dayText);
         coolDownmusic4 -= Time.deltaTime;
         if (coolDownmusic4 <= 0)
         {
@@ -354,20 +388,9 @@ public class Manager : MonoBehaviour {
             OldChicken.SetActive(true);
         }
 
-        if (fading && feedFoodPic.GetComponent<SpriteRenderer>().color.a > 0)
-        {
-            float al = feedFoodPic.GetComponent<SpriteRenderer>().color.a;
-            al -= 100 * Time.deltaTime;
-            Color Co = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(Co.r, Co.g, Co.b, (int)al);
-            //Debug.Log(feedFoodPic.GetComponent<SpriteRenderer>().color.a);
-        }
-        else if(fading && feedFoodPic.GetComponent<SpriteRenderer>().color.a <= 0)
-        {
-            Color Co = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(Co.r, Co.g, Co.b, 0);
+        if (fading) {
+            StartCoroutine(fade(feedFoodPic));
             fading = false;
-            Debug.Log("enD");
         }
     }
 
@@ -468,7 +491,7 @@ public class Manager : MonoBehaviour {
             DateTime changes = Convert.ToDateTime(PlayerPrefs.GetString("then"));
             int hours = int.Parse(thenPanel.transform.Find("Amount").GetComponent<Text>().text);
             print(changes.Hour);
-            changes = changes.AddHours(hours);
+            changes = changes.AddHours(-hours);
             print(changes.Hour);
             thenPanel.transform.Find("Amount").GetComponent<Text>().text = "0";
             PlayerPrefs.SetString("then", changes.Month + "/" + changes.Day + "/" + changes.Year + " " + changes.Hour + ":" + changes.Minute + ":" + changes.Second);
@@ -527,6 +550,10 @@ public class Manager : MonoBehaviour {
                 foodPanel.SetActive(!foodPanel.activeInHierarchy);
                 break;
             case 3:
+                if (pet.activeInHierarchy || pet2.activeInHierarchy || pet3.activeInHierarchy || pet4.activeInHierarchy)
+                {
+                    StartCoroutine(waitShower());
+                }
                 break;
             case 4:
                 pet.GetComponent<Robo>().savePet();
@@ -555,22 +582,27 @@ public class Manager : MonoBehaviour {
             if (random == 0)
             {
                 PlayerPrefs.SetInt("CosmeticSave1", random);
+                item[0].GetComponent<Button>().interactable = true;
             }
             else if (random == 1)
             {
                 PlayerPrefs.SetInt("CosmeticSave2", random);
+                item[1].GetComponent<Button>().interactable = true;
             }
             else if (random == 2)
             {
                 PlayerPrefs.SetInt("CosmeticSave3", random);
+                item[2].GetComponent<Button>().interactable = true;
             }
             else if (random == 3)
             {
                 PlayerPrefs.SetInt("CosmeticSave4", random);
+                item[3].GetComponent<Button>().interactable = true;
             }
             else if (random == 4)
             {
                 PlayerPrefs.SetInt("CosmeticSave5", random);
+                item[4].GetComponent<Button>().interactable = true;
             }
         }
         else if (rarity >= 7 && rarity <= 12)
@@ -585,18 +617,22 @@ public class Manager : MonoBehaviour {
             if (random == 5)
             {
                 PlayerPrefs.SetInt("CosmeticSave6", random);
+                item[5].GetComponent<Button>().interactable = true;
             }
             else if (random == 6)
             {
                 PlayerPrefs.SetInt("CosmeticSave7", random);
+                item[6].GetComponent<Button>().interactable = true;
             }
             else if (random == 7)
             {
                 PlayerPrefs.SetInt("CosmeticSave8", random);
+                item[7].GetComponent<Button>().interactable = true;
             }
             else if (random == 8)
             {
                 PlayerPrefs.SetInt("CosmeticSave9", random);
+                item[8].GetComponent<Button>().interactable = true;
             }
         }
         else if (rarity >= 13 && rarity <= 16)
@@ -611,138 +647,150 @@ public class Manager : MonoBehaviour {
             if (random == 9)
             {
                 PlayerPrefs.SetInt("CosmeticSave10", random);
+                item[9].GetComponent<Button>().interactable = true;
             }
             else if (random == 10)
             {
                 PlayerPrefs.SetInt("CosmeticSave11", random);
+                item[10].GetComponent<Button>().interactable = true;
             }
         }
         else {
             ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[11];
             item[11].GetComponent<Image>().sprite = Cosmetics[11];
             PlayerPrefs.SetInt("CosmeticSave12", 11);
+            item[11].GetComponent<Button>().interactable = true;
         }
         rarityhelp = 0;
     }
 
     public void selectFood(int i)
     {
-        music1.SetActive(true);
-        coolDownmusic1 = 1.0f;
-        if (DailyQuest.GetComponent<DailyQuest>().number == 1)
+        if (pet.activeInHierarchy || pet2.activeInHierarchy || pet3.activeInHierarchy || pet4.activeInHierarchy)
+        {
+            music1.SetActive(true);
+            coolDownmusic1 = 1.0f;
+            if (DailyQuest.GetComponent<DailyQuest>().number == 1)
             {
-                    countForQuest1++;
+                countForQuest1++;
             }
             int hun = feedValue[i];
-        int pay = price[i];
-        if (money >= pay)
-        {
-            money -= pay;
-            moneyText.GetComponent<Text>().text = money.ToString();
-            pet.GetComponent<Robo>().Hunger += hun;
-            pet2.GetComponent<Robo2>().Hunger += hun;
-            pet3.GetComponent<Robo3>().Hunger += hun;
-            pet4.GetComponent<Robo4>().Hunger += hun;
-
-            if (pet.GetComponent<Robo>().Hunger > 100)
+            int pay = price[i];
+            if (money >= pay)
             {
-                pet.GetComponent<Robo>().Hunger = 100;
-            }
-            if (pet2.GetComponent<Robo2>().Hunger > 100)
-            {
-                pet2.GetComponent<Robo2>().Hunger = 100;
-            }
-            if (pet3.GetComponent<Robo3>().Hunger > 100)
-            {
-                pet3.GetComponent<Robo3>().Hunger = 100;
-            }
-            if (pet4.GetComponent<Robo4>().Hunger > 100)
-            {
-                pet4.GetComponent<Robo4>().Hunger = 100;
-            }
-
-            if (money < 0) {
-                money = 0;
+                money -= pay;
                 moneyText.GetComponent<Text>().text = money.ToString();
-            }
-                
+                pet.GetComponent<Robo>().Hunger += hun;
+                pet2.GetComponent<Robo2>().Hunger += hun;
+                pet3.GetComponent<Robo3>().Hunger += hun;
+                pet4.GetComponent<Robo4>().Hunger += hun;
+
+                if (pet.GetComponent<Robo>().Hunger > 100)
+                {
+                    pet.GetComponent<Robo>().Hunger = 100;
+                }
+                if (pet2.GetComponent<Robo2>().Hunger > 100)
+                {
+                    pet2.GetComponent<Robo2>().Hunger = 100;
+                }
+                if (pet3.GetComponent<Robo3>().Hunger > 100)
+                {
+                    pet3.GetComponent<Robo3>().Hunger = 100;
+                }
+                if (pet4.GetComponent<Robo4>().Hunger > 100)
+                {
+                    pet4.GetComponent<Robo4>().Hunger = 100;
+                }
+
+                if (money < 0)
+                {
+                    money = 0;
+                    moneyText.GetComponent<Text>().text = money.ToString();
+                }
 
 
-            foodPanel.SetActive(false);
-            if (pet.activeSelf == true)
-            {
-                feedFoodPic.transform.position = new Vector3(pet.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
-            }
-            else if (pet2.activeSelf == true)
-            {
-                feedFoodPic.transform.position = new Vector3(pet2.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
-            }
-            else if (pet3.activeSelf == true)
-            {
-                feedFoodPic.transform.position = new Vector3(pet3.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
-            }
-            else if (pet4.activeSelf == true)
-            {
-                feedFoodPic.transform.position = new Vector3(pet4.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
-            }
-            if (i == 3)
-            {
-                rarityhelp += 0.25f;
-                feedFoodPic.transform.localScale = new Vector3(0.1f, 0.1f, 0);
-            }
-            else if (i == 5)
-            {
-                rarityhelp += 0.75f;
-                feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
-            }
-            else if (i == 4) {
-                rarityhelp += 0.5f;
-                feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
-            } else if (i == 6) {
-                rarityhelp += 1.25f;
-                feedFoodPic.transform.localScale = new Vector3(0.1f, 0.1f, 0);
-            } else if (i == 7) {
-                rarityhelp += 1.5f;
-                feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
-            }
-            else
-            {
-                feedFoodPic.transform.localScale = new Vector3(0.2530704f, 0.0530704f, 0);
-            }
-            feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[i];
-            C = feedFoodPic.GetComponent<SpriteRenderer>().color;
-            feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
-            Invoke("fade", 1);
 
-            if (pet.activeSelf == true)
-            {
-                pet.GetComponent<Animator>().SetBool("walking", false);
-                pet.GetComponent<Robo>().idle = false;
-                //pet.GetComponent<Robo>().idleCount = 15 / Time.deltaTime;
-                pet.GetComponent<Animator>().SetTrigger("eat");
-            }
-            if (pet2.activeSelf == true)
-            {
-                pet2.GetComponent<Animator>().SetBool("walking", false);
-                pet2.GetComponent<Robo2>().idle = false;
-                //pet2.GetComponent<Robo2>().idleCount = 15 / Time.deltaTime;
-                pet2.GetComponent<Animator>().SetTrigger("eat");
-            }
-            if (pet3.activeSelf == true)
-            {
-                pet3.GetComponent<Animator>().SetBool("walking", false);
-                pet3.GetComponent<Robo3>().idle = false;
-                //pet3.GetComponent<Robo3>().idleCount = 15 / Time.deltaTime;
-                pet3.GetComponent<Animator>().SetTrigger("eat");
-            }
-            if (pet4.activeSelf == true)
-            {
-                pet4.GetComponent<Animator>().SetBool("walking", false);
-                pet4.GetComponent<Robo4>().idle = false;
-               // pet4.GetComponent<Robo4>().idleCount = 15 / Time.deltaTime;
-                pet4.GetComponent<Animator>().SetTrigger("eat");
-            }
+                foodPanel.SetActive(false);
+                if (pet.activeSelf == true)
+                {
+                    feedFoodPic.transform.position = new Vector3(pet.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+                }
+                else if (pet2.activeSelf == true)
+                {
+                    feedFoodPic.transform.position = new Vector3(pet2.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+                }
+                else if (pet3.activeSelf == true)
+                {
+                    feedFoodPic.transform.position = new Vector3(pet3.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+                }
+                else if (pet4.activeSelf == true)
+                {
+                    feedFoodPic.transform.position = new Vector3(pet4.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
+                }
+                if (i == 3)
+                {
+                    rarityhelp += 0.25f;
+                    feedFoodPic.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+                }
+                else if (i == 5)
+                {
+                    rarityhelp += 0.75f;
+                    feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
+                }
+                else if (i == 4)
+                {
+                    rarityhelp += 0.5f;
+                    feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
+                }
+                else if (i == 6)
+                {
+                    rarityhelp += 1.25f;
+                    feedFoodPic.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+                }
+                else if (i == 7)
+                {
+                    rarityhelp += 1.5f;
+                    feedFoodPic.transform.localScale = new Vector3(0.175f, 0.1f, 0);
+                }
+                else
+                {
+                    feedFoodPic.transform.localScale = new Vector3(0.2530704f, 0.0530704f, 0);
+                }
+                feedFoodPic.GetComponent<SpriteRenderer>().sprite = foodIcon[i];
+                C = feedFoodPic.GetComponent<SpriteRenderer>().color;
+                feedFoodPic.GetComponent<SpriteRenderer>().color = new Color(C.r, C.g, C.b, 255);
+                Invoke("fade", 1);
 
+                if (pet.activeSelf == true)
+                {
+                    pet.GetComponent<Animator>().SetBool("walking", false);
+                    pet.GetComponent<Robo>().idle = false;
+                    //pet.GetComponent<Robo>().idleCount = 15 / Time.deltaTime;
+                    pet.GetComponent<Animator>().SetTrigger("eat");
+                }
+                if (pet2.activeSelf == true)
+                {
+                    pet2.GetComponent<Animator>().SetBool("walking", false);
+                    pet2.GetComponent<Robo2>().idle = false;
+                    //pet2.GetComponent<Robo2>().idleCount = 15 / Time.deltaTime;
+                    pet2.GetComponent<Animator>().SetTrigger("eat");
+                }
+                if (pet3.activeSelf == true)
+                {
+                    pet3.GetComponent<Animator>().SetBool("walking", false);
+                    pet3.GetComponent<Robo3>().idle = false;
+                    //pet3.GetComponent<Robo3>().idleCount = 15 / Time.deltaTime;
+                    pet3.GetComponent<Animator>().SetTrigger("eat");
+                }
+                if (pet4.activeSelf == true)
+                {
+                    pet4.GetComponent<Animator>().SetBool("walking", false);
+                    pet4.GetComponent<Robo4>().idle = false;
+                    // pet4.GetComponent<Robo4>().idleCount = 15 / Time.deltaTime;
+                    pet4.GetComponent<Animator>().SetTrigger("eat");
+                }
+
+            }
         }
         
     }
@@ -751,6 +799,8 @@ public class Manager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("money", money);
         PlayerPrefs.SetInt("RibbonNow", ribbonKey);
+        PlayerPrefs.SetInt("HatNow", hatKey);
+        PlayerPrefs.SetInt("CapNow", capKey);
     }
     
 
@@ -761,32 +811,79 @@ public class Manager : MonoBehaviour {
             if (pet2.activeSelf == true)
             {
                 pet2.transform.Find("YoungAdult_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+                pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
 
             }
             if (pet3.activeSelf == true)
             {
                 pet3.transform.Find("AdultChicken_torso").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+                pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
             }
             if (pet4.activeSelf == true)
             {
                 pet4.transform.Find("OldChicken_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+                pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
             }
             ribbonKey = -1;
+            hatKey = -1;
             return;
         }
-        if(pet2.activeSelf == true)
-        {
-            pet2.transform.Find("YoungAdult_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+        if (i < 5) {
+            if (pet2.activeSelf == true)
+            {
+                pet2.transform.Find("YoungAdult_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+            }
+            if (pet3.activeSelf == true)
+            {
+                pet3.transform.Find("AdultChicken_torso").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+            }
+            if (pet4.activeSelf == true)
+            {
+                pet4.transform.Find("OldChicken_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+            }
+            ribbonKey = i;
         }
-        if (pet3.activeSelf == true)
+        else if(i == 5)
         {
-            pet3.transform.Find("AdultChicken_torso").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+            if (pet2.activeSelf == true)
+            {
+                pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+                pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            if (pet3.activeSelf == true)
+            {
+                pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+                pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            if (pet4.activeSelf == true)
+            {
+                pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+                pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            hatKey = i;
+            capKey = -1;
         }
-        if (pet4.activeSelf == true)
+        else if (i == 6)
         {
-            pet4.transform.Find("OldChicken_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+            if (pet2.activeSelf == true)
+            {
+                pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+                pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            if (pet3.activeSelf == true)
+            {
+                pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+                pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            if (pet4.activeSelf == true)
+            {
+                pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Cap").GetComponent<SpriteRenderer>().sprite = Cosmetics[i];
+                pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            capKey = i;
+            hatKey = -1;
         }
-        ribbonKey = i;
+
     }
 
     public void toggle(GameObject g)
@@ -799,5 +896,89 @@ public class Manager : MonoBehaviour {
     {
         fading = true;
         Debug.Log("fade");
+    }
+
+    public void lockItems(bool b)
+    {
+        if (b)
+        {
+            foreach (GameObject cosm in item)
+            {
+                cosm.GetComponent<Button>().interactable = false;
+                cosm.GetComponent<Image>().sprite = locked;
+            }
+            if (pet2.activeSelf == true)
+            {
+                pet2.transform.Find("YoungAdult_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+                pet2.transform.Find("YoungAdult_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
+
+            }
+            if (pet3.activeSelf == true)
+            {
+                pet3.transform.Find("AdultChicken_torso").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+                pet3.transform.Find("AdultChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
+            }
+            if (pet4.activeSelf == true)
+            {
+                pet4.transform.Find("OldChicken_Body").Find("Cosmetic_Ribbon").GetComponent<SpriteRenderer>().sprite = null;
+                pet4.transform.Find("OldChicken_Head").Find("Cosmetic_Hat").GetComponent<SpriteRenderer>().sprite = null;
+            }
+        }
+        else
+        {
+            for(int i = 0; i < item.Length; i++)
+            {
+                item[i].GetComponent<Button>().interactable = true;
+                item[i].GetComponent<Image>().sprite = Cosmetics[i];
+            }
+        }
+    }
+
+    IEnumerator fade(GameObject g)
+    {
+        for (int al = 255; al >= 0; al--)   
+        {
+            print(al);
+            Color c = g.GetComponent<SpriteRenderer>().color;
+            c.a = al;
+            g.GetComponent<SpriteRenderer>().color = c;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+
+    IEnumerator waitShower()
+    {
+        shower.SetActive(true);
+        yield return new WaitForSeconds(3);
+        if (pet.activeInHierarchy)
+        {
+            pet.transform.Find("Chick_Body").Find("dirtyChick").gameObject.SetActive(false);
+        }
+        else if (pet2.activeInHierarchy)
+        {
+            pet2.transform.Find("YoungAdult_Body").Find("dirtyYoung").gameObject.SetActive(false);
+        }
+        else if (pet3.activeInHierarchy)
+        {
+            pet3.transform.Find("AdultChicken_torso").Find("dirtyAdult").gameObject.SetActive(false);
+        }
+        else if (pet4.activeInHierarchy)
+        {
+            pet4.transform.Find("OldChicken_Body").Find("dirtyOld").gameObject.SetActive(false);
+        }
+        shower.SetActive(false);
+        if (DailyQuest.GetComponent<DailyQuest>().number == 3)
+        {
+            countForQuest3++;
+        }
+        if (countForQuest3 == 3)
+        {
+            treasureAward.SetActive(true);
+            countForQuest3 = 0;
+            DailyQuest.GetComponent<DailyQuest>().inProcess = false;
+            money += 30;
+            DailyQuest.GetComponent<DailyQuest>().generateQuest();
+        }
     }
 }
