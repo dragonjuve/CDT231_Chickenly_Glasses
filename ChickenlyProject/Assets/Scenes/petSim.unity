@@ -2793,7 +2793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.045, y: 0.12757926}
   m_AnchorMax: {x: 0.2552689, y: 0.64164513}
-  m_AnchoredPosition: {x: 21.9, y: 9.799999}
+  m_AnchoredPosition: {x: 21.900002, y: 9.799999}
   m_SizeDelta: {x: 30, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &254384808
@@ -22834,6 +22834,8 @@ MonoBehaviour:
   music2: {fileID: 1550488979}
   music3: {fileID: 448209336}
   music4: {fileID: 1238592970}
+  cheatPanel1: {fileID: 272996352}
+  cheatPanel2: {fileID: 1570664807}
   BGM: {fileID: 1414268213}
   BGM_On: {fileID: 630274206}
   BGM_Off: {fileID: 1588374379}

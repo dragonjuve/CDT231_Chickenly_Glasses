@@ -68,6 +68,7 @@ public class Manager : MonoBehaviour {
     bool spawnItem = false;
     float rarityhelp = 0;
     int ribbonKey;
+    public GameObject cheatPanel1, cheatPanel2;
     public GameObject BGM;
     public GameObject BGM_On;
     public GameObject BGM_Off;
@@ -190,6 +191,11 @@ public class Manager : MonoBehaviour {
     }
 
     void Update () {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            cheatPanel1.SetActive(!cheatPanel1.activeInHierarchy);
+            cheatPanel2.SetActive(!cheatPanel2.activeInHierarchy);
+        }
         print(dayText);
         coolDownmusic4 -= Time.deltaTime;
         if (coolDownmusic4 <= 0)
