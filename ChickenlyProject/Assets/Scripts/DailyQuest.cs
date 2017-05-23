@@ -9,7 +9,7 @@ public class DailyQuest : MonoBehaviour {
     public GameObject objective;
     public GameObject description;
     public GameObject QuestPicReal;
-    
+    public GameObject day;
     public bool inProcess;
     public int number;
     public Sprite[] QuestPicSelect;
@@ -27,11 +27,36 @@ public class DailyQuest : MonoBehaviour {
         if (newQuest > 1 && inProcess == false)
         {
             inProcess = true;
-            generateQuest();
+            if (int.Parse(day.GetComponent<Text>().text) < 5)
+            {
+                generateQuest();
+            }
+            else {
+                generateQuest2();
+            }
+            
         }
     }
 
     public void generateQuest()
+    {
+        number = UnityEngine.Random.Range(1, 4);
+        if (number == 1)
+        {
+            Quest1();
+        }
+        else if (number == 2)
+        {
+            Quest2();
+        }
+        else 
+        {
+            Quest3();
+        }
+        
+    }
+
+    public void generateQuest2()
     {
         number = UnityEngine.Random.Range(1, 5);
         if (number == 1)
@@ -46,7 +71,7 @@ public class DailyQuest : MonoBehaviour {
         {
             Quest3();
         }
-        else {
+        else{
             Quest4();
         }
     }
@@ -69,12 +94,14 @@ public class DailyQuest : MonoBehaviour {
     {
         objective.GetComponent<Text>().text = "[Stay Clean!]";
         description.GetComponent<Text>().text = "Wash Your Chicken 3 Times";
+        QuestPicReal.GetComponent<Image>().sprite = QuestPicSelect[2];
     }
 
     void Quest4()
     {
         objective.GetComponent<Text>().text = "[Is Something There?]";
         description.GetComponent<Text>().text = "Explore And Gather 1 Collectible";
+        QuestPicReal.GetComponent<Image>().sprite = QuestPicSelect[3];
     }
     TimeSpan getTimeSpan()
     {
