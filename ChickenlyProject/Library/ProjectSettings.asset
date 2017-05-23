@@ -146,7 +146,7 @@ PlayerSettings:
     tvOS: com.Glasses.ChickenlyProject
   buildNumber:
     iOS: 0
-  AndroidBundleVersionCode: 4
+  AndroidBundleVersionCode: 5
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
