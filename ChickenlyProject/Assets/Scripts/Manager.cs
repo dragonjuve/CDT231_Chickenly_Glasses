@@ -8,7 +8,7 @@ public class Manager : MonoBehaviour {
 
     [SerializeField]
     public int money;
-
+    public GameObject cheat, cheat2, cheat3, cheat4;
     public GameObject hungerText;
     public GameObject happinessText;
     public GameObject moneyText;
@@ -236,6 +236,17 @@ public class Manager : MonoBehaviour {
 
 
     void Update () {
+        if (Input.GetKey("1")) {
+            cheat.SetActive(!cheat.activeInHierarchy);
+            cheat2.SetActive(!cheat2.activeInHierarchy);
+            cheat3.SetActive(!cheat3.activeInHierarchy);
+        }
+        if (Input.GetKey("2"))
+        {
+            cheat3.SetActive(!cheat3.activeInHierarchy);
+            cheat4.SetActive(false);
+        }
+
         coolDownmusic4 -= Time.deltaTime;
         if (coolDownmusic4 <= 0)
         {
