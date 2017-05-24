@@ -129,6 +129,7 @@ public class Robo : MonoBehaviour {
                 }
             }
         }
+
         
         if (Input.GetKeyDown(KeyCode.Q))
         {
