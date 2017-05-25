@@ -51,6 +51,8 @@ public class Robo : MonoBehaviour {
         if (!PlayerPrefs.HasKey("firstPlay"))
         {
             PlayerPrefs.SetString("firstPlay", getStringTime());
+            hunger = 100;
+            happiness = 50;
         }
 
         if (!PlayerPrefs.HasKey("happiness"))
@@ -235,7 +237,7 @@ public class Robo : MonoBehaviour {
             return DateTime.Now - Convert.ToDateTime(PlayerPrefs.GetString("then"));
     }
 
-    string getStringTime()
+    public string getStringTime()
     {
         DateTime now = DateTime.Now;
         return now.Month + "/" + now.Day + "/" + now.Year + " " + now.Hour + ":" + now.Minute + ":" + now.Second;

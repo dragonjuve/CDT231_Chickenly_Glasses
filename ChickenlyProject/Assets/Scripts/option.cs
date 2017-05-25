@@ -19,12 +19,15 @@ public class option : MonoBehaviour {
     public GameObject moneyText;
     public GameObject Manager;
     public GameObject musicOption;
+    public Sprite locked;
     float coolDownmusicOption = 0.3f;
     int id = 0;
     // Use this for initialization
 
     void Start() {
         Manager = GameObject.FindGameObjectWithTag("Manager");
+        if (PlayerPrefs.HasKey("BackGroundSave"))
+            id = PlayerPrefs.GetInt("BackGroundSave");
     }
 
     void update() {
@@ -34,6 +37,9 @@ public class option : MonoBehaviour {
             musicOption.SetActive(false);
             coolDownmusicOption = 0.3f;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Quit();
     }
     public void Quit() {
         musicOption.SetActive(true);
@@ -131,13 +137,46 @@ public class option : MonoBehaviour {
         PlayerPrefs.DeleteKey("CosmeticSave10");
         PlayerPrefs.DeleteKey("CosmeticSave11");
         PlayerPrefs.DeleteKey("CosmeticSave12");
+        foreach (GameObject cosm in Manager.GetComponent<Manager>().item)
+        {
+            cosm.GetComponent<Button>().interactable = false;
+            cosm.GetComponent<Image>().sprite = locked;
+        }
         PlayerPrefs.DeleteKey("RibbonNow");
         PlayerPrefs.DeleteKey("HatNow");
         PlayerPrefs.DeleteKey("CapNow");
+        PlayerPrefs.DeleteKey("BackGroundSave");
+        PlayerPrefs.DeleteKey("SaveToAchieve1");
+        PlayerPrefs.DeleteKey("SaveToAchieve3");
+        PlayerPrefs.DeleteKey("SaveToAchieve4");
+        PlayerPrefs.DeleteKey("SaveToAchieve6");
+        Manager.GetComponent<Manager>().achieveCount[0] = 0;
+        Manager.GetComponent<Manager>().achieveCount[2] = 0;
+        Manager.GetComponent<Manager>().achieveCount[3] = 0;
+        Manager.GetComponent<Manager>().achieveCount[4] = 0;
+        Manager.GetComponent<Manager>().achieveCount[5] = 0;
         PlayerPrefs.SetString("name", "Chick");
-        PlayerPrefs.SetString("firstPlay", DateTime.Now.ToString());
+        PlayerPrefs.SetString("firstPlay", Manager.GetComponent<Manager>().pet.GetComponent<Robo>().getStringTime());
+        PlayerPrefs.SetString("then", Manager.GetComponent<Manager>().pet.GetComponent<Robo>().getStringTime());
         dayText.GetComponent<Text>().text = "1";
+        
+
+        Manager.GetComponent<Manager>().pet.GetComponent<Robo>().Happiness = 50;
+        Manager.GetComponent<Manager>().pet.GetComponent<Robo>().Hunger = 100;
+        Manager.GetComponent<Manager>().money = 100;
+        if (Manager.GetComponent<Manager>().pet.activeSelf == true)
+        {
+            Manager.GetComponent<Manager>().pet.GetComponent<Robo>().updateStatus();
+            happinessText.GetComponent<Text>().text = Manager.GetComponent<Manager>().pet.GetComponent<Robo>().Happiness.ToString();
+            hungerText.GetComponent<Text>().text = Manager.GetComponent<Manager>().pet.GetComponent<Robo>().Hunger.ToString();
+        }
+        
+        moneyText.GetComponent<Text>().text = Manager.GetComponent<Manager>().money.ToString();
+        print(Manager.GetComponent<Manager>().pet.GetComponent<Robo>().Happiness);
+        print(Manager.GetComponent<Manager>().pet.GetComponent<Robo>().Hunger);
+        print(Manager.GetComponent<Manager>().money);
     }
 
+    
 
 }
