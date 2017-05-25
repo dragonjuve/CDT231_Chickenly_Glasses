@@ -27,22 +27,15 @@ public class option : MonoBehaviour {
     }
 
     void update() {
-        coolDownmusicOption -= Time.deltaTime;
-        if (coolDownmusicOption <= 0)
-        {
-            musicOption.SetActive(false);
-            coolDownmusicOption = 0.3f;
-        }
+
     }
     public void Quit() {
-        musicOption.SetActive(true);
-        coolDownmusicOption = 0.3f;
+        musicOption.GetComponent<AudioSource>().Play();
         Application.Quit();
     }
 
     public void EnableSound() {
-        musicOption.SetActive(true);
-        coolDownmusicOption = 0.3f;
+        musicOption.GetComponent<AudioSource>().Play();
         if (BGM[0].GetComponent<AudioSource>().isPlaying || BGM[1].GetComponent<AudioSource>().isPlaying || BGM[2].GetComponent<AudioSource>().isPlaying)
         {
             BGM[0].GetComponent<AudioSource>().Stop();
@@ -64,8 +57,7 @@ public class option : MonoBehaviour {
     }
 
     public void BGchange(bool next) {
-        musicOption.SetActive(true);
-        coolDownmusicOption = 0.3f;
+        musicOption.GetComponent<AudioSource>().Play();
         if (next)
         {
             id++;
@@ -91,6 +83,7 @@ public class option : MonoBehaviour {
     }
 
     public void changeBackgroundMusic(bool next) {
+        musicOption.GetComponent<AudioSource>().Play();
         if (next)
         {
             id2++;
@@ -120,7 +113,7 @@ public class option : MonoBehaviour {
     }
 
     public void Reset() {
-        musicOption.SetActive(true);
+        musicOption.GetComponent<AudioSource>().Play();
         coolDownmusicOption = 0.3f;
         PlayerPrefs.DeleteKey("RibbonNow");
         /*PlayerPrefs.SetInt("hunger", 0);

@@ -8,6 +8,7 @@ public class Manager : MonoBehaviour {
 
     [SerializeField]
     public int money;
+    public GameObject musicOption;
     public GameObject cheat, cheat2, cheat3, cheat4;
     public int[] achieveCount;
     public GameObject[] achieve;
@@ -1032,6 +1033,7 @@ public class Manager : MonoBehaviour {
     }
 
     public void openTutorial() {
+        musicOption.GetComponent<AudioSource>().Play();
         mainTutorial.SetActive(!mainTutorial.activeInHierarchy);
     }
 

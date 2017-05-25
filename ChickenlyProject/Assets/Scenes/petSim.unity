@@ -16157,7 +16157,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a544152b242ccbc488fdfcc72baf77f9, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -34658,6 +34658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 100
+  musicOption: {fileID: 969361320}
   cheat: {fileID: 272996352}
   cheat2: {fileID: 1570664807}
   cheat3: {fileID: 1755262093}
