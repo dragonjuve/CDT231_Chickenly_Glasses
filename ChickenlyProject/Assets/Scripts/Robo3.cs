@@ -177,6 +177,8 @@ public class Robo3 : MonoBehaviour
         //    GetComponent<Animator>().SetBool("walking", true);
         //}
 
+        GetComponent<Animator>().SetInteger("happy", Happiness);
+
         if (GetComponent<Animator>().GetBool("walking"))
         {
 
