@@ -15,6 +15,7 @@ public class Robo3 : MonoBehaviour
     public string itsName;
     public GameObject dayText;
     public Animator anim;
+    public GameObject manager;
     public GameObject previousChicken;
     public GameObject treasureAward;
     public GameObject daily;
@@ -30,7 +31,7 @@ public class Robo3 : MonoBehaviour
     public int dayCountde;
     public GameObject dirt;
     bool DEBUG;
-
+    public GameObject Playrub;
     public bool idle;
     //public float idleCount;
     float sXwalk;
@@ -109,6 +110,8 @@ public class Robo3 : MonoBehaviour
                         countForQuest2++;
                     }
                     clickCount++;
+                    Playrub.GetComponent<AudioSource>().Play();
+                    manager.GetComponent<Manager>().achieveCount[0]++;
                     if (clickCount >= 3 && cd == 0)
                     {
                         clickCount = 0;
@@ -121,6 +124,7 @@ public class Robo3 : MonoBehaviour
 
                     if (countForQuest2 >= 25)
                     {
+                        manager.GetComponent<Manager>().achieveCount[5]++;
                         treasureAward.SetActive(true);
                         countForQuest2 = 0;
                         daily.GetComponent<DailyQuest>().inProcess = false;

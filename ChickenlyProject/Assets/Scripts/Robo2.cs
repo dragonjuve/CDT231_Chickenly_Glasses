@@ -14,10 +14,12 @@ public class Robo2 : MonoBehaviour
     public string itsName;
     public GameObject dayText;
     public Animator anim;
+    public GameObject manager;
     public GameObject previousChicken;
     public GameObject treasureAward;
     public GameObject daily;
     public GameObject Golden;
+    public GameObject Playrub;
     bool goldSpawn;
     int countForQuest2;
     GameObject Manager;
@@ -105,6 +107,8 @@ public class Robo2 : MonoBehaviour
                         countForQuest2++;
                     }
                     clickCount++;
+                    manager.GetComponent<Manager>().achieveCount[0]++;
+                    Playrub.GetComponent<AudioSource>().Play();
                     if (clickCount >= 1 && cd == 0)
                     {
                         clickCount = 0;
@@ -117,6 +121,7 @@ public class Robo2 : MonoBehaviour
 
                     if (countForQuest2 >= 25)
                     {
+                        manager.GetComponent<Manager>().achieveCount[5]++;
                         treasureAward.SetActive(true);
                         countForQuest2 = 0;
                         daily.GetComponent<DailyQuest>().inProcess = false;

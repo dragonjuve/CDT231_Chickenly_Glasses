@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class option : MonoBehaviour {
 
     public GameObject BGM;
+    public GameObject BGM2;
+    public GameObject BGM3;
     public GameObject BGM_On;
     public GameObject BGM_Off;
     public GameObject BG;
@@ -42,15 +44,17 @@ public class option : MonoBehaviour {
     public void EnableSound() {
         musicOption.SetActive(true);
         coolDownmusicOption = 0.3f;
-        if (BGM.GetComponent<AudioSource>().isPlaying)
+        if (BGM.GetComponent<AudioSource>().isPlaying || BGM2.GetComponent<AudioSource>().isPlaying || BGM2.GetComponent<AudioSource>().isPlaying)
         {
             BGM.GetComponent<AudioSource>().Stop();
+            BGM2.GetComponent<AudioSource>().Stop();
             BGM_On.SetActive(false);
             BGM_Off.SetActive(true);
             PlayerPrefs.SetInt("SaveBGM", 0);
         }
         else {
             BGM.GetComponent<AudioSource>().Play();
+            BGM2.GetComponent<AudioSource>().Play();
             BGM_On.SetActive(true);
             BGM_Off.SetActive(false);
             PlayerPrefs.SetInt("SaveBGM", 1);
@@ -85,9 +89,27 @@ public class option : MonoBehaviour {
 
     }
 
+    public void changeBackgroundMusic() {
+        if (BGM.activeSelf == true) {
+            BGM.SetActive(false);
+            BGM2.SetActive(true);
+            BGM3.SetActive(false);
+        }
+        else if (BGM2.activeSelf == true) {
+            BGM.SetActive(false);
+            BGM2.SetActive(false);
+            BGM3.SetActive(true);
+        } else if (BGM3.activeSelf == true) {
+            BGM.SetActive(true);
+            BGM2.SetActive(false);
+            BGM3.SetActive(false);
+        }
+    }
+
     public void Reset() {
         musicOption.SetActive(true);
         coolDownmusicOption = 0.3f;
+        PlayerPrefs.DeleteKey("RibbonNow");
         /*PlayerPrefs.SetInt("hunger", 0);
         PlayerPrefs.SetInt("happiness", 0);
         hungerText.GetComponent<Text>().text = PlayerPrefs.GetInt("hunger").ToString();

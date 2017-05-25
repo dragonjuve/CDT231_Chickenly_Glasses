@@ -8,7 +8,10 @@ public class Manager : MonoBehaviour {
 
     [SerializeField]
     public int money;
-
+    public GameObject cheat, cheat2, cheat3, cheat4;
+    public int[] achieveCount;
+    public GameObject[] achieve;
+    public GameObject achievement;
     public GameObject hungerText;
     public GameObject happinessText;
     public GameObject moneyText;
@@ -75,10 +78,22 @@ public class Manager : MonoBehaviour {
     public GameObject BGM_On;
     public GameObject BGM_Off;
     Color C;
-    
+
 
     void Start()
     {
+        achieveCount[0] = PlayerPrefs.GetInt("SaveToAchieve1");
+        achieveCount[2] = PlayerPrefs.GetInt("SaveToAchieve3");
+        achieveCount[3] = PlayerPrefs.GetInt("SaveToAchieve4");
+        achieveCount[5] = PlayerPrefs.GetInt("SaveToAchieve6");
+        for (int count = 0; count < 6; count++)
+        {
+            if (count == 1) {
+                continue;
+            }
+            achieve[count].GetComponent<Text>().text = achieveCount[count].ToString();
+        }
+
         if (PlayerPrefs.HasKey("SaveBGM")) {
             if (PlayerPrefs.GetInt("SaveBGM") == 1)
             {
@@ -114,61 +129,73 @@ public class Manager : MonoBehaviour {
         {
             item[0].GetComponent<Image>().sprite = Cosmetics[0];
             item[0].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave2"))
         {
             item[1].GetComponent<Image>().sprite = Cosmetics[1];
             item[1].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave3"))
         {
             item[2].GetComponent<Image>().sprite = Cosmetics[2];
             item[2].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave4"))
         {
             item[3].GetComponent<Image>().sprite = Cosmetics[3];
             item[3].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave5"))
         {
             item[4].GetComponent<Image>().sprite = Cosmetics[4];
             item[4].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave6"))
         {
             item[5].GetComponent<Image>().sprite = Cosmetics[5];
             item[5].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave7"))
         {
             item[6].GetComponent<Image>().sprite = Cosmetics[6];
             item[6].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave8"))
         {
             item[7].GetComponent<Image>().sprite = Cosmetics[7];
             item[7].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave9"))
         {
             item[8].GetComponent<Image>().sprite = Cosmetics[8];
             item[8].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave10"))
         {
             item[9].GetComponent<Image>().sprite = Cosmetics[9];
             item[9].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave11"))
         {
             item[10].GetComponent<Image>().sprite = Cosmetics[10];
             item[10].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("CosmeticSave12"))
         {
             item[11].GetComponent<Image>().sprite = Cosmetics[11];
             item[11].GetComponent<Button>().interactable = true;
+            achieveCount[4]++;
         }
         if (PlayerPrefs.HasKey("RibbonNow"))
         {
@@ -236,6 +263,25 @@ public class Manager : MonoBehaviour {
 
 
     void Update () {
+        PlayerPrefs.SetInt("SaveToAchieve1", achieveCount[0]);
+        PlayerPrefs.SetInt("SaveToAchieve3", achieveCount[2]);
+        PlayerPrefs.SetInt("SaveToAchieve4", achieveCount[3]);
+        PlayerPrefs.SetInt("SaveToAchieve6", achieveCount[5]);
+        for (int count = 0; count < 6; count++)
+        {
+            achieve[count].GetComponent<Text>().text = achieveCount[count].ToString();
+        }
+        if (Input.GetKey("1")) {
+            cheat.SetActive(!cheat.activeInHierarchy);
+            cheat2.SetActive(!cheat2.activeInHierarchy);
+            cheat3.SetActive(!cheat3.activeInHierarchy);
+        }
+        if (Input.GetKey("2"))
+        {
+            cheat3.SetActive(!cheat3.activeInHierarchy);
+            cheat4.SetActive(false);
+        }
+
         coolDownmusic4 -= Time.deltaTime;
         if (coolDownmusic4 <= 0)
         {
@@ -269,10 +315,12 @@ public class Manager : MonoBehaviour {
         }
 
         moneyText.GetComponent<Text>().text = money.ToString();
+        achieveCount[1] = money;
         nameText.GetComponent<Text>().text = PlayerPrefs.GetString("name");
         waitText.GetComponent<Text>().text = ((int)coolDown).ToString();
         if (countForQuest1 >= 3)
         {
+            achieveCount[5]++;
             treasureAward.SetActive(true);
             countForQuest1 = 0;
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
@@ -282,6 +330,7 @@ public class Manager : MonoBehaviour {
         }
         if (countForQuest4 >= 1)
         {
+            achieveCount[5]++;
             treasureAward.SetActive(true);
             countForQuest4 = 0;
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
@@ -406,6 +455,12 @@ public class Manager : MonoBehaviour {
         }
     }
 
+    public void changeToachivement() {
+        music4.SetActive(true);
+        DailyQuest.SetActive(!DailyQuest.activeInHierarchy);
+        achievement.SetActive(!achievement.activeInHierarchy);
+    }
+
     public void triggerdailyQuest()
     {
         music4.SetActive(true);
@@ -413,6 +468,7 @@ public class Manager : MonoBehaviour {
     }
 
     public void goExplore() {
+        achieveCount[2]++;
         music2.SetActive(true);
         music3.SetActive(false);
         coolDown = 20.0f;
@@ -573,6 +629,10 @@ public class Manager : MonoBehaviour {
         if (rarity >= 1 && rarity <= 6)
         {
             int random = UnityEngine.Random.Range(0, 5);
+            if (item[random].GetComponent<Image>().sprite != Cosmetics[random])
+            {
+                achieveCount[4]++;
+            }
             if (random > 4)
             {
                 random = 4;
@@ -608,6 +668,10 @@ public class Manager : MonoBehaviour {
         else if (rarity >= 7 && rarity <= 12)
         {
             int random = UnityEngine.Random.Range(5, 9);
+            if (item[random].GetComponent<Image>().sprite != Cosmetics[random])
+            {
+                achieveCount[4]++;
+            }
             if (random > 8)
             {
                 random = 8;
@@ -638,6 +702,10 @@ public class Manager : MonoBehaviour {
         else if (rarity >= 13 && rarity <= 16)
         {
             int random = UnityEngine.Random.Range(9, 11);
+            if (item[random].GetComponent<Image>().sprite != Cosmetics[random])
+            {
+                achieveCount[4]++;
+            }
             if (random > 10)
             {
                 random = 10;
@@ -656,16 +724,21 @@ public class Manager : MonoBehaviour {
             }
         }
         else {
+            if (item[11].GetComponent<Image>().sprite != Cosmetics[11]) {
+                achieveCount[4]++;
+            }
             ItemPic.GetComponent<SpriteRenderer>().sprite = Cosmetics[11];
             item[11].GetComponent<Image>().sprite = Cosmetics[11];
             PlayerPrefs.SetInt("CosmeticSave12", 11);
             item[11].GetComponent<Button>().interactable = true;
         }
+        
         rarityhelp = 0;
     }
 
     public void selectFood(int i)
     {
+        achieveCount[3]++;
         if (pet.activeInHierarchy || pet2.activeInHierarchy || pet3.activeInHierarchy || pet4.activeInHierarchy)
         {
             music1.SetActive(true);
@@ -974,6 +1047,7 @@ public class Manager : MonoBehaviour {
         }
         if (countForQuest3 == 3)
         {
+            achieveCount[5]++;
             treasureAward.SetActive(true);
             countForQuest3 = 0;
             DailyQuest.GetComponent<DailyQuest>().inProcess = false;
