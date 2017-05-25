@@ -14,12 +14,14 @@ public class Robo4 : MonoBehaviour
     public string itsName;
     public GameObject dayText;
     public Animator anim;
+    public GameObject manager;
     public GameObject previousChicken;
     public GameObject treasureAward;
     public GameObject daily;
     public GameObject Golden;
     bool goldSpawn;
     int countForQuest2;
+    public GameObject Playrub;
     GameObject Manager;
     public GameObject egg;
     private bool serverTime;
@@ -109,8 +111,10 @@ public class Robo4 : MonoBehaviour
                     {
                         countForQuest2++;
                     }
+                    Playrub.GetComponent<AudioSource>().Play();
                     clickCount++;
-                    if (clickCount >= 3 && cd == 0)
+                    manager.GetComponent<Manager>().achieveCount[0]++;
+                    if (clickCount >= 2 && cd == 0)
                     {
                         clickCount = 0;
                         updateHappiness(1);
@@ -122,6 +126,7 @@ public class Robo4 : MonoBehaviour
 
                     if (countForQuest2 >= 25)
                     {
+                        manager.GetComponent<Manager>().achieveCount[5]++;
                         treasureAward.SetActive(true);
                         countForQuest2 = 0;
                         daily.GetComponent<DailyQuest>().inProcess = false;

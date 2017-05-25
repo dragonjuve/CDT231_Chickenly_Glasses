@@ -14,7 +14,7 @@ public class Robo : MonoBehaviour {
     public string itsName;
     public GameObject dayText;
     public Animator anim;
-
+    public GameObject manager;
     public GameObject treasureAward;
     public GameObject daily;
     public GameObject Golden;
@@ -30,7 +30,7 @@ public class Robo : MonoBehaviour {
     bool DEBUG;
     bool goldSpawn;
     public float time = 0.0f;
-
+    public GameObject Playrub;
     public bool idle;
     //public float idleCount;
     float sXwalk;
@@ -103,9 +103,12 @@ public class Robo : MonoBehaviour {
                     {
                         countForQuest2++;
                     }
+                    Playrub.GetComponent<AudioSource>().Play();
                     clickCount++;
-                    if(clickCount >= 3)
+                    manager.GetComponent<Manager>().achieveCount[0]++;
+                    if (clickCount >= 3)
                     {
+                        manager.GetComponent<Manager>().achieveCount[5]++;
                         clickCount = 0;
                         updateHappiness(3);
                         gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300.0f));
