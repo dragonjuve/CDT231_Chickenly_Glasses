@@ -38,6 +38,7 @@ public class Robo3 : MonoBehaviour
     bool walkRight;
     int cd = 0;
     public float time = 0.0f;
+    public GameObject Smile;
 
     void Start()
     {
@@ -124,6 +125,8 @@ public class Robo3 : MonoBehaviour
 
                     if (countForQuest2 >= 25)
                     {
+                        GameObject smile = (GameObject)Instantiate(Smile, transform.position, transform.rotation);
+                        smile.transform.position = new Vector2(transform.position.x, transform.position.y + 1.5f);
                         manager.GetComponent<Manager>().achieveCount[5]++;
                         treasureAward.SetActive(true);
                         countForQuest2 = 0;

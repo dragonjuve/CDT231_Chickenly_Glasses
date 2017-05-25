@@ -31,7 +31,7 @@ public class Robo4 : MonoBehaviour
     public int dayCountde;
     public GameObject dirt;
     bool DEBUG;
-
+    public GameObject Smile;
     public bool idle;
     //public float idleCount;
     float sXwalk;
@@ -116,6 +116,8 @@ public class Robo4 : MonoBehaviour
                     manager.GetComponent<Manager>().achieveCount[0]++;
                     if (clickCount >= 2 && cd == 0)
                     {
+                        GameObject smile = (GameObject)Instantiate(Smile, transform.position, transform.rotation);
+                        smile.transform.position = new Vector2(transform.position.x, transform.position.y + 1.5f);
                         clickCount = 0;
                         updateHappiness(1);
                         cd = 250;

@@ -35,6 +35,7 @@ public class Robo : MonoBehaviour {
     //public float idleCount;
     float sXwalk;
     bool walkRight;
+    public GameObject Smile;
 
     void Start() {
         Manager = GameObject.FindGameObjectWithTag("Manager");
@@ -110,6 +111,8 @@ public class Robo : MonoBehaviour {
                     manager.GetComponent<Manager>().achieveCount[0]++;
                     if (clickCount >= 3)
                     {
+                        GameObject smile = (GameObject)Instantiate(Smile, transform.position, transform.rotation);
+                        smile.transform.position = new Vector2(transform.position.x, transform.position.y+1.5f);
                         manager.GetComponent<Manager>().achieveCount[5]++;
                         clickCount = 0;
                         updateHappiness(3);
