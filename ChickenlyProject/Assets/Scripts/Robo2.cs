@@ -33,6 +33,7 @@ public class Robo2 : MonoBehaviour
     float sXwalk;
     bool walkRight;
     int cd = 0;
+    public GameObject Smile;
 
     void Start()
     {
@@ -111,6 +112,8 @@ public class Robo2 : MonoBehaviour
                     Playrub.GetComponent<AudioSource>().Play();
                     if (clickCount >= 1 && cd == 0)
                     {
+                        GameObject smile = (GameObject)Instantiate(Smile, transform.position, transform.rotation);
+                        smile.transform.position = new Vector2(transform.position.x, transform.position.y + 1.5f);
                         clickCount = 0;
                         updateHappiness(1);
                         GetComponent<Animator>().SetBool("walking", false);

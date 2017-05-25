@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Robo4.cs" />
     <Compile Include="Assets\Scripts\Sharper.cs" />
     <Compile Include="Assets\Scripts\SlotController.cs" />
+    <Compile Include="Assets\Scripts\SmileMove.cs" />
     <Compile Include="Assets\Scripts\UpdateDate.cs" />
     <Compile Include="Assets\Scripts\disappearing.cs" />
     <Compile Include="Assets\Scripts\justfadeaway.cs" />

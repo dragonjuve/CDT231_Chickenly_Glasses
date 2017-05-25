@@ -6,9 +6,7 @@ using UnityEngine.UI;
 //using UnityEngine.SceneManagement;
 public class option : MonoBehaviour {
 
-    public GameObject BGM;
-    public GameObject BGM2;
-    public GameObject BGM3;
+    public GameObject[] BGM;
     public GameObject BGM_On;
     public GameObject BGM_Off;
     public GameObject BG;
@@ -21,6 +19,7 @@ public class option : MonoBehaviour {
     public GameObject musicOption;
     float coolDownmusicOption = 0.3f;
     int id = 0;
+    int id2 = 0;
     // Use this for initialization
 
     void Start() {
@@ -44,17 +43,19 @@ public class option : MonoBehaviour {
     public void EnableSound() {
         musicOption.SetActive(true);
         coolDownmusicOption = 0.3f;
-        if (BGM.GetComponent<AudioSource>().isPlaying || BGM2.GetComponent<AudioSource>().isPlaying || BGM2.GetComponent<AudioSource>().isPlaying)
+        if (BGM[0].GetComponent<AudioSource>().isPlaying || BGM[1].GetComponent<AudioSource>().isPlaying || BGM[2].GetComponent<AudioSource>().isPlaying)
         {
-            BGM.GetComponent<AudioSource>().Stop();
-            BGM2.GetComponent<AudioSource>().Stop();
+            BGM[0].GetComponent<AudioSource>().Stop();
+            BGM[1].GetComponent<AudioSource>().Stop();
+            BGM[2].GetComponent<AudioSource>().Stop();
             BGM_On.SetActive(false);
             BGM_Off.SetActive(true);
             PlayerPrefs.SetInt("SaveBGM", 0);
         }
         else {
-            BGM.GetComponent<AudioSource>().Play();
-            BGM2.GetComponent<AudioSource>().Play();
+            BGM[0].GetComponent<AudioSource>().Play();
+            BGM[1].GetComponent<AudioSource>().Play();
+            BGM[2].GetComponent<AudioSource>().Play();
             BGM_On.SetActive(true);
             BGM_Off.SetActive(false);
             PlayerPrefs.SetInt("SaveBGM", 1);
@@ -89,21 +90,33 @@ public class option : MonoBehaviour {
 
     }
 
-    public void changeBackgroundMusic() {
-        if (BGM.activeSelf == true) {
-            BGM.SetActive(false);
-            BGM2.SetActive(true);
-            BGM3.SetActive(false);
+    public void changeBackgroundMusic(bool next) {
+        if (next)
+        {
+            id2++;
+            if (id2 >= BGM.Length)
+            {
+                id2 = 0;
+            }
         }
-        else if (BGM2.activeSelf == true) {
-            BGM.SetActive(false);
-            BGM2.SetActive(false);
-            BGM3.SetActive(true);
-        } else if (BGM3.activeSelf == true) {
-            BGM.SetActive(true);
-            BGM2.SetActive(false);
-            BGM3.SetActive(false);
+        else
+        {
+            id2--;
+            if (id2 < BGM.Length)
+            {
+                id2 = BGM.Length - 1;
+            }
         }
+        for (int i = 0; i < BGM.Length; i++) {
+            if (i == id2)
+            {
+                BGM[i].SetActive(true);
+            }
+            else {
+                BGM[i].SetActive(false);
+            }
+        }
+        PlayerPrefs.SetInt("BackGroundMusic", id2);
     }
 
     public void Reset() {

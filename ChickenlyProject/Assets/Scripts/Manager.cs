@@ -55,7 +55,8 @@ public class Manager : MonoBehaviour {
     public GameObject foodPanel;
     public Sprite[] foodIcon;
     public Sprite[] Cosmetics;
-    static bool[] CosmeticSave = {false, false, false, false, false, false};
+    static bool[] CosmeticSave = { false, false, false, false, false, false };
+    static bool[] once = {false, false, false, false, false, false };
     //public GameObject foods;
     public Text[] foodAmount;
     public GameObject store;
@@ -74,9 +75,15 @@ public class Manager : MonoBehaviour {
     bool spawnItem = false;
     float rarityhelp = 0;
     int ribbonKey,hatKey,capKey;
-    public GameObject BGM;
+    public GameObject[] BGM;
     public GameObject BGM_On;
     public GameObject BGM_Off;
+    public GameObject FeedbackFood;
+    public GameObject Show;
+    public GameObject ShowText;
+    public GameObject mainTutorial;
+    public GameObject[] tutorial;
+    int Counttutorial = 0;
     Color C;
 
 
@@ -97,20 +104,40 @@ public class Manager : MonoBehaviour {
         if (PlayerPrefs.HasKey("SaveBGM")) {
             if (PlayerPrefs.GetInt("SaveBGM") == 1)
             {
-                BGM.GetComponent<AudioSource>().Play();
+                BGM[0].GetComponent<AudioSource>().Play();
+                BGM[1].GetComponent<AudioSource>().Play();
+                BGM[2].GetComponent<AudioSource>().Play();
                 BGM_On.SetActive(true);
                 BGM_Off.SetActive(false);
             }
             else {
-                BGM.GetComponent<AudioSource>().Stop();
+                BGM[0].GetComponent<AudioSource>().Stop();
+                BGM[1].GetComponent<AudioSource>().Stop();
+                BGM[2].GetComponent<AudioSource>().Stop();
                 BGM_On.SetActive(false);
                 BGM_Off.SetActive(true);
             }
+        }
+        if (PlayerPrefs.HasKey("BackGroundMusic")) {
+            int id2 = PlayerPrefs.GetInt("BackGroundMusic");
+            for (int i = 0; i < BGM.Length; i++)
+            {
+                if (i == id2)
+                {
+                    BGM[i].SetActive(true);
+                }
+                else
+                {
+                    BGM[i].SetActive(false);
+                }
+            }
+            
         }
         if (PlayerPrefs.HasKey("BackGroundSave"))
         {
             BG.GetComponent<SpriteRenderer>().sprite = BGsprite[PlayerPrefs.GetInt("BackGroundSave")];
         }
+
         if (!PlayerPrefs.HasKey("money"))
         {
             PlayerPrefs.SetInt("money", money);
@@ -124,7 +151,30 @@ public class Manager : MonoBehaviour {
         {
             cosm.GetComponent<Button>().interactable = false;
         }
-
+        if (PlayerPrefs.HasKey("Already"))
+        {
+            once[0] = true;
+        }
+        if (PlayerPrefs.HasKey("Already1"))
+        {
+            once[1] = true;
+        }
+        if (PlayerPrefs.HasKey("Already2"))
+        {
+            once[2] = true;
+        }
+        if (PlayerPrefs.HasKey("Already3"))
+        {
+            once[3] = true;
+        }
+        if (PlayerPrefs.HasKey("Already4"))
+        {
+            once[4] = true;
+        }
+        if (PlayerPrefs.HasKey("Already5"))
+        {
+            once[5] = true;
+        }
         if (PlayerPrefs.HasKey("CosmeticSave1"))
         {
             item[0].GetComponent<Image>().sprite = Cosmetics[0];
@@ -263,6 +313,70 @@ public class Manager : MonoBehaviour {
 
 
     void Update () {
+        if (achieveCount[0] >= 9001) {
+            achieveCount[0] = 9001;
+            if (once[0] == false)
+            {
+                ShowText.GetComponent<Text>().text = "[It's Over 9000!!!]";
+                Show.SetActive(true);
+            }
+            once[0] = true;
+            PlayerPrefs.SetInt("Already", 0);
+        }
+        if (achieveCount[1] >= 10000)
+        {
+            achieveCount[1] = 10000;
+            if (once[1] == false) {
+                ShowText.GetComponent<Text>().text = "[MAKE IT RAIN]";
+                Show.SetActive(true);
+            }
+            once[1] = true;
+            PlayerPrefs.SetInt("Already1", 0);
+        }
+        if (achieveCount[2] >= 150)
+        {
+            achieveCount[2] = 150;
+            if (once[2] == false)
+            {
+                ShowText.GetComponent<Text>().text = "[GRAND ADVENTURE]";
+                Show.SetActive(true);
+            }
+            once[2] = true;
+            PlayerPrefs.SetInt("Already2", 0);
+        }
+        if (achieveCount[3] > 200)
+        {
+            achieveCount[3] = 200;
+            if (once[3] == false)
+            {
+                ShowText.GetComponent<Text>().text = "[SO FULL!]";
+                Show.SetActive(true);
+            }
+            once[3] = true;
+            PlayerPrefs.SetInt("Already3", 0);
+        }
+        if (achieveCount[4] > 12)
+        {
+            achieveCount[4] = 12;
+            if (once[4] == false)
+            {
+                ShowText.GetComponent<Text>().text = "[MASTER COLLECTION]";
+                Show.SetActive(true);
+            }
+            once[4] = true;
+            PlayerPrefs.SetInt("Already4", 0);
+        }
+        if (achieveCount[5] > 100)
+        {
+            achieveCount[5] = 100;
+            if (once[5] == false)
+            {
+                ShowText.GetComponent<Text>().text = "[QUEST CONQUEROR]";
+                Show.SetActive(true);
+            }
+            once[5] = true;
+            PlayerPrefs.SetInt("Already5", 0);
+        }
         PlayerPrefs.SetInt("SaveToAchieve1", achieveCount[0]);
         PlayerPrefs.SetInt("SaveToAchieve3", achieveCount[2]);
         PlayerPrefs.SetInt("SaveToAchieve4", achieveCount[3]);
@@ -465,6 +579,9 @@ public class Manager : MonoBehaviour {
     {
         music4.SetActive(true);
         DailyQuest.SetActive(!DailyQuest.activeInHierarchy);
+        if (achievement.activeSelf == true) {
+            achievement.SetActive(false);
+        }
     }
 
     public void goExplore() {
@@ -786,18 +903,26 @@ public class Manager : MonoBehaviour {
                 foodPanel.SetActive(false);
                 if (pet.activeSelf == true)
                 {
+                    GameObject feedback = (GameObject)Instantiate(FeedbackFood, transform.position, transform.rotation);
+                    feedback.transform.position = new Vector2(transform.position.x, transform.position.y);
                     feedFoodPic.transform.position = new Vector3(pet.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
                 }
                 else if (pet2.activeSelf == true)
                 {
+                    GameObject feedback = (GameObject)Instantiate(FeedbackFood, transform.position, transform.rotation);
+                    feedback.transform.position = new Vector2(transform.position.x, transform.position.y);
                     feedFoodPic.transform.position = new Vector3(pet2.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
                 }
                 else if (pet3.activeSelf == true)
                 {
+                    GameObject feedback = (GameObject)Instantiate(FeedbackFood, transform.position, transform.rotation);
+                    feedback.transform.position = new Vector2(transform.position.x, transform.position.y);
                     feedFoodPic.transform.position = new Vector3(pet3.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
                 }
                 else if (pet4.activeSelf == true)
                 {
+                    GameObject feedback = (GameObject)Instantiate(FeedbackFood, transform.position, transform.rotation);
+                    feedback.transform.position = new Vector2(transform.position.x, transform.position.y);
                     feedFoodPic.transform.position = new Vector3(pet4.transform.position.x, feedFoodPic.transform.position.y, feedFoodPic.transform.position.z);
                 }
                 if (i == 3)
@@ -875,7 +1000,41 @@ public class Manager : MonoBehaviour {
         PlayerPrefs.SetInt("HatNow", hatKey);
         PlayerPrefs.SetInt("CapNow", capKey);
     }
-    
+
+    public void Nexttutorial(bool next) {
+
+        if (next)
+        {
+            Counttutorial++;
+            if (Counttutorial >= tutorial.Length)
+            {
+                Counttutorial = 0;
+            }
+        }
+        else {
+            Counttutorial--;
+            if (Counttutorial < tutorial.Length)
+            {
+                Counttutorial = tutorial.Length - 1;
+            }
+        }
+        for (int i = 0; i < tutorial.Length; i++)
+        {
+            if (i == Counttutorial)
+            {
+                tutorial[i].SetActive(true);
+            }
+            else
+            {
+                tutorial[i].SetActive(false);
+            }
+        }
+    }
+
+    public void openTutorial() {
+        mainTutorial.SetActive(!mainTutorial.activeInHierarchy);
+    }
+
 
     public void wear(int i)
     {
